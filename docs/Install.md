@@ -77,6 +77,9 @@ sudo chmod -R 777 /dev/bus/usb/
 1. Allow your device to install applications from unknown sources. To do this, go to **Settings → Security and tick "Unknown sources"**.
 2. Download [Nuitrack.apk](http://download.3divi.com/Nuitrack/platforms/Nuitrack.apk) and install it. To install the APK package, locate it in a file manager, open and tap "INSTALL".
 3. Launch the Nuitrack application. 
+
     <img src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/install_1.png" width="480">
+    
 4. Wait for Nuitrack installation. If the Nuitrack installation is successful, the message will be displayed as shown in the picture below:
+
     <img src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/install_2.png" width="480">
