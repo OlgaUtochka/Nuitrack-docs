@@ -1,5 +1,5 @@
 * Overview.md
-* Install.md
+* [Installation Instructions](https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/docs/Install.md)
 * Nuitrack Instance-Based API [Beta]
 * Creating your First Unity Project using Nuitrack SDK
 * Common Elements 
