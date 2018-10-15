@@ -17,7 +17,7 @@ To install Nuitrack on Windows, follow the steps below:
     * Create an environment variable with the name of **NUITRACK_HOME** and value of *<install-folder>*\nuitrack.
     * Add *<install-folder>*\nuitrack\bin to the **PATH** environment variable.
 
-> To add a new environment variable or change the existing environment variable manually, use the "Environment Variables" dialog.
-> To access it, open the "System" dialog (Win + Break), then select **Advanced system settings → Environment Variables...**
+### Note
 
-_**Warning:** Be very careful here._
+To add a new environment variable or change the existing environment variable manually, use the "Environment Variables" dialog.
+To access it, open the "System" dialog (Win + Break), then select **Advanced system settings → Environment Variables...**
