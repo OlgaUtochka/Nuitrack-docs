@@ -19,3 +19,5 @@ To install Nuitrack on Windows, follow the steps below:
 
 > To add a new environment variable or change the existing environment variable manually, use the "Environment Variables" dialog.
 > To access it, open the "System" dialog (Win + Break), then select **Advanced system settings → Environment Variables...**
+
+_**Warning:** Be very careful here._
