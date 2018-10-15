@@ -79,5 +79,4 @@ sudo chmod -R 777 /dev/bus/usb/
 3. Launch the Nuitrack application. 
 ![alt text](https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/install_1.png)
 4. Wait for Nuitrack installation. If the Nuitrack installation is successful, the message will be displayed as shown in the picture below:
-![alt text](https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/install_2.png)
-<img src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/install_2.png" width="48">
+<img src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/install_2.png" width="480">
