@@ -21,3 +21,17 @@ To install Nuitrack on Windows, follow the steps below:
 
 To add a new environment variable or change the existing environment variable manually, use the "Environment Variables" dialog.
 To access it, open the "System" dialog (Win + Break), then select **Advanced system settings → Environment Variables...**
+![alt text](https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/install_windows.png "Editing environment variables in Windows 10")
+
+5. [Optional] Install OpenNI-1.5 Primesense/ORBBEC driver (*<install-folder>*\Primesense-Sensor-5.1.6.6-Win-x86.msi, *<install-folder>*\Primesense-Sensor-5.1.6.6-Win-x64.msi for 64-bit).
+6. [Optional] To use OpenNI 1.5 API, register the Nuitrack dynamic module for OpenNI 1.5:
+   
+  32-bit:
+  ```
+  "C:\Program Files (x86)\OpenNI\Bin\niReg.exe" -r <install-folder>\nuitrack\bin\libnuitrack_ni.dll <install-folder>\nuitrack\data
+  ```
+
+  64-bit:
+  ```
+  "C:\Program Files\OpenNI\Bin64\niReg64.exe" -r <install-folder>\nuitrack\bin\libnuitrack_ni.dll <install-folder>\nuitrack\data
+  ```
