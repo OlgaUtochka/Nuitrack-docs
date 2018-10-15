@@ -83,3 +83,31 @@ sudo chmod -R 777 /dev/bus/usb/
 4. Wait for Nuitrack installation. If the Nuitrack installation is successful, the message will be displayed as shown in the picture below:
 
     <img src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/install_2.png" width="400">
+
+## License Activation
+
+There are two Nuitrack versions: **Nuitrack Trial** and **Nuitrack Pro**.
+
+**Nuitrack Trial** is free and has the time limit. This Nuitrack version stops working after running for three minutes, so you need to restart it. **Nuitrack Trial** is provided by default and you can use it without entering the license key. It is intended for demo and evaluation purposes only.
+
+**Nuitrack Pro** is for commercial applications. It allows to develop and sell applications based on Nuitrack. There are two types of **Nuitrack Pro** licenses: annual (which is valid for 1 year) and perpetual (with unlimited period of validity).
+
+You can upgrade **Nuitrack Trial** to **Nuitrack Pro** by entering a license key. The license is purchased [here](https://nuitrack.com/#rec38627247). After you purchase the license, we send you an email with your activation key and activation instructions. You need a license key for each sensor used with an application based on Nuitrack.
+
+The Nuitrack license is associated with a sensor serial number. Besides, the hardware that you use is also checked at Nuitrack runtime. The license is non-portable, but you can reactivate the license if you use new hardware with the same sensor.
+
+## 3D Sensor Known Issues 
+### All Sensors
+* Make sure that the date and time settings on your device are correct.
+* [For Windows 10] Make sure that you allowed apps to access your camera: select **Settings → Privacy → Camera** and turn on **"Allow apps to access your camera"**.
+
+### Kinect V1
+To install the driver for Kinect V1, download [Kinect SDK v1.8](https://www.microsoft.com/en-us/download/details.aspx?id=40278) and follow [Install Instructions](https://www.microsoft.com/en-us/download/confirmation.aspx?id=40278).
+
+#### Note
+If you use Windows 10, we recommend to run *KinectSDK-v1.8-Setup.exe* in compatibility mode for Windows 8
+
+### Intel® RealSense™ Depth Camera D415
+* Supported OS versions: Windows 8.1, Windows 10 and Ubuntu 14.04 or higher
+* Before using the sensor, you need to download and install Intel® RealSense™ SDK 2.0 [for Windows](https://goo.gl/hkhUdR) or [for Linux] (https://goo.gl/wmFSuG)
+* Supported camera firmware version: 5.8.15 or higher. To update the camera firmware, please, download the latest firmware from [the official Intel website] (https://downloadcenter.intel.com/download/27514/Windows-Device-Firmware-Update-Tool-for-Intel-RealSense-D400-Product-Family?v=t)
