@@ -18,7 +18,6 @@ To install Nuitrack on Windows, follow the steps below:
     * Add *<install-folder>*\nuitrack\bin to the **PATH** environment variable.
 
 ### Note
-
 To add a new environment variable or change the existing environment variable manually, use the "Environment Variables" dialog.
 To access it, open the "System" dialog (Win + Break), then select **Advanced system settings → Environment Variables...**
 ![alt text](https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/install_windows.png "Editing environment variables in Windows 10")
@@ -35,3 +34,41 @@ To access it, open the "System" dialog (Win + Break), then select **Advanced sys
   ```
   "C:\Program Files\OpenNI\Bin64\niReg64.exe" -r <install-folder>\nuitrack\bin\libnuitrack_ni.dll <install-folder>\nuitrack\data
   ```
+
+### Note
+To get started with a new device, you must first install the drivers for it. Contact the device vendor to get the drivers.
+
+## Ubuntu Linux 
+
+Supported Ubuntu version is 14.04 and above. Supported architectures are AMD64 and ARM 32-bit.
+
+To install Nuitrack on Ubuntu, follow the steps below:
+
+1. Download one of the following Debian packages, depending on the target architecture:
+    * [nuitrack-ubuntu-amd64.deb](http://download.3divi.com/Nuitrack/platforms/nuitrack-ubuntu-amd64.deb) for AMD64
+    * [nuitrack-persee-ubuntu-arm32.deb](http://download.3divi.com/Nuitrack/platforms/nuitrack-persee-ubuntu-arm32.deb) for ARM 32-bit
+2. Install the downloaded package using the following command: 
+```
+sudo dpkg -i <downloaded-package-name>.deb
+```
+3. Log out to let the system changes take effect. 
+4. Check that the environment variables **NUITRACK_HOME** and **LD_LIBRARY_PATH** are set correctly using the following commands:
+```
+echo $NUITRACK_HOME
+echo $LD_LIBRARY_PATH
+```
+NUITRACK_HOME should be equal to */usr/etc/nuitrack*. LD_LIBRARY_PATH should include */usr/local/lib/nuitrack* path.
+
+If the environment variables are empty, set them manually using the following commands (as root):
+```
+echo "export NUITRACK_HOME=/usr/etc/nuitrack" > /etc/profile.d/nuitrack_env.sh
+echo "export LD_LIBRARY_PATH=/usr/local/lib/nuitrack" >> /etc/profile.d/nuitrack_env.sh
+. /etc/profile.d/nuitrack_env.sh
+```
+5. [For Ubuntu 18.04] Install the [libpng12-0](https://packages.ubuntu.com/xenial/amd64/libpng12-0/download) package.
+
+### Note
+If you see "ERROR: Couldn't open device ..." message when trying to use Nuitrack, try to set permissions for USB devices with the following command:
+```
+sudo chmod -R 777 /dev/bus/usb/
+```
