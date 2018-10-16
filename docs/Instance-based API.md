@@ -25,7 +25,7 @@ The JSON string includes the following properties:
               * <b>top</b> - Y coordinate of the upper-left corner of the rectangle;
               * <b>width</b> - rectangle width;
               * <b>height</b> - rectangle height;
-          * <b>landmark</b> - facial landmarks. The <i>singlelbf</i> set of anthropometric points is used (31 points). Normalized coordinates of each point from the set are returned. ![Singlelbf set of points](@ref images/facerec/singlelbf.png)
+          * <b>landmark</b> - facial landmarks. The *singlelbf* set of anthropometric points is used (31 points). Normalized coordinates of each point from the set are returned. ![Singlelbf set of points](@ref images/facerec/singlelbf.png)
           * <b>left_eye</b> - normalized coordinates of the center of a person’s left eye;
           * <b>right_eye</b> - normalized coordinates of the center of a person’s right eye;
           * <b>angles</b> - face orientation angles in degrees:
