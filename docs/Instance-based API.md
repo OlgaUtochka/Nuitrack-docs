@@ -12,7 +12,7 @@ You should also set the value of ```AstraProPerseeDepthProvider.Windows.CameraID
 
 ## JSON Getting Information about Instances
 
-Nuitrack allows to get information about people standing in front of the camera in JSON format. To get the information, call the ```tdv::nuitrack::Nuitrack::getInstancesJson "Nuitrack::getInstancesJson"``` (C++) or ```nuitrack.Nuitrack.GetInstancesJson "Nuitrack.GetInstancesJson"``` (CSharp) function. The result will be returned in the form of a JSON string.
+Nuitrack allows to get information about people standing in front of the camera in JSON format. To get the information, call the ```tdv::nuitrack::Nuitrack::getInstancesJson "Nuitrack::getInstancesJson"``` (C++) or ```nuitrack.Nuitrack.GetInstancesJson "Nuitrack.GetInstancesJson"``` (C#) function. The result will be returned in the form of a JSON string.
 The JSON string includes the following properties:
 
 * **Timestamp** - frame timestamp in microseconds;
