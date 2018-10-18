@@ -56,9 +56,9 @@ You can find the finished project in **Nuitrack SDK**: **Unity 3D → NuitrackSD
 6.  Now that everything is set up, let\'s build the project: **File → Build Settings → Build**
 
 ### Note
-Hotkeys:
-**Ctrl + Shift + B** - Build Settings
-**Ctrl + B** - Build
+Hotkeys:<br>
+**Ctrl + Shift + B** - Build Settings<br>
+**Ctrl + B** - Build<br>
 
 7.  If the build was successful, a new window will open with your application in the .apk format, which can be run on the Android device. When you run the app on your device, you will see the image as shown below:
 
