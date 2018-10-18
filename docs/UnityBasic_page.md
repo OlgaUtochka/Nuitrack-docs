@@ -29,7 +29,7 @@ You can find the finished project in **Nuitrack SDK**: **Unity 3D → NuitrackSD
 5.  And now, here is the most interesting part that will allow us to create projects with skeleton detection and tracking. Download **Nuitrack SDK** [from the official web site](https://nuitrack.com/) and import it to the project. To import **Nuitrack SDK**, select **Import Package → Custom Package → {Root}/NuitrackSDK/Unity3d/Nuitrack.unitypackage** by right-clicking in the **Project** tab.
 
 ### Note
-**What sensors can I use with my app?**
+**What sensors can I use with my app?**<br>
 *You can use any of the supported sensors for your application (see the list of supported sensors at the [Nuitrack official website](https://nuitrack.com/)). To learn more about **VicoVR** sensor, visit [the official VicoVR website](https://vicovr.com/). If you\'d like to create apps with VicoVR sensor, you need to [download VicoVRapp](https://play.google.com/store/apps/details?id=com.vicovr.manager). To get some inspiration for creating your own VR apps, you can check the list of our [VR apps made with VicoVR](https://vicovr.com/apps/vr).*
 
 6.  As a result, you will have a configured development environment with all the necessary components for the build.
@@ -60,7 +60,7 @@ Hotkeys:<br>
 **Ctrl + Shift + B** - Build Settings<br>
 **Ctrl + B** - Build<br>
 
-7.  If the build was successful, a new window will open with your application in the .apk format, which can be run on the Android device. When you run the app on your device, you will see the image as shown below:
+7.  If the build was successful, a new window will open with your application in the ```.apk``` format, which can be run on the Android device. When you run the app on your device, you will see the image as shown below:
 
     ![](Ubasic_image4.png)
 
@@ -84,7 +84,7 @@ As you can see, there are several more modules in this field. We'll cover them i
 
 3.  Create an empty C\# Script: **Create C\# Script** by right-clicking in the Project tab.
     
-4.  To get information about joints, we first need to detect the user. First, let\'s check whether the user is in the frame or not using the *CurrentUserTracker.CurrentUser! = 0* condition. The result will be displayed as a \'User found\' or \'User not found\' message, which is stored in the *message* variable and displayed by the *OnGUI()* method. See the link at the end of the document to learn more about Execution Order of Event Functions.
+4.  To get information about joints, we first need to detect the user. First, let's check whether the user is in the frame or not using the ```CurrentUserTracker.CurrentUser! = 0``` condition. The result will be displayed as a 'User found' or 'User not found' message, which is stored in the ```message``` variable and displayed by the ```OnGUI()``` method. See the link at the end of the document to learn more about Execution Order of Event Functions.
 
 ```cpp
 using UnityEngine;
@@ -123,20 +123,19 @@ drag-and-drop the script to that object.
 
 6.  Build the project (Ctrl + B) and check the app operation on your device.
 
-7.  If everything is done correctly, at this stage the user will be detected. Depending on the result, you will see a message \'User found\' or \'User not found\' in the scene in the upper right corner. Time to move onto more complex things!
+7.  If everything is done correctly, at this stage the user will be detected. Depending on the result, you will see a message 'User found' or 'User not found' in the scene in the upper right corner. Time to move onto more complex things!
 
     ![](Ubasic_image6.png)
 
 ### Note
-**How can I get the full log from the device?**\
+**How can I get the full log from the device?**<br>
 *To get the Unity app log from your mobile device, install the Android Debug Bridge (adb) into your computer. Run the following
 command in the console: adb logcat -s Unity. When you run the application on your phone, the log will be displayed in the console.*
 
 ## Creating Objects for Skeleton Visualization
 
 1.  Now that we initialized Nuitrack and checked the detection of the user, we can go to the next stage, which presupposes obtaining data on the skeleton and visualization of the joints.
-2.  Let\'s determine the joints of the skeleton, which we need to get: declare the
-*[nuitrack.JointType](group__SkeletonTracker__group__csharp.html#ga659db18c8af0cb3d660930d7116709ae "Joint index meaning (please note that LeftFingertip, RightFingertip, LeftFoot, RightFoot are not used..."){.el}* and *GameObject* arrays. Each element of the *GameObject* array will correspond to a specific *typeJoint*. In the app, the joint will be rendered in the form of the *PrefabJoint* that we selected.
+2.  Let's determine the joints of the skeleton, which we need to get: declare the ```nuitrack.JointType``` and ```GameObject``` arrays. Each element of the ```GameObject``` array will correspond to a specific ```typeJoint```. In the app, the joint will be rendered in the form of the ```PrefabJoint``` that we selected.
 
 ```cpp
 public nuitrack.JointType[] typeJoint;
@@ -145,16 +144,16 @@ public GameObject PrefabJoint;
 ```
 
 3.  In Unity, select the required number of joints in the object characteristics: **Native Avatar → Type Joint** and specify the
-joint types that you need. Drag-and-drop the prefab that will be used for displaying the user\'s joints (for example, a white sphere) to the **Prefab Joint**.
+joint types that you need. Drag-and-drop the prefab that will be used for displaying the user's joints (for example, a white sphere) to the **Prefab Joint**.
 
     ![](Ubasic_image9.png)
 
 ### Note
 *To create a prefab in Unity (for example, a sphere), select **GameObject → 3D Object → {Sphere}**. Scale down the sphere
-that appeared on the scene so that its size is about 10 cm (1 Unity unit \~ 1 m). Create a prefab in the **Project** tab:
+that appeared on the scene so that its size is about 10 cm (1 Unity unit ~ 1 m). Create a prefab in the **Project** tab:
 **Right Click → Create → Prefab**. Then, drag-and-drop the created sphere to the prefab. To learn more about prefabs, see the link at the end of this tutorial.* 
 
-4.  Let's create objects for visualization of joints using the saved prefab: create an array of the same dimension as the *typeJoint* array: *CreatedJoint = new GameObject\[typeJoint.Length\]*. After that, we start to create their copies on the scene in the loop using the Instantiate function. Now, we define copies of the objects as children of the object that contains the script. As a result, the position of the parent object will correspond to the position of the sensor.
+4.  Let's create objects for visualization of joints using the saved prefab: create an array of the same dimension as the ```typeJoint``` array: ```CreatedJoint = new GameObject[typeJoint.Length]```. After that, we start to create their copies on the scene in the loop using the ```Instantiate``` function. Now, we define copies of the objects as children of the object that contains the script. As a result, the position of the parent object will correspond to the position of the sensor.
 
 ```cpp
 void Start()
@@ -175,21 +174,20 @@ void Start()
 
 ## Getting Data, Converting and Scaling the Joints
 
-1.  As soon as we created the objects for visualization of the joints, let\'s match their positions with the positions of the joints of a real user\'s skeleton.
+1.  As soon as we created the objects for visualization of the joints, let's match their positions with the positions of the joints of a real user's skeleton.
 
-2.  Get data on the detected skeleton using *CurrentUserTracker.CurrentSkeleton*. After this, we process the
+2.  Get data on the detected skeleton using ```CurrentUserTracker.CurrentSkeleton```. After this, we process the
 information about the joints in the loop.
 
-3.  To receive data on the required joint, call the *GetJoint* function from the obtained *skeleton* specifying the *typeJoint\[q\]*.
+3.  To receive data on the required joint, call the ```GetJoint``` function from the obtained ```skeleton``` specifying the ```typeJoint[q]```.
 
-4.  Let\'s calculate the joint position by calling the *ToVector3()* function from the current joint: *Vector3 newPosition = 0.001f \* joint.ToVector3()*. To learn more about Vectors in Unity, see the link at the end of this tutorial.
+4.  Let's calculate the joint position by calling the ```ToVector3()``` function from the current joint: ```Vector3 newPosition = 0.001f*joint.ToVector3()```. To learn more about Vectors in Unity, see the link at the end of this tutorial.
 
 ### Note
 *Keep in mind that 1 Unity unit is about 1 m, so we need to adjust the obtained data. To do that, multiply the received
 values by 0.001 (convert m to mm).*
 
-5.  Set the calculated position *newPosition* to the *CreatedJoint\[q\]* object, which is matched with the *typeJoint \[q\]:
-CreatedJoint\[q\].transform.localPosition = newPosition*.
+5.  Set the calculated position ```newPosition``` to the ```CreatedJoint\[q\]``` object, which is matched with the ```typeJoint \[q\]:CreatedJoint\[q\].transform.localPosition = newPosition```.
 
 ```cpp
 void Update()
