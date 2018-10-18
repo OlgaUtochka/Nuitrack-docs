@@ -51,7 +51,7 @@ You can find the finished project in **Nuitrack SDK**: **Unity 3D → NuitrackSD
     ![](Ubasic_image5.png)
 
 ### Note
-To reduce the size of a final .apk file, select **ARMv7** type of architecture in the **Device Filter** section.
+*To reduce the size of a final .apk file, select **ARMv7** type of architecture in the **Device Filter** section.*
 
 6.  Now that everything is set up, let\'s build the project: **File → Build Settings → Build**
 
@@ -116,7 +116,7 @@ using UnityEngine;
 
 ```
 ### Note
-Save changes in the script code so that they take effect in the Unity editor.
+*Save changes in the script code so that they take effect in the Unity editor.*
 
 5.  Create an empty object on the scene so that Unity can execute **NativeAvatar.cs**: **GameObject → Create Empty** and then
 drag-and-drop the script to that object.
@@ -127,10 +127,10 @@ drag-and-drop the script to that object.
 
     ![](Ubasic_image6.png)
 
-Note
+### Note
 **How can I get the full log from the device?**\
-To get the Unity app log from your mobile device, install the Android Debug Bridge (adb) into your computer. Run the following
-command in the console: adb logcat -s Unity. When you run the application on your phone, the log will be displayed in the console.
+*To get the Unity app log from your mobile device, install the Android Debug Bridge (adb) into your computer. Run the following
+command in the console: adb logcat -s Unity. When you run the application on your phone, the log will be displayed in the console.*
 
 ## Creating Objects for Skeleton Visualization
 
@@ -150,11 +150,11 @@ joint types that you need. Drag-and-drop the prefab that will be used for displa
     ![](Ubasic_image9.png)
 
 ### Note
-To create a prefab in Unity (for example, a sphere), select **GameObject → 3D Object → {Sphere}**. Scale down the sphere
+*To create a prefab in Unity (for example, a sphere), select **GameObject → 3D Object → {Sphere}**. Scale down the sphere
 that appeared on the scene so that its size is about 10 cm (1 Unity unit \~ 1 m). Create a prefab in the **Project** tab:
-**Right Click → Create → Prefab**. Then, drag-and-drop the created sphere to the prefab. To learn more about prefabs, see the link at the end of this tutorial.
+**Right Click → Create → Prefab**. Then, drag-and-drop the created sphere to the prefab. To learn more about prefabs, see the link at the end of this tutorial.* 
 
-4.  Let\'s create objects for visualization of joints using the saved prefab: create an array of the same dimension as the *typeJoint* array: *CreatedJoint = new GameObject\[typeJoint.Length\]*. After that, we start to create their copies on the scene in the loop using the Instantiate function. Now, we define copies of the objects as children of the object that contains the script. As a result, the position of the parent object will correspond to the position of the sensor.
+4.  Let's create objects for visualization of joints using the saved prefab: create an array of the same dimension as the *typeJoint* array: *CreatedJoint = new GameObject\[typeJoint.Length\]*. After that, we start to create their copies on the scene in the loop using the Instantiate function. Now, we define copies of the objects as children of the object that contains the script. As a result, the position of the parent object will correspond to the position of the sensor.
 
 ```cpp
 void Start()
@@ -185,8 +185,8 @@ information about the joints in the loop.
 4.  Let\'s calculate the joint position by calling the *ToVector3()* function from the current joint: *Vector3 newPosition = 0.001f \* joint.ToVector3()*. To learn more about Vectors in Unity, see the link at the end of this tutorial.
 
 ### Note
-Keep in mind that 1 Unity unit is about 1 m, so we need to adjust the obtained data. To do that, multiply the received
-values by 0.001 (convert m to mm).
+*Keep in mind that 1 Unity unit is about 1 m, so we need to adjust the obtained data. To do that, multiply the received
+values by 0.001 (convert m to mm).*
 
 5.  Set the calculated position *newPosition* to the *CreatedJoint\[q\]* object, which is matched with the *typeJoint \[q\]:
 CreatedJoint\[q\].transform.localPosition = newPosition*.
@@ -214,8 +214,7 @@ void Update()
 ```
 
 ### Note
-For correct detection of the user, the camera in Unity should be set at a distance of approximately 2-3 m from the object, which
-contains the script. Make sure the camera is facing the object.
+*For correct detection of the user, the camera in Unity should be set at a distance of approximately 2-3 m from the object, which contains the script. Make sure the camera is facing the object.*
 
 6.  And now we are down to the final stretch! Build the project and run the app on your mobile device. Now, if everything was done properly, your skeleton will be detected, tracked and displayed in the app. Good job!
 
