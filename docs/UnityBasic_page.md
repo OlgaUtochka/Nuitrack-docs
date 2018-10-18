@@ -67,10 +67,10 @@ Hotkeys:<br>
 8.  During the project build, all errors and warnings (if any) are displayed in the **Console**.
 
 ### Note
-After the first build, when you have a ready-made .apk file, you can perform build and installation on the device in one click
+*After the first build, when you have a ready-made .apk file, you can perform build and installation on the device in one click
 using **Ctrl + B**. To do this, activate **Developer Mode** in the settings of the mobile device and connect it to the computer
 via USB. Then press **Ctrl + B** in Unity. As a result, the project will be built, installed and launched on your mobile
-device.
+device.*
 
 ## Initializing the Nuitrack SDK, Setting up the Scene and Checking the Skeleton Detection
 
