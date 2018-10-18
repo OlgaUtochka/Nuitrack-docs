@@ -1,88 +1,13 @@
----
-generator: 'Doxygen 1.8.6'
-title: 'Nuitrack: Creating your First Unity Project using Nuitrack SDK'
----
+# Creating your First Unity Project using Nuitrack SDK
 
-::: {#top}
-::: {#titlearea}
-+-----------------------------------+-----------------------------------+
-| ![Logo](nuitrack.png)             | ::: {#projectname}                |
-|                                   | Nuitrack  [1.3.5]{#projectnumber} |
-|                                   | :::                               |
-|                                   |                                   |
-|                                   | ::: {#projectbrief}               |
-|                                   | 3D Skeleton Tracking Middleware   |
-|                                   | :::                               |
-+-----------------------------------+-----------------------------------+
-:::
-
-::: {#navrow1 .tabs}
--   [Main Page](index.html)
--   [Related Pages](pages.html)
--   [Modules](modules.html)
--   [Classes](annotated.html)
--   ::: {#MSearchBox .MSearchBoxInactive}
-    [ ![](search/mag_sel.png){#MSearchSelect} ]{.left}[
-    [![](search/close.png){#MSearchCloseImg}](javascript:searchBox.CloseResultsWindow()){#MSearchClose}
-    ]{.right}
-    :::
-:::
-:::
-
-::: {#side-nav .ui-resizable .side-nav-resizable}
-::: {#nav-tree}
-::: {#nav-tree-contents}
-::: {#nav-sync .sync}
-:::
-:::
-:::
-
-::: {#splitbar .ui-resizable-handle style="-moz-user-select:none;"}
-:::
-:::
-
-::: {#doc-content}
-::: {#MSearchSelectWindow onmouseover="return searchBox.OnSearchSelectShow()" onmouseout="return searchBox.OnSearchSelectHide()" onkeydown="return searchBox.OnSearchSelectKey(event)"}
-[[ ]{.SelectionMark}All](javascript:void(0)){.SelectItem}[[ ]{.SelectionMark}Classes](javascript:void(0)){.SelectItem}[[ ]{.SelectionMark}Namespaces](javascript:void(0)){.SelectItem}[[ ]{.SelectionMark}Functions](javascript:void(0)){.SelectItem}[[ ]{.SelectionMark}Variables](javascript:void(0)){.SelectItem}[[ ]{.SelectionMark}Typedefs](javascript:void(0)){.SelectItem}[[ ]{.SelectionMark}Enumerations](javascript:void(0)){.SelectItem}[[ ]{.SelectionMark}Enumerator](javascript:void(0)){.SelectItem}[[ ]{.SelectionMark}Properties](javascript:void(0)){.SelectItem}[[ ]{.SelectionMark}Events](javascript:void(0)){.SelectItem}[[ ]{.SelectionMark}Groups](javascript:void(0)){.SelectItem}[[ ]{.SelectionMark}Pages](javascript:void(0)){.SelectItem}
-:::
-
-::: {#MSearchResultsWindow}
-:::
-
-::: {.header}
-::: {.headertitle}
-::: {.title}
-Creating your First Unity Project using Nuitrack SDK
-:::
-:::
-:::
-
-::: {.contents}
-::: {.toc}
-### Table of Contents
-
--   [Setting up the Environment](#environment)
--   [Setting up the Build](#build)
--   [Initializing the Nuitrack SDK, Setting up the Scene and Checking
-    the Skeleton Detection](#initialize)
--   [Creating Objects for Skeleton
-    Visualization](#skeleton_vizualization)
--   [Getting Data, Converting and Scaling the
-    Joints](#getting_data_scaling)
-:::
-
-::: {.textblock}
 In this very first tutorial, you'll learn how to create a basic Unity
 project using Nuitrack SDK. As a result, you'll get a simple app with an
 option of skeleton detection and tracking, which can be modified into a
 full-fledged VR app.
 
-You can find the finished project in **Nuitrack SDK**: **Unity 3D →
-NuitrackSDK.unitypackage → Tutorials → First Project**
+You can find the finished project in **Nuitrack SDK**: **Unity 3D → NuitrackSDK.unitypackage → Tutorials → First Project**
 
-::: {.image}
 ![](Ubasic_image10.gif)
-:::
 
 []{#environment .anchor} Setting up the Environment
 ===================================================
