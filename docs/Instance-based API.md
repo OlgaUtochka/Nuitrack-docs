@@ -29,6 +29,7 @@ The JSON string includes the following properties:
           
           <p align="center">
           <img width="300" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/singlelbf.png">
+          <em>Singlelbf set of points</em>
           </p>
           
           * **left_eye** - normalized coordinates of the center of a person’s left eye;
