@@ -15,28 +15,28 @@ You should also set the value of *AstraProPerseeDepthProvider.Windows.CameraID* 
 Nuitrack allows to get information about people standing in front of the camera in JSON format. To get the information, call the @ref tdv::nuitrack::Nuitrack::getInstancesJson "Nuitrack::getInstancesJson" (C++) or @ref nuitrack.Nuitrack.GetInstancesJson "Nuitrack.GetInstancesJson" (CSharp) function. The result will be returned in the form of a JSON string.<br>
 The JSON string includes the following properties:
 
-* <b>Timestamp</b> - frame timestamp in microseconds;
-* <b>Instances</b> - array with instances tracked by Nuitrack:
-     * <b>id</b> - identifier of an instance, corresponds to user segment id;
-     * <b>class</b> - class of an instance;
-     * <b>face</b> - characteristics of a detected person’s face:
-          * <b>rectangle</b> - normalized screen coordinates of a face rectangle in the image:
-              * <b>left</b> - X coordinate of the upper-left corner of the rectangle;
-              * <b>top</b> - Y coordinate of the upper-left corner of the rectangle;
-              * <b>width</b> - rectangle width;
-              * <b>height</b> - rectangle height;
-          * <b>landmark</b> - facial landmarks. The *singlelbf* set of anthropometric points is used (31 points). Normalized coordinates of each point from the set are returned. ![Singlelbf set of points](@ref images/facerec/singlelbf.png)
-          * <b>left_eye</b> - normalized coordinates of the center of a person’s left eye;
-          * <b>right_eye</b> - normalized coordinates of the center of a person’s right eye;
-          * <b>angles</b> - face orientation angles in degrees:
-              * <b>yaw</b> - yaw angle;
-              * <b>pitch</b> - pitch angle;
-              * <b>roll</b> - roll angle;
-          * <b>emotions</b> - emotion scores for a person’s face. Confidence degree for each emotion is returned as a positive real number in the range of [0; 1]. <i>Values</i>: `neutral | angry | happy | surprise`
-          * <b>age</b> - estimated age of a person:
-              * <b>type</b> - age group of a person depending on his/her age. <i>Values</i>: `kid | young | adult | senior`
-              * <b>years</b> - estimated age of a person, returned as a real positive number.
-          * <b>gender</b> - estimated gender of a person. <i>Values</i>: `male | female`
+* **Timestamp** - frame timestamp in microseconds;
+* **Instances** - array with instances tracked by Nuitrack:
+     * **id** - identifier of an instance, corresponds to user segment id;
+     * **class** - class of an instance;
+     * **face** - characteristics of a detected person’s face:
+          * **rectangle** - normalized screen coordinates of a face rectangle in the image:
+              * **left** - X coordinate of the upper-left corner of the rectangle;
+              * **top** - Y coordinate of the upper-left corner of the rectangle;
+              * **width** - rectangle width;
+              * **height** - rectangle height;
+          * **landmark** - facial landmarks. The *singlelbf* set of anthropometric points is used (31 points). Normalized coordinates of each point from the set are returned. ![Singlelbf set of points](@ref images/facerec/singlelbf.png)
+          * **left_eye** - normalized coordinates of the center of a person’s left eye;
+          * **right_eye** - normalized coordinates of the center of a person’s right eye;
+          * **angles** - face orientation angles in degrees:
+              * **yaw** - yaw angle;
+              * **pitch** - pitch angle;
+              * **roll** - roll angle;
+          * **emotions** - emotion scores for a person’s face. Confidence degree for each emotion is returned as a positive real number in the range of [0; 1]. *Values*: `neutral | angry | happy | surprise`
+          * **age** - estimated age of a person:
+              * **type** - age group of a person depending on his/her age. <i>Values</i>: `kid | young | adult | senior`
+              * **years** - estimated age of a person, returned as a real positive number.
+          * **gender** - estimated gender of a person. <i>Values</i>: `male | female`
 
 Here is an example of output JSON data:
 @verbinclude Instance_based_API.json
