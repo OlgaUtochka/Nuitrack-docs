@@ -25,7 +25,7 @@ The JSON string includes the following properties:
               * **top** - Y coordinate of the upper-left corner of the rectangle;
               * **width** - rectangle width;
               * **height** - rectangle height;
-          * **landmark** - facial landmarks. The *singlelbf* set of anthropometric points is used (31 points). Normalized coordinates of each point from the set are returned. ![Singlelbf set of points](@ref images/facerec/singlelbf.png)
+          * **landmark** - facial landmarks. The *singlelbf* set of anthropometric points is used (31 points). Normalized coordinates of each point from the set are returned. ![Singlelbf set of points](https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/singlelbf.png)
           * **left_eye** - normalized coordinates of the center of a person’s left eye;
           * **right_eye** - normalized coordinates of the center of a person’s right eye;
           * **angles** - face orientation angles in degrees:
