@@ -46,5 +46,70 @@ The JSON string includes the following properties:
           * **gender** - estimated gender of a person. <i>Values</i>: `male | female`
 
 Here is an example of output JSON data:
-@verbinclude Instance_based_API.json
-*/
+```
+{
+    "Timestamp": "21510171",
+    "Instances":
+    [
+        {
+            "id": "1",
+            "class": "human",
+            "face":
+            {
+                "rectangle":
+                {
+                    "left": "0.328125",
+                    "top": "0.008333334",
+                    "width": "0.31875",
+                    "height": "0.4208333333333333"
+                },
+                "landmark":
+                [
+                    {
+                        "x": "0.4263304",
+                        "y": "0.1120703"
+                    },
+                    ...
+                    {
+                        "x": "0.4574016",
+                        "y": "0.1485224"
+                    },
+                    {
+                        "x": "0.5318047",
+                        "y": "0.1858454"
+                    }
+                ],
+                "left_eye":
+                {
+                    "x": "0.4574016",
+                    "y": "0.1485224"
+                },
+                "right_eye":
+                {
+                    "x": "0.5318047",
+                    "y": "0.1858454"
+                },
+                "angles":
+                {
+                    "yaw": "10.45415",
+                    "pitch": "-15.17794",
+                    "roll": "21.27661"
+                },
+                "emotions":
+                {
+                    "angry": "0.5808502",
+                    "neutral": "0.3572008",
+                    "surprise": "0.05123258",
+                    "happy": "0.01071637"
+                },
+                "age":
+                {
+                    "type": "young",
+                    "years": "26.7231330871582"
+                },
+                "gender": "male"
+            }
+        }
+    ]
+}
+```
