@@ -31,7 +31,7 @@ The JSON string includes the following properties:
           <img width="300" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/singlelbf.png">
           </p>
           
-                                        **Single bf set of points**
+                                            Single bf set of points
           
           * **left_eye** - normalized coordinates of the center of a person’s left eye;
           * **right_eye** - normalized coordinates of the center of a person’s right eye;
