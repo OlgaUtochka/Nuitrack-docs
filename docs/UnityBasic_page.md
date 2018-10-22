@@ -4,7 +4,7 @@ In this very first tutorial, you'll learn how to create a basic Unity project us
 
 You can find the finished project in **Nuitrack SDK**: **Unity 3D → NuitrackSDK.unitypackage → Tutorials → First Project**
 
-![](Ubasic_image10.gif)
+![](http://download.3divi.com/Nuitrack/doc/Ubasic_image10.gif)
 
 ## Setting up the Environment
 
@@ -15,7 +15,7 @@ You can find the finished project in **Nuitrack SDK**: **Unity 3D → NuitrackSD
 
 2.  Create a new project.
 
-    ![](Ubasic_image1.png)
+    ![](http://download.3divi.com/Nuitrack/doc/Ubasic_image1.png)
 
 3.  To create a project, select the appropriate platform, for example, Android: **File → Build Settings → Android** and then select **Switch Platform**.
 
@@ -24,7 +24,7 @@ You can find the finished project in **Nuitrack SDK**: **Unity 3D → NuitrackSD
 
 4.  Download and install **SDK** and **JDK**. To do this, select **Edit → Preferences → External Tools** and click **Download** in the relevant sections. After that, your browser will open the web sites, where you can download the required **SDK** and **JDK**.
 
-    ![](Ubasic_image3.png)
+    ![](http://download.3divi.com/Nuitrack/doc/Ubasic_image3.png)
 
 5.  And now, here is the most interesting part that will allow us to create projects with skeleton detection and tracking. Download **Nuitrack SDK** [from the official web site](https://nuitrack.com/) and import it to the project. To import **Nuitrack SDK**, select **Import Package → Custom Package → {Root}/NuitrackSDK/Unity3d/Nuitrack.unitypackage** by right-clicking in the **Project** tab.
 
@@ -34,7 +34,7 @@ You can find the finished project in **Nuitrack SDK**: **Unity 3D → NuitrackSD
 
 6.  As a result, you will have a configured development environment with all the necessary components for the build.
 
-    ![](Ubasic_image2.png)
+    ![](http://download.3divi.com/Nuitrack/doc/Ubasic_image2.png)
 
 ## Setting up the Build
 
@@ -48,7 +48,7 @@ You can find the finished project in **Nuitrack SDK**: **Unity 3D → NuitrackSD
     
 5.  Also, select minimum API level in this section for correct operation of Nuitrack: **Minimum API Level → Android 4.4 'Kit Kat' (API Level 19)**.
 
-    ![](Ubasic_image5.png)
+    ![](http://download.3divi.com/Nuitrack/doc/Ubasic_image5.png)
 
 ### Note
 *To reduce the size of a final .apk file, select **ARMv7** type of architecture in the **Device Filter** section.*
@@ -62,7 +62,7 @@ Hotkeys:<br>
 
 7.  If the build was successful, a new window will open with your application in the ```.apk``` format, which can be run on the Android device. When you run the app on your device, you will see the image as shown below:
 
-    ![](Ubasic_image4.png)
+    ![](http://download.3divi.com/Nuitrack/doc/Ubasic_image4.png)
 
 8.  During the project build, all errors and warnings (if any) are displayed in the **Console**.
 
@@ -78,7 +78,7 @@ device.*
 
 2.  Set up the characteristics of the **NuitrackScripts** object by right-clicking on it. Check **Skeleton Tracker Module On** in the **Nuitrack Manager** section in the **Inspector** tab. This very module takes care of detection and tracking of a user's skeleton.
 
-    ![](Ubasic_image7.png)
+    ![](http://download.3divi.com/Nuitrack/doc/Ubasic_image7.png)
 
 As you can see, there are several more modules in this field. We'll cover them in the following tutorials.
 
@@ -125,7 +125,7 @@ drag-and-drop the script to that object.
 
 7.  If everything is done correctly, at this stage the user will be detected. Depending on the result, you will see a message 'User found' or 'User not found' in the scene in the upper right corner. Time to move onto more complex things!
 
-    ![](Ubasic_image6.png)
+    ![](http://download.3divi.com/Nuitrack/doc/Ubasic_image6.png)
 
 ### Note
 **How can I get the full log from the device?**<br>
@@ -146,7 +146,7 @@ public GameObject PrefabJoint;
 3.  In Unity, select the required number of joints in the object characteristics: **Native Avatar → Type Joint** and specify the
 joint types that you need. Drag-and-drop the prefab that will be used for displaying the user's joints (for example, a white sphere) to the **Prefab Joint**.
 
-    ![](Ubasic_image9.png)
+    ![](http://download.3divi.com/Nuitrack/doc/Ubasic_image9.png)
 
 ### Note
 *To create a prefab in Unity (for example, a sphere), select **GameObject → 3D Object → {Sphere}**. Scale down the sphere
@@ -170,7 +170,7 @@ void Start()
 
 5.  Build the project (Ctrl + B) and check the app operation on your device. If everything is done correctly, the spheres from the prefab will be located in the position of the object with the script. Since they are yet located at one point, they will look like a single sphere.
 
-    ![](Ubasic_image8.png)
+    ![](http://download.3divi.com/Nuitrack/doc/Ubasic_image8.png)
 
 ## Getting Data, Converting and Scaling the Joints
 
@@ -216,7 +216,7 @@ void Update()
 
 6.  And now we are down to the final stretch! Build the project and run the app on your mobile device. Now, if everything was done properly, your skeleton will be detected, tracked and displayed in the app. Good job!
 
-    ![](Ubasic_image10.gif)
+    ![](http://download.3divi.com/Nuitrack/doc/Ubasic_image10.gif)
 
 Now you know how to create a Unity project using Nuitrack SDK. From now on, you can develop a plenty of apps with skeleton tracking! That's all for now. Though this is a very simple example, it covers a large set of basic subjects important to understanding how to use Unity with Nuitrack SDK. In the next tutorials, you'll learn how create more complex and
 functional Unity apps with skeleton tracking.
