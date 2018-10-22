@@ -28,7 +28,7 @@ The JSON string includes the following properties:
           * **landmark** - facial landmarks. The *singlelbf* set of anthropometric points is used (31 points). Normalized coordinates of each point from the set are returned. 
           
           <p align="center">
-          <img width="300" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/singlelbf.png">
+          <img width="300" src="http://download.3divi.com/Nuitrack/doc/singlelbf.png">
           </p>
           
                                             Single bf set of points
