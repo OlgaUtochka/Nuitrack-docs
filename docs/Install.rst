@@ -25,6 +25,14 @@ To install Nuitrack on Windows, follow the steps below:
    :width: 600 px
    :alt: Editing environment variables in Windows 10
    :align: center
+   
+   .. figure:: http://download.3divi.com/Nuitrack/doc/install_windows.png
+       :scale: 50 %
+       :align: center
+       :alt: Альтернативный текст
+
+       Подпись изображения
+
 
 **Editing environment variables in Windows 10**
 
