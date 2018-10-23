@@ -25,14 +25,6 @@ To install Nuitrack on Windows, follow the steps below:
    :width: 600 px
    :alt: Editing environment variables in Windows 10
    :align: center
-   
-   .. figure:: http://download.3divi.com/Nuitrack/doc/install_windows.png
-       :scale: 50 %
-       :align: center
-       :alt: Альтернативный текст
-
-       Подпись изображения
-
 
 **Editing environment variables in Windows 10**
 
@@ -132,3 +124,10 @@ Intel® RealSense™ Depth Camera D415
 * Supported OS versions: Windows 8.1, Windows 10 and Ubuntu 14.04 or higher
 * Before using the sensor, you need to download and install Intel® RealSense™ SDK 2.0 `for Windows <https://goo.gl/hkhUdR>`_ or `for Linux <https://goo.gl/wmFSuG>`_.
 * Supported camera firmware version: 5.8.15 or higher. To update the camera firmware, please, download the latest firmware from `the official Intel website <https://downloadcenter.intel.com/download/27514/Windows-Device-Firmware-Update-Tool-for-Intel-RealSense-D400-Product-Family?v=t>`_.
+
+.. figure:: http://download.3divi.com/Nuitrack/doc/install_windows.png
+       :scale: 50 %
+       :align: center
+       :alt: Альтернативный текст
+
+       Подпись изображения
