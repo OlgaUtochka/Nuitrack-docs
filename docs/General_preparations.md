@@ -5,7 +5,7 @@
 It is recommended that the area does not have direct sunlight in the field of view of the sensor.
 
 <p align="center">
-<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/lighting_conditions.png">
+<img width="700" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/lighting_conditions.png">
 </p>
 
 ## Sensor placement
