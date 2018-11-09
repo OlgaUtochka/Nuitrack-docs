@@ -1,38 +1,23 @@
+# Open Source Licenses
+
 Nuitrack SDK uses the following open source libraries:
 
-Boost (<https://www.boost.org/>)
+* Boost (<https://www.boost.org/>)
+* Ceres Solver (<http://ceres-solver.org/>)
+* GLEW (<http://glew.sourceforge.net/>)
+* GLM (<https://glm.g-truc.net/0.9.8/index.html>)
+* Google logging module (<https://github.com/google/glog>)
+* libLBFGS (<http://www.chokkan.org/software/liblbfgs/>)
+* librealsense (<https://realsense.intel.com/sdk-2/>)
+* LIBSVM ([https://www.csie.ntu.edu.tw/$\sim$cjlin/libsvm/](https://www.csie.ntu.edu.tw/~cjlin/libsvm/))
+* OpenCV (<https://opencv.org/>)
+* OpenNI (<https://github.com/OpenNI/OpenNI>)
+* OpenNI2 (<https://structure.io/openni>)
+* PrimeSense/Sensor (<https://github.com/PrimeSense/Sensor>)
+* TinyXML (<http://www.grinninglizard.com/tinyxml/>)
 
-Ceres Solver (<http://ceres-solver.org/>)
-
-GLEW (<http://glew.sourceforge.net/>)
-
-GLM (<https://glm.g-truc.net/0.9.8/index.html>)
-
-Google logging module (<https://github.com/google/glog>)
-
-libLBFGS (<http://www.chokkan.org/software/liblbfgs/>)
-
-librealsense (<https://realsense.intel.com/sdk-2/>)
-
-LIBSVM
-([https://www.csie.ntu.edu.tw/$\sim$cjlin/libsvm/](https://www.csie.ntu.edu.tw/~cjlin/libsvm/))
-
-OpenCV (<https://opencv.org/>)
-
-OpenNI (<https://github.com/OpenNI/OpenNI>)
-
-OpenNI2 (<https://structure.io/openni>)
-
-PrimeSense/Sensor (<https://github.com/PrimeSense/Sensor>)
-
-TinyXML (<http://www.grinninglizard.com/tinyxml/>)
-
-::: {#OpensourceLicences_page_boost_license}
-:::
-
-Boost License {#OpensourceLicences_page_boost_license}
-=============
-
+## Boost License
+```
 Boost Software License - Version 1.0 - August 17th, 2003
 
 Permission is hereby granted, free of charge, to any person or
@@ -58,9 +43,7 @@ DISTRIBUTING THE SOFTWARE BE LIABLE FOR ANY DAMAGES OR OTHER LIABILITY,
 WHETHER IN CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-
-::: {#OpensourceLicences_page_ceres_solver_license}
-:::
+```
 
 Ceres Solver License {#OpensourceLicences_page_ceres_solver_license}
 ====================
