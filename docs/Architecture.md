@@ -1,5 +1,4 @@
-Nuitrack SDK Architecture 
-==========================
+# Nuitrack SDK Architecture 
 
 Nuitrack API is a native (C++) synchronous interface based on the
 asynchronous middleware layer that conceals all the interactions with 3D
