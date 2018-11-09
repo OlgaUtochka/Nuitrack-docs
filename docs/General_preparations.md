@@ -23,12 +23,9 @@ least a distance of 40 centimetres from the walls and the ceiling.
 ## Player position within the frame
 
 Make sure that the player's entire body is visible:
-
-When extending the arm to the front, sides and above the head, they are still visible in the frame.
-
-The whole head should be visible with room to spare above it.
-
-The knee area should be within the frame.
+* When extending the arm to the front, sides and above the head, they are still visible in the frame.
+* The whole head should be visible with room to spare above it.
+* The knee area should be within the frame.
 
 \mbox{\includegraphics{player_position.jpg}}
 
