@@ -43,7 +43,7 @@ Make sure that the player's entire body is visible:
 <img width="600" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/space_between_players.png">
 </p>
 
-## Make sure there is no overlapping, occlusions may effect tracking.
+## Make sure there is no overlapping. Occlusions may effect tracking.
 
 <p align="center">
 <img width="600" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/player_overlap.png">
