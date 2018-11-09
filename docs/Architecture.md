@@ -14,5 +14,5 @@ The SDK contains a Nuitrack C\# wrapper, a plugin for Unity3D and a
 plugin for Android devices.
 
 <p align="center">
-<img width="900" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/architecture.png">
+<img width="1000" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/architecture.png">
 </p>
