@@ -13,7 +13,6 @@ through JNI.
 The SDK contains a Nuitrack C\# wrapper, a plugin for Unity3D and a
 plugin for Android devices.
 
-\mbox{\includegraphics{architecture.png}}
 <p align="center">
-<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/architecture.png">
+<img width="900" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/architecture.png">
 </p>
