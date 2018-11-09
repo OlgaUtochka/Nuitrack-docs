@@ -17,7 +17,7 @@ Nuitrack SDK uses the following open source libraries:
 * [TinyXML](<http://www.grinninglizard.com/tinyxml/>)
 
 ## Boost License
-
+```
 Boost Software License - Version 1.0 - August 17th, 2003
 
 Permission is hereby granted, free of charge, to any person or organization
@@ -41,9 +41,9 @@ SHALL THE COPYRIGHT HOLDERS OR ANYONE DISTRIBUTING THE SOFTWARE BE LIABLE
 FOR ANY DAMAGES OR OTHER LIABILITY, WHETHER IN CONTRACT, TORT OR OTHERWISE,
 ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 DEALINGS IN THE SOFTWARE.
-
+```
 ## Ceres Solver License
-
+```
 Ceres Solver - A fast non-linear least squares minimizer
 Copyright 2010, 2011, 2012 Google Inc. All rights reserved.
 http://code.google.com/p/ceres-solver/
@@ -71,9 +71,9 @@ INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
 CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
 ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 POSSIBILITY OF SUCH DAMAGE.
-
+```
 ## GLEW License
-
+```
 The OpenGL Extension Wrangler Library
 Copyright (C) 2002-2007, Milan Ikits <milan ikits[]ieee org>
 Copyright (C) 2002-2007, Marcelo E. Magallon <mmagallo[]debian org>
@@ -103,7 +103,6 @@ CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
 ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF
 THE POSSIBILITY OF SUCH DAMAGE.
 
-
 Mesa 3-D graphics library
 Version:  7.0
 
@@ -126,7 +125,6 @@ BRIAN PAUL BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN
 AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-
 Copyright (c) 2007 The Khronos Group Inc.
 
 Permission is hereby granted, free of charge, to any person obtaining a
@@ -147,9 +145,9 @@ IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
 CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 MATERIALS OR THE USE OR OTHER DEALINGS IN THE MATERIALS.
-
+```
 ## GLM License
-
+```
 The MIT License
 
 Copyright (c) 2005 - 2013 G-Truc Creation
@@ -171,9 +169,9 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
-
+```
 ## Google Logging Module License
-
+```
 Copyright (c) 2008, Google Inc.
 All rights reserved.
 
@@ -202,7 +200,6 @@ DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
 THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-
 
 A function gettimeofday in utilities.cc is based on
 
@@ -239,9 +236,9 @@ DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
 THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-
+```
 ## libLBFGS License
-
+```
 The MIT License
 
 Copyright (c) 1990 Jorge Nocedal
@@ -264,10 +261,10 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
-
+```
 ## librealsense License
-
- Apache License
+```
+                                  Apache License
                            Version 2.0, January 2004
                         http://www.apache.org/licenses/
 
@@ -468,9 +465,9 @@ THE SOFTWARE.
    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
    See the License for the specific language governing permissions and
 limitations under the License.
-
+```
 ## LIBSVM License
-
+```
 Copyright (c) 2000-2014 Chih-Chung Chang and Chih-Jen Lin
 All rights reserved.
 
@@ -501,9 +498,9 @@ PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
 LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
 NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-
+```
 ## OpenCV License
-
+```
 By downloading, copying, installing or using the software you agree to this license.
 If you do not agree to this license, do not download, install,
 copy or use the software.
@@ -545,10 +542,10 @@ loss of use, data, or profits; or business interruption) however caused
 and on any theory of liability, whether in contract, strict liability,
 or tort (including negligence or otherwise) arising in any way out of
 the use of this software, even if advised of the possibility of such damage.
-
+```
 ## OpenNI License
-
-   Apache License
+```
+                                  Apache License
                            Version 2.0, January 2004
                         http://www.apache.org/licenses/
 
@@ -749,9 +746,9 @@ the use of this software, even if advised of the possibility of such damage.
    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
    See the License for the specific language governing permissions and
    limitations under the License.
-   
+```   
 ## OpenNI2 License
-   
+```   
                                 Apache License
                            Version 2.0, January 2004
                         http://www.apache.org/licenses/
@@ -953,10 +950,10 @@ the use of this software, even if advised of the possibility of such damage.
    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
    See the License for the specific language governing permissions and
    limitations under the License.
-   
+```   
    ## PrimeSense/Sensor License
-   
-   Apache License
+```   
+                                  Apache License
                            Version 2.0, January 2004
                         http://www.apache.org/licenses/
 
@@ -1157,9 +1154,9 @@ the use of this software, even if advised of the possibility of such damage.
    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
    See the License for the specific language governing permissions and
    limitations under the License.
-   
+```   
 ## TinyXML License
-
+```
 www.sourceforge.net/projects/tinyxml
 
 This software is provided 'as-is', without any express or implied
@@ -1180,3 +1177,4 @@ must not be misrepresented as being the original software.
 
 3. This notice may not be removed or altered from any source
 distribution.
+```
