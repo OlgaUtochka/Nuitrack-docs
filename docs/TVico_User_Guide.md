@@ -26,13 +26,13 @@ Android, Windows and Linux platforms are supported. Please see the installation 
 3. Launch the Nuitrack application.
 
 <p align="center">
-<img width="600" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/TVico_1.png">
+<img width="1100" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/TVico_1.png">
 </p>
 
 4. Wait for Nuitrack installation. If the Nuitrack installation is successful, the message will be displayed as shown in the picture below:
 
 <p align="center">
-<img width="600" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/TVico_2.png">
+<img width="1100" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/TVico_2.png">
 </p>
 
 ### Setting Up TVico
@@ -46,25 +46,25 @@ Android, Windows and Linux platforms are supported. Please see the installation 
 2. Enter your Activation Key and click **Get available licenses**.
 
 <p align="center">
-<img width="600" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/TVico_4.png">
+<img width="1100" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/TVico_4.png">
 </p>
 
 3. Choose the **TVico** license type and click **Activate**. After that, the Nuitrack app will be restarted.
 
 <p align="center">
-<img width="600" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/TVico_5.png">
+<img width="1100" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/TVico_5.png">
 </p>
 
 4. Turn on a Wi-Fi access point (go to **Android Settings → Wireless & Networks → More → Tethering & Portable Hotspot** and tick the **Portable Wi-Fi Hotspot**)
 
 <p align="center">
-<img width="600" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/TVico_6.png">
+<img width="1100" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/TVico_6.png">
 </p>
 
 5. To turn on the server, run the Nuitrack app. When the server is running, the notification is displayed. To turn off the server, just click on the notification.
 
 <p align="center">
-<img width="600" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/TVico_7.png">
+<img width="1100" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/TVico_7.png">
 </p>
 
 ### Setting Up Your Device
@@ -75,14 +75,14 @@ Android, Windows and Linux platforms are supported. Please see the installation 
 2. Connect to the TVico Wi-Fi access point (its default name is **AndroidAP**).
 
 <p align="center">
-<img width="600" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/TVico_8.png">
+<img width="300" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/TVico_8.png">
 </p>
 
 3. Run the VicoVR app.
 4. Go to **Settings → Developer Options**, change mode to **Wi-Fi** and edit the IP Address to **192.168.43.1** (the default address for access points on TVico).
 
 <p align="center">
-<img width="600" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/TVico_9.png">
+<img width="300" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/TVico_9.png">
 </p>
 
 5. In Settings, click on the **Test Sensor** button. You will see the window with the depth map, user mask and skeleton.
@@ -100,10 +100,10 @@ Android, Windows and Linux platforms are supported. Please see the installation 
 
 2. [**Unity**]
 
-Import **NuitrackSDK.unitypackage** to your project and drag-and-drop the **Nuitrack Scripts** prefab to the Scene. In the **Nuitrack Manager** section, select **Wifi Connect From PC --> TVico**. After that, **Build and run** the project.
+Import **NuitrackSDK.unitypackage** to your project and drag-and-drop the **Nuitrack Scripts** prefab to the Scene. In the **Nuitrack Manager** section, select **Wifi Connect From PC → TVico**. After that, **Build and run** the project.
 
 <p align="center">
-<img width="600" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/TVico_11.png">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/TVico_11.png">
 </p>
 
    [**С\# sample with nuitrack.net.dll**]
