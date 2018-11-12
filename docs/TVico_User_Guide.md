@@ -4,6 +4,7 @@
 You can use **TVico**:
 1) as a standalone device or 
 2) as a device for development with a PC (using Wi-Fi connection). 
+
 Android, Windows and Linux platforms are supported. Please see the installation instructions for both cases below.
 
 ## Standalone case
