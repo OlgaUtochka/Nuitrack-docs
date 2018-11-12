@@ -93,10 +93,10 @@ Android, Windows and Linux platforms are supported. Please see the installation 
 
 #### Windows / Linux
 
----
+<blockquote>
 **Note**
 In this case, **only skeleton data** can be transferred.
----
+</blockquote>
 
 1. Connect your PC to the Wi-Fi access point (its default name is **AndroidAP**).
 
