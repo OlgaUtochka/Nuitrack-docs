@@ -128,9 +128,9 @@ Dictionary<nuitrack.JointType, ModelJoint> jointsRigged = new Dictionary<nuitrac
 @image html images/Uanim_image4.gif
 @image latex images/Uanim_image4.gif
 
----
+**Note**
 By default, the avatar directly repeats the user's movements (for example, when the user raises the right hand, the avatar raises its right hand, too). If you want to mirror the movements of the avatar, download the [MirrorFlipCamera script](http://bit.ly/2Hxpuiv), drag-and-drop it to the Unity camera, and put the **flipHorizontal** tick in the **Mirror Flip Camera (Script)** section in the **Inspector**.
----
+
 
 ## Direct Mapping
 
@@ -210,4 +210,3 @@ The deformation of the model may be greater than expected. To avoid this, make s
 <blockquote>
 For testing, a mobile device is not necessary. You can test the project even if there is only a computer and a sensor. The app will run in the Unity. 
 </blockquote>
-*/
