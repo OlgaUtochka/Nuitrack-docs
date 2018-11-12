@@ -90,25 +90,25 @@ Android, Windows and Linux platforms are supported. Please see the installation 
 <img width="600" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/TVico_10.png">
 </p>
 
-#### Windows / Linux {#TVico_page_TVico_Desktop}
+#### Windows / Linux
 
 ##### Note
 *Note In this case, **only skeleton data** can be transferred.*
 
 1. Connect your PC to the Wi-Fi access point (its default name is **AndroidAP**).
 
-2. **Unity**
+2. [**Unity**]
 
-Import **NuitrackSDK.unitypackage** to your project and drag-and-drop the **Nuitrack Scripts** prefab to the Scene. In the **Nuitrack Manager** section, select **Wifi Connect From PC --$>$ TVico**. After that, **Build and run** the project.
+Import **NuitrackSDK.unitypackage** to your project and drag-and-drop the **Nuitrack Scripts** prefab to the Scene. In the **Nuitrack Manager** section, select **Wifi Connect From PC --> TVico**. After that, **Build and run** the project.
 
 <p align="center">
 <img width="600" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/TVico_11.png">
 </p>
 
-**С\# sample with nuitrack.net.dll**
+   [**С\# sample with nuitrack.net.dll**]
 
 Use the following code to initialize Nuitrack:
-```
+```cs
 Nuitrack.Init("", Nuitrack.NuitrackMode.DEBUG);    
 Nuitrack.SetConfigValue("Settings.IPAddress", "192.168.43.1"); // TVico IP-address
 ```
