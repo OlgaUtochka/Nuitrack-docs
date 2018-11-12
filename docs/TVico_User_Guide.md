@@ -2,7 +2,7 @@
 
 **TVico** is an interactive Android computer with a 3D sensor and RGB camera. 
 You can use **TVico**:
-1) as a standalone device or 
+1) as a standalone device; 
 2) as a device for development with a PC (using Wi-Fi connection). 
 
 Android, Windows and Linux platforms are supported. Please see the installation instructions for both cases below.
@@ -55,7 +55,7 @@ Android, Windows and Linux platforms are supported. Please see the installation 
 <img width="1000" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/TVico_5.png">
 </p>
 
-4. Turn on a Wi-Fi access point (go to **Android Settings → Wireless & Networks → More → Tethering & Portable Hotspot** and tick the **Portable Wi-Fi Hotspot**)
+4. Turn on a Wi-Fi access point (go to **Android Settings → Wireless & Networks → More → Tethering & Portable Hotspot** and tick the **Portable Wi-Fi Hotspot**).
 
 <p align="center">
 <img width="1000" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/TVico_6.png">
