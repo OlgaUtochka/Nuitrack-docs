@@ -16,8 +16,9 @@ We’ll start with indirect mapping, as it’s a more simple way to animate your
 
 You can find the finished project in **Nuitrack SDK**: **Unity 3D → NuitrackSDK.unitypackage → Tutorials → Avatar Animation**
 
-@image html images/Uanim_image4.gif
-@image latex images/Uanim_image4.gif
+<p align="center">
+<img width="600" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Uanim_image4.gif">
+</p>
 
 ## Indirect Mapping
 
@@ -40,19 +41,20 @@ void Update()
 3. If the user is identified, we move the the calculation of the model position. In indirect mapping, the position of the whole model is calculated using the torso joint position. The position is then rotated 180 degrees along the y axis, otherwise, the model will move in the opposite direction. 
 
 ```cs
-    void ProcessSkeleton(nuitrack.Skeleton skeleton)    
-	{    
-		Vector3 torsoPos = Quaternion.Euler(0f, 180f, 0f) * (0.001f * skeleton.GetJoint(nuitrack.JointType.Torso).ToVector3());
-		transform.position = torsoPos;
-	}
+void ProcessSkeleton(nuitrack.Skeleton skeleton)    
+{    
+	Vector3 torsoPos = Quaternion.Euler(0f, 180f, 0f) * (0.001f * skeleton.GetJoint(nuitrack.JointType.Torso).ToVector3());
+	transform.position = torsoPos;
+}
 ```
 
-4. Build the project. (See the **Creating your First Unity Project using Nuitrack SDK** tutorial, **Setting up the Build** section). If everything was done correctly, the model will move according to the user's movements. At this point, the limbs of the model are not yet rotating.
+4. Build the project. (See the [**Creating your First Unity Project using Nuitrack SDK**](https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/docs/UnityBasic_page.md#setting-up-the-build) tutorial). If everything was done correctly, the model will move according to the user's movements. At this point, the limbs of the model are not yet rotating.
 
-@image html images/Uanim_image1.gif
-@image latex images/Uanim_image1.gif
+<p align="center">
+<img width="600" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Uanim_image1.gif">
+</p>
  
-5. Create another empty C# script (`ModelJoint.cs`), in which we'll describe the ModelJoint class, which we'll use to process the model bones. Mark it as `[System.Serializable]` do that it is displayed in the Inspector. 
+5. Create another empty C# script (`ModelJoint.cs`), in which we'll describe the `ModelJoint` class, which we'll use to process the model bones. Mark it as `[System.Serializable]` do that it is displayed in the Inspector. 
 
 ```cs
 using UnityEngine;
@@ -80,15 +82,17 @@ public class RiggedAvatar : MonoBehaviour
 }
 ```
 
-@image html images/Uanim_image2.png
-@image latex images/Uanim_image2.png
+<p align="center">
+<img width="600" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Uanim_image2.png">
+</p>
 
 <blockquote>
 The skeleton of the model usually has two collarbones, just like a human. There are also two types of collarbones in the JointType (LeftCollar, RightCollar). However, it should be noted that the skeleton retrieved from the sensor has only one "collarbone", which is located in the middle (as shown in the picture below).
 </blockquote>
 
-@image html images/Uanim_image3.jpg
-@image latex images/Uanim_image3.jpg
+<p align="center">
+<img width="600" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Uanim_image3.jpg">
+</p>
 
 7. For convenience, create a dictionary and fill in the joints: 
 
@@ -96,39 +100,41 @@ The skeleton of the model usually has two collarbones, just like a human. There 
 Dictionary<nuitrack.JointType, ModelJoint> jointsRigged = new Dictionary<nuitrack.JointType, ModelJoint>();
 ```
 
-8. Then we loop over the joints from the modelJoints array and record the basic rotation of the model's bone. The joints of the model and their type (<i>jointType</i>) are added to the <i>jointsRigged</i> dictionary.
+8. Then we loop over the joints from the `modelJoints` array and record the basic rotation of the model's bone. The joints of the model and their type (`jointType`) are added to the `jointsRigged` dictionary.
 
 ```cs
-    void Start()
-    {
-        for (int i = 0; i < modelJoints.Length; i++)
-        {
-            modelJoints[i].baseRotOffset = modelJoints[i].bone.rotation;
-            jointsRigged.Add(modelJoints[i].jointType, modelJoints[i]);
-        }
-    }
+void Start()
+{
+	for (int i = 0; i < modelJoints.Length; i++)
+	{
+		modelJoints[i].baseRotOffset = modelJoints[i].bone.rotation;
+		jointsRigged.Add(modelJoints[i].jointType, modelJoints[i]);
+	}
+}
 ```
 
 9. Then we get information about each joint from the Nuitrack. Calculate the rotation of the model bone: take the 'mirrored' joint orientation, add the base rotation of the model bone.
 
 ```cs
-        foreach (var riggedJoint in jointsRigged)
-        {
-            nuitrack.Joint joint = skeleton.GetJoint(riggedJoint.Key);
+foreach (var riggedJoint in jointsRigged)
+{
+	nuitrack.Joint joint = skeleton.GetJoint(riggedJoint.Key);
  
-            ModelJoint modelJoint = riggedJoint.Value;
+	ModelJoint modelJoint = riggedJoint.Value;
  
-            Quaternion jointOrient = Quaternion.Inverse(CalibrationInfo.SensorOrientation) * (joint.ToQuaternionMirrored()) * modelJoint.baseRotOffset;
-            modelJoint.bone.rotation = jointOrient;
-        }
+	Quaternion jointOrient = Quaternion.Inverse(CalibrationInfo.SensorOrientation) * (joint.ToQuaternionMirrored()) * 		modelJoint.baseRotOffset;
+	modelJoint.bone.rotation = jointOrient;
+}
 ```
 
 10. Check the movement of the whole model and rotation of its joints. 
 
-@image html images/Uanim_image4.gif
-@image latex images/Uanim_image4.gif
+<p align="center">
+<img width="600" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Uanim_image4.gif">
+</p>
 
 **Note**
+
 By default, the avatar directly repeats the user's movements (for example, when the user raises the right hand, the avatar raises its right hand, too). If you want to mirror the movements of the avatar, download the [MirrorFlipCamera script](http://bit.ly/2Hxpuiv), drag-and-drop it to the Unity camera, and put the **flipHorizontal** tick in the **Mirror Flip Camera (Script)** section in the **Inspector**.
 
 
@@ -138,40 +144,40 @@ By default, the avatar directly repeats the user's movements (for example, when 
 
 ```cs
 ...
-    public nuitrack.JointType parentJointType;
-    [HideInInspector] public Transform parentBone;
-    [HideInInspector] public float baseDistanceToParent;
-}
+public nuitrack.JointType parentJointType;
+[HideInInspector] public Transform parentBone;
+[HideInInspector] public float baseDistanceToParent;
 ```
 
 2. Let's add some new information to the `RiggedAvatar.cs` script as well. Check the required joints in the Inspector. To animate the model using Nuitrack and direct mapping, we'll need 17 joints.  As you can see, in direct mapping we use greater number of joints than in indirect mapping. The point is, in indirect mapping some joints were dependent on others and moved according to the hierarchy. In direct mapping, all the joints are independent, i.e. we have to specify the movement of each joint.  
 
 <blockquote>
-Note: for direct mapping, we have to specify not only the types of joints that we need but also the 'parent' - 'child' relationship between all the joints.
+For direct mapping, we have to specify not only the types of joints that we need but also the 'parent' - 'child' relationship between all the joints.
 </blockquote>
 
-@image html images/Uanim_image5.jpg
-@image latex images/Uanim_image5.jpg
+<p align="center">
+<img width="600" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Uanim_image5.jpg">
+</p>
 
 3. Since in direct mapping we need to know not only the position of the torso but also the positions of all other joints, we have to delete the lines defining the position of the torso, namely: 
 
 ```cs
-		Vector3 torsoPos = Quaternion.Euler(0f, 180f, 0f) * (0.001f * skeleton.GetJoint(nuitrack.JointType.Torso).ToVector3());
-		transform.position = torsoPos;
+Vector3 torsoPos = Quaternion.Euler(0f, 180f, 0f) * (0.001f * skeleton.GetJoint(nuitrack.JointType.Torso).ToVector3());
+transform.position = torsoPos;
 ```
 
 After that, we need to add the lines, which define the position of each joint, to the `foreach (var riggedJoint in jointsRigged)` loop of the `void ProcessSkeleton(nuitrack.Skeleton skeleton)` function: 
 
 ```cs
-		Vector3 newPos = Quaternion.Euler(0f, 180f, 0f) * (0.001f * joint.ToVector3());
-		modelJoint.bone.position = newPos;
+Vector3 newPos = Quaternion.Euler(0f, 180f, 0f) * (0.001f * joint.ToVector3());
+modelJoint.bone.position = newPos;
 ```
 
-4. If you build the project at this point, the model's limbs may look disproportionate. To rectify this situation, let's define the basic distances between the child bone and its parent bone by using the AddBoneScale function, which should be located in the `void Start()`. 
+4. If you build the project at this point, the model's limbs may look disproportionate. To rectify this situation, let's define the basic distances between the child bone and its parent bone by using the `AddBoneScale` function, which should be located in  `Start()`. 
 
 ```cs
 void AddBoneScale(nuitrack.JointType targetJoint, nuitrack.JointType parentJoint)
-    {
+{
         // take the position of the model bone
         Vector3 targetBonePos = jointsRigged[targetJoint].bone.position;
         // take the position of the model parent bone
@@ -181,21 +187,21 @@ void AddBoneScale(nuitrack.JointType targetJoint, nuitrack.JointType parentJoint
         jointsRigged[targetJoint].parentBone = jointsRigged[parentJoint].bone;
         // extract the parent bone from the hierarchy to make it independent
         jointsRigged[targetJoint].parentBone.parent = transform.root;
-    }
+}
 ```
 
-5. Then, let's perform bone scaling. By default, the bone scale is equal to (1,1,1). It  changes dynamically in accordance with the user's proportions. Add the `void ProcessSkeleton(nuitrack.Skeleton skeleton)` function:
+5. Then, let's perform bone scaling. By default, the bone scale is equal to (1,1,1). It  changes dynamically in accordance with the user's proportions. Add the `ProcessSkeleton(nuitrack.Skeleton skeleton)` function:
 
 ```cs
 if (modelJoint.parentBone != null)
-            {
-                // take the Transform of the parent bone
-                Transform parentBone = modelJoint.parentBone;
-                // calculate how many times the distance between the child bone and its parent bone has changed compared to the base distance (which was recorded at the start)
-                float scaleDif = modelJoint.baseDistanceToParent / Vector3.Distance(newPos, parentBone.position);
-                // change the size of the bone to the resulting value
-                parentBone.localScale = Vector3.one / scaleDif;
-            }
+{
+	// take the Transform of the parent bone
+	Transform parentBone = modelJoint.parentBone;
+	// calculate how many times the distance between the child bone and its parent bone has changed compared to the base distance (which was recorded at the start)
+	float scaleDif = modelJoint.baseDistanceToParent / Vector3.Distance(newPos, parentBone.position);
+	// change the size of the bone to the resulting value
+	parentBone.localScale = Vector3.one / scaleDif;
+}
 ```
 
 <blockquote>
@@ -204,8 +210,9 @@ The deformation of the model may be greater than expected. To avoid this, make s
 
 6. Build the project. The model should look proportionally and move. 
 
-@image html images/Uanim_image6.gif
-@image latex images/Uanim_image6.gif
+<p align="center">
+<img width="600" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Uanim_image6.gif">
+</p>
 
 <blockquote>
 For testing, a mobile device is not necessary. You can test the project even if there is only a computer and a sensor. The app will run in the Unity. 
