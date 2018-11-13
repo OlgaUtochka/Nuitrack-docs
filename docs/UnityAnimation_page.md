@@ -17,7 +17,7 @@ We’ll start with indirect mapping, as it’s a more simple way to animate your
 You can find the finished project in **Nuitrack SDK**: **Unity 3D → NuitrackSDK.unitypackage → Tutorials → Avatar Animation**
 
 <p align="center">
-<img width="600" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Uanim_image4.gif">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Uanim_image4.gif">
 </p>
 
 ## Indirect Mapping
@@ -51,7 +51,7 @@ void ProcessSkeleton(nuitrack.Skeleton skeleton)
 4. Build the project. (See the [**Creating your First Unity Project using Nuitrack SDK**](https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/docs/UnityBasic_page.md#setting-up-the-build) tutorial). If everything was done correctly, the model will move according to the user's movements. At this point, the limbs of the model are not yet rotating.
 
 <p align="center">
-<img width="600" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Uanim_image1.gif">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Uanim_image1.gif">
 </p>
  
 5. Create another empty C# script (`ModelJoint.cs`), in which we'll describe the `ModelJoint` class, which we'll use to process the model bones. Mark it as `[System.Serializable]` do that it is displayed in the Inspector. 
@@ -83,7 +83,7 @@ public class RiggedAvatar : MonoBehaviour
 ```
 
 <p align="center">
-<img width="600" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Uanim_image2.png">
+<img width="300" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Uanim_image2.png">
 </p>
 
 <blockquote>
@@ -130,7 +130,7 @@ foreach (var riggedJoint in jointsRigged)
 10. Check the movement of the whole model and rotation of its joints. 
 
 <p align="center">
-<img width="600" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Uanim_image4.gif">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Uanim_image4.gif">
 </p>
 
 **Note**
@@ -156,7 +156,7 @@ For direct mapping, we have to specify not only the types of joints that we need
 </blockquote>
 
 <p align="center">
-<img width="600" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Uanim_image5.jpg">
+<img width="700" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Uanim_image5.jpg">
 </p>
 
 3. Since in direct mapping we need to know not only the position of the torso but also the positions of all other joints, we have to delete the lines defining the position of the torso, namely: 
@@ -211,7 +211,7 @@ The deformation of the model may be greater than expected. To avoid this, make s
 6. Build the project. The model should look proportionally and move. 
 
 <p align="center">
-<img width="600" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Uanim_image6.gif">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Uanim_image6.gif">
 </p>
 
 <blockquote>
