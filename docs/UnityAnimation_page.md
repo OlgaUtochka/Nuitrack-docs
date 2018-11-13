@@ -33,9 +33,9 @@ First of all, let's check the presence of the user in front of the sensor:
 
 ```cs
 void Update()
-    {
-        if (CurrentUserTracker.CurrentSkeleton != null) ProcessSkeleton(CurrentUserTracker.CurrentSkeleton);
-    }
+{
+	if (CurrentUserTracker.CurrentSkeleton != null) ProcessSkeleton(CurrentUserTracker.CurrentSkeleton);
+}
 ```
 
 3. If the user is identified, we move the the calculation of the model position. In indirect mapping, the position of the whole model is calculated using the torso joint position. The position is then rotated 180 degrees along the y axis, otherwise, the model will move in the opposite direction. 
