@@ -1,6 +1,6 @@
 # Animating the Avatar using Skeleton
 
-In this tutorial, you'll learn how to animate an avatar in Unity, employing the user's skeleton data. To do this, you need **Nuitrack SDK** and any supported sensor (for example, **VicoVR**), as well as a mobile device (optional).
+In this tutorial, you'll learn how to animate an avatar in Unity, employing the user's skeleton data. To do this, you need **Nuitrack SDK** and [any supported sensor](https://nuitrack.com/), as well as a mobile device (optional).
 
 You can animate an avatar by mapping the user's skeleton and model skeleton. There are two mapping types: direct and indirect.
 
