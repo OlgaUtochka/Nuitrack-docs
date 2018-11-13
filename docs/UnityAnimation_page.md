@@ -48,7 +48,7 @@ void ProcessSkeleton(nuitrack.Skeleton skeleton)
 }
 ```
 
-4. Build the project. (See the [**Creating your First Unity Project using Nuitrack SDK**](https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/docs/UnityBasic_page.md#setting-up-the-build) tutorial). If everything was done correctly, the model will move according to the user's movements. At this point, the limbs of the model are not yet rotating.
+4. Build the project. (See the [Creating your First Unity Project using Nuitrack SDK](https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/docs/UnityBasic_page.md#setting-up-the-build) tutorial). If everything was done correctly, the model will move according to the user's movements. At this point, the limbs of the model are not yet rotating.
 
 <p align="center">
 <img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Uanim_image1.gif">
