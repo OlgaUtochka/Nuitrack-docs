@@ -17,9 +17,7 @@ You can find the finished project in **Nuitrack SDK**: **Unity 3D → NuitrackSD
 
 <p align="center">
 <img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Upoints_1.png">
-<center>This text will be center-aligned.</center> 
 </p>
-
 <p align="center">
 <b>Tick the required modules in the Nuitrack Manager.</b><br>
 </p>
