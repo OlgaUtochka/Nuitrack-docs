@@ -16,7 +16,7 @@ You can find the finished project in **Nuitrack SDK**: **Unity 3D → NuitrackSD
 4. Download  [Nuitrack SDK](http://download.3divi.com/Nuitrack/platforms/). Import the **Nuitrack** and  **Plugins** folders from the  **Nuitrack.unitypackage** to the project. Drag-and-drop the **NuitrackScripts** prefab from the **Nuitrack/Prefabs** folder to the scene. In Unity, select the **Inspector** tab → **Nuitrack Manager** and tick two modules: **Color Module On** and **Depth Module On**. As you can see, these Nuitrack modules provide access to the sensor depth and color data. Other Nuitrack modules are not required for this project.
 
 <p align="center">
-<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Upoints_1.png">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Upoints_1.png"><br>
 <b>Tick the required modules in the Nuitrack Manager.</b><br>
 </p>
 
