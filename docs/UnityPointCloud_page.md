@@ -4,6 +4,10 @@ In this tutorial, you'll learn how to create a point cloud in the Unity editor. 
 
 You can find the finished project in **Nuitrack SDK**: **Unity 3D → NuitrackSDK.unitypackage → Tutorials → Point Cloud**
 
+<div class="alert alert-success">
+Blah blah blah
+</div>
+
 <p align="center">
 <img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Upoints_7.gif">
 </p>
