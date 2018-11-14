@@ -41,7 +41,7 @@ You can find the finished project in **Nuitrack SDK**: **Unity 3D → NuitrackSD
 <b>Characteristics of the Point Cloud object</b><br>
 </p>
 
-2. In the `PointCloud : MonoBehaviour` class, create the fields for displaying depth and color. Then, create the variables that will store the depth and color values:
+2. In the `PointCloud` class, create the fields for displaying depth and color. Then, create the variables that will store the depth and color values:
 
 ```cs
 public class PointCloud : MonoBehaviour
@@ -62,9 +62,7 @@ int frameStep;
 ...
 ```
 
-<blockquote>
-Recommended image resolution: 128х96. You can set a higher resolution if you want. However, in this case Unity may run slower if your computer is not so powerful.
-</blockquote>
+_**Note:** Recommended image resolution: 128х96. You can set a higher resolution if you want. However, in this case Unity may run slower if your computer is not so powerful._
 
 4. Set the default color (that will be used for coloring the cubes if the sensor doesn't have an RGB camera).
 
@@ -149,9 +147,7 @@ void InitMeshes(int cols, int rows, float hfov)
 }
 ```
 
-<blockquote>
-We recommend you to use the following sensors for better quality of your point cloud: TVico, VicoVR, Asus Xtion Pro, Orbbec Persee, Intel RealSense D415/D435.
-</blockquote>
+_**Note:** We recommend you to use the following sensors for better quality of your point cloud: TVico, VicoVR, Asus Xtion Pro, Orbbec Persee, Intel RealSense D415/D435._
 
 10. In the `Update` method, check for new frames:
 
@@ -173,9 +169,7 @@ void Update()
 }
 ```
 
-<blockquote>
-You can also request new depth and color frames by subscribing to events `NuitrackManager.onColorUpdate` (to receive color frames) and `NuitrackManager.onDepthUpdate` (to receive depth frames).
-</blockquote>
+_**Note:** You can also request new depth and color frames by subscribing to events `NuitrackManager.onColorUpdate` (to receive color frames) and `NuitrackManager.onDepthUpdate` (to receive depth frames)._
 
 11. If new frames are received, process them:
 
@@ -257,7 +251,7 @@ GameObject[] points;
 ...
 ```
 
-8. In the *InitMeshes* method, set the size of the array with the **Points** prefabs (multiply the number of rows by the number of columns with points):
+8. In the `InitMeshes` method, set the size of the array with the **Points** prefabs (multiply the number of rows by the number of columns with points):
 
 ```cs
 ...	
@@ -265,7 +259,7 @@ points = new GameObject[cols * rows];
 ...
 ```
 
-9. In the *InitMeshes* method, create instances of the **Points** (cubes) and include them to the *Points* array. Set the **Visualization** as a parent object and the **Points** prefabs as its children.
+9. In the `InitMeshes` method, create instances of the **Points** (cubes) and include them to the `Points` array. Set the **Visualization** as a parent object and the **Points** prefabs as its children.
 
 ```cs
 int pointId = 0;
@@ -278,7 +272,7 @@ for (int i = 0; i < rgbTexture.height; i++)
 	}
 }
 ```
-10. In the *ProcessFrame* method, change the position of the **Point** (cube) along the Z (depth) axis. In some cases, the sensor can't identify the depth of the point. As a result, the Z coordinate has the value of 0. Let's hide the points with Z=0 for correct display of the image. After that, we change the position and size of the **Point** (cube).
+10. In the `ProcessFrame` method, change the position of the **Point** (cube) along the Z (depth) axis. In some cases, the sensor can't identify the depth of the point. As a result, the Z coordinate has the value of 0. Let's hide the points with Z=0 for correct display of the image. After that, we change the position and size of the **Point** (cube).
 
 ```cs
 points[pointIndex].GetComponent<Renderer>().material.color = rgbCol;
@@ -333,7 +327,7 @@ points[pointIndex].transform.localScale = Vector3.one * meshScaling * depthToSca
 15. All right, now that we created the point cloud, it seems kind of flat. To see the actual volume of our point cloud and position of objects in the room, we need to apply the [MouseOrbitImproved](http://wiki.unity3d.com/index.php?title=MouseOrbitImproved#Code_C.23) script. Drag-and-drop the script to the camera in Unity. Create an empty object and name it, for example, rotation point. Move the object to x:0 y:0 z:600 (the camera will rotate around this object). In the script settings, specify the object around which the camera (**rotation point**) will rotate. The settings must be as shown in the picture below.
 
 <p align="center">
-<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Upoints_6.png"><br>
+<img width="300" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Upoints_6.png"><br>
 <b>Characteristics of the MouseOrbitImproved Script</b><br>
 </p>
 
