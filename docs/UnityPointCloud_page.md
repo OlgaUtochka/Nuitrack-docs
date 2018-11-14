@@ -1,5 +1,8 @@
 # Creating a 3D Point Cloud
 
+| WARNING: be careful to baz the quux before initializing the retro encabulator! |
+| --- |
+
 In this tutorial, you'll learn how to create a point cloud in the Unity editor. To do this, you'll need a 3D camera (ideally, with an RGB camera) and **Nuitrack SDK**, as well as a mobile device (optional). The point cloud may be used in many fields, such as 3D modeling, 3D gaming, VR apps, etc.  The point cloud is created using the color and depth data received from the sensor.
 
 You can find the finished project in **Nuitrack SDK**: **Unity 3D → NuitrackSDK.unitypackage → Tutorials → Point Cloud**
