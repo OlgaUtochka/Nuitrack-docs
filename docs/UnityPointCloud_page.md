@@ -1,7 +1,5 @@
 # Creating a 3D Point Cloud
 
-_**Warning:** Be very careful here._
-
 In this tutorial, you'll learn how to create a point cloud in the Unity editor. To do this, you'll need a 3D camera (ideally, with an RGB camera) and **Nuitrack SDK**, as well as a mobile device (optional). The point cloud may be used in many fields, such as 3D modeling, 3D gaming, VR apps, etc.  The point cloud is created using the color and depth data received from the sensor.
 
 You can find the finished project in **Nuitrack SDK**: **Unity 3D → NuitrackSDK.unitypackage → Tutorials → Point Cloud**
@@ -19,7 +17,7 @@ You can find the finished project in **Nuitrack SDK**: **Unity 3D → NuitrackSD
 
 <p align="center">
 <img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Upoints_1.png"><br>
-<b>Tick the required modules in the Nuitrack Manager.</b><br>
+<b>Tick the required modules in the Nuitrack Manager</b><br>
 </p>
 
 5. Create an empty object and name it **Visualization**. We'll use this object to visualize depth and color.
@@ -27,7 +25,7 @@ You can find the finished project in **Nuitrack SDK**: **Unity 3D → NuitrackSD
 
 <p align="center">
 <img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Upoints_2.png"><br>
-<b>Ticked Visualization Object.</b><br>
+<b>Ticked Visualization Object</b><br>
 </p>
 
 ## Depth and Color Visualization
@@ -38,8 +36,10 @@ You can find the finished project in **Nuitrack SDK**: **Unity 3D → NuitrackSD
 * specify the resolution of the window, in which the point cloud will be displayed, 
 * set the default color that will be used for coloring the point cloud if the sensor doesn't have an RGB camera.
 
-@image html images/Upoints_3.png Characteristics of the Point Cloud object
-@image latex images/Upoints_3.png Characteristics of the Point Cloud object
+<p align="center">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Upoints_3.png"><br>
+<b>Characteristics of the Point Cloud object</b><br>
+</p>
 
 2. In the `PointCloud : MonoBehaviour` class, create the fields for displaying depth and color. Then, create the variables that will store the depth and color values:
 
@@ -226,8 +226,10 @@ rgbTexture.Apply();
 
 14. As a result, you will see two windows: color pixel image on the left and depth map on the right. We'll use them to create our point cloud.
 
-@image html images/Upoints_4.gif Color and depth planes in Unity
-@image latex images/Upoints_4.gif Color and depth planes in Unity
+<p align="center">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Upoints_4.gif"><br>
+<b>Color and depth planes in Unity</b><br>
+</p>
 
 ## Creating a Point Cloud
 
@@ -323,18 +325,24 @@ points[pointIndex].transform.localScale = Vector3.one * meshScaling * depthToSca
 
 14. So, after your project is built, you should see a color point cloud like the animation below. Keep in mind, that the image may me slightly different, depending on the sensor used: colours may be brighter or paler, the deptha map may be more or less detailed. However, in any case, the created point cloud will be accorate enough to be used in your projects.
 
-@image html images/Upoints_5.gif Created point cloud
-@image latex images/Upoints_5.gif Created point cloud
+<p align="center">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Upoints_5.gif"><br>
+<b>Created point cloud</b><br>
+</p>
 
 15. All right, now that we created the point cloud, it seems kind of flat. To see the actual volume of our point cloud and position of objects in the room, we need to apply the [MouseOrbitImproved](http://wiki.unity3d.com/index.php?title=MouseOrbitImproved#Code_C.23) script. Drag-and-drop the script to the camera in Unity. Create an empty object and name it, for example, rotation point. Move the object to x:0 y:0 z:600 (the camera will rotate around this object). In the script settings, specify the object around which the camera (**rotation point**) will rotate. The settings must be as shown in the picture below.
 
-@image html images/Upoints_6.png Characteristics of the MouseOrbitImproved Script
-@image latex images/Upoints_6.png Characteristics of the MouseOrbitImproved Script
+<p align="center">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Upoints_6.png"><br>
+<b>Characteristics of the MouseOrbitImproved Script</b><br>
+</p>
 
 16. When the script is applied, you can see the volume of the objects displayed as a point cloud. Well done!
 
-@image html images/Upoints_7.gif 3D Point Cloud after the MouseOrbitImproved script is applied
-@image latex images/Upoints_7.gif 3D Point Cloud after the MouseOrbitImproved script is applied
+<p align="center">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Upoints_7.gif"><br>
+<b>3D Point Cloud after the MouseOrbitImproved script is applied</b><br>
+</p>
 
 Useful links:
 
