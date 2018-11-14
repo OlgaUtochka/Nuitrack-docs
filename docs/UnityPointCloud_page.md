@@ -327,7 +327,7 @@ points[pointIndex].transform.localScale = Vector3.one * meshScaling * depthToSca
 15. All right, now that we created the point cloud, it seems kind of flat. To see the actual volume of our point cloud and position of objects in the room, we need to apply the [MouseOrbitImproved](http://wiki.unity3d.com/index.php?title=MouseOrbitImproved#Code_C.23) script. Drag-and-drop the script to the camera in Unity. Create an empty object and name it, for example, rotation point. Move the object to x:0 y:0 z:600 (the camera will rotate around this object). In the script settings, specify the object around which the camera (**rotation point**) will rotate. The settings must be as shown in the picture below.
 
 <p align="center">
-<img width="300" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Upoints_6.png"><br>
+<img width="250" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Upoints_6.png"><br>
 <b>Characteristics of the MouseOrbitImproved Script</b><br>
 </p>
 
