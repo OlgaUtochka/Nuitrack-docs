@@ -20,18 +20,13 @@ You can find the finished project in **Nuitrack SDK**: **Unity 3D → NuitrackSD
 <b>Tick the required modules in the Nuitrack Manager.</b><br>
 </p>
 
-<p align="center">
-<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Upoints_1.png">
-</p>
-<p align="center">
-<b>Tick the required modules in the Nuitrack Manager.</b><br>
-</p>
-
 5. Create an empty object and name it **Visualization**. We'll use this object to visualize depth and color.
 6. Untick this object. In the **NuitrackManager**, select ' + ' in the **Init Event (NuitrackInitState)**. Drag-and-drop the **Visualization** object to the created field. Select **GameObject/SetActive** from the drop-down list and tick. This ensures that the visualization starts only after Nuitrack initialization. Now, when our scene is set up, we are ready to move on to some more interesting things, such as actual work with depth and color.
 
-@image html images/Upoints_2.png Ticked Visualization Object
-@image latex images/Upoints_2.png Ticked Visualization Object
+<p align="center">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Upoints_2.png"><br>
+<b>Ticked Visualization Object.</b><br>
+</p>
 
 ## Depth and Color Visualization
 
