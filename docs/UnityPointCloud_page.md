@@ -8,15 +8,6 @@ You can find the finished project in **Nuitrack SDK**: **Unity 3D → NuitrackSD
 <img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Upoints_7.gif">
 </p>
 
-<p align="center">
-  <b>Some Links:</b><br>
-  <a href="#">Link 1</a> |
-  <a href="#">Link 2</a> |
-  <a href="#">Link 3</a>
-  <br><br>
-  <img src="http://s.4cdn.org/image/title/105.gif">
-</p>
-
 ## Setting Up the Environment
 
 1. Create a new Scene in Unity: **File → New Scene**
@@ -24,12 +15,13 @@ You can find the finished project in **Nuitrack SDK**: **Unity 3D → NuitrackSD
 3. Then, create 2 materials for depth and color respectively: create the **Materials** folder in the **Assets** folder, then, in the **Project** tab: **RC → Create → Material**. For convenience, let's name the materials  **ColorMaterial** and **DepthMaterial**.
 4. Download  [Nuitrack SDK](http://download.3divi.com/Nuitrack/platforms/). Import the **Nuitrack** and  **Plugins** folders from the  **Nuitrack.unitypackage** to the project. Drag-and-drop the **NuitrackScripts** prefab from the **Nuitrack/Prefabs** folder to the scene. In Unity, select the **Inspector** tab → **Nuitrack Manager** and tick two modules: **Color Module On** and **Depth Module On**. As you can see, these Nuitrack modules provide access to the sensor depth and color data. Other Nuitrack modules are not required for this project.
 
-@image html images/Upoints_1.png Tick the required modules in the Nuitrack Manager.
-@image latex images/Upoints_1.png Tick the required modules in the Nuitrack Manager.
-
 <p align="center">
 <img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Upoints_1.png">
 <center>This text will be center-aligned.</center> 
+</p>
+
+<p align="center">
+<b>Tick the required modules in the Nuitrack Manager.</b><br>
 </p>
 
 5. Create an empty object and name it **Visualization**. We'll use this object to visualize depth and color.
