@@ -8,6 +8,15 @@ You can find the finished project in **Nuitrack SDK**: **Unity 3D → NuitrackSD
 <img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Upoints_7.gif">
 </p>
 
+<p align="center">
+  <b>Some Links:</b><br>
+  <a href="#">Link 1</a> |
+  <a href="#">Link 2</a> |
+  <a href="#">Link 3</a>
+  <br><br>
+  <img src="http://s.4cdn.org/image/title/105.gif">
+</p>
+
 ## Setting Up the Environment
 
 1. Create a new Scene in Unity: **File → New Scene**
