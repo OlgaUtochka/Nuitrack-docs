@@ -168,7 +168,7 @@ void Update()
 
 <blockquote>
 You can also request new depth and color frames by subscribing to events `NuitrackManager.onColorUpdate` (to receive color frames) and `NuitrackManager.onDepthUpdate` (to receive depth frames).
-<blockquote>
+</blockquote>
 
 11. If new frames are received, process them:
 
@@ -296,7 +296,7 @@ float depthToScale;
 ...
 ```
 
-12. In the *ProcessFrame*, calculate the size of the cubes according to the depth by adding the following strings to the *if (depthFrame[i, j] == 0)... else...* condition:
+12. In the `ProcessFrame`, calculate the size of the cubes according to the depth by adding the following strings to the `if (depthFrame[i, j] == 0)... else...` condition:
 
 ```cs
 else             
@@ -306,7 +306,7 @@ depthToScale = distancePoints * depthFrame.Cols / hRes; //Calculate the size of 
 ...
 ```
 
-13. In the *ProcessFrame* method, change the cube size:
+13. In the `ProcessFrame` method, change the cube size:
 
 ```cs
 ...
@@ -329,9 +329,8 @@ points[pointIndex].transform.localScale = Vector3.one * meshScaling * depthToSca
 @image html images/Upoints_7.gif 3D Point Cloud after the MouseOrbitImproved script is applied
 @image latex images/Upoints_7.gif 3D Point Cloud after the MouseOrbitImproved script is applied
 
-<b>Useful links:</b>
-<ul>
-<li> [Learn more about Texture2D](https://docs.unity3d.com/ScriptReference/Texture2D.html)
-<li> Learn more about Vector3 nuitrack.DepthSensor.ConvertRealToProjCoords
-<li> [Learn more about  Color32](https://docs.unity3d.com/ScriptReference/Color32.html)
-</ul>
+Useful links:
+
+* [Learn more about Texture2D](https://docs.unity3d.com/ScriptReference/Texture2D.html)
+* [Learn more about Vector3 nuitrack.DepthSensor.ConvertRealToProjCoords]
+* [Learn more about  Color32](https://docs.unity3d.com/ScriptReference/Color32.html)
