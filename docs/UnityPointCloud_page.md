@@ -22,10 +22,7 @@ You can find the finished project in **Nuitrack SDK**: **Unity 3D → NuitrackSD
 <img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Upoints_1.png">
 </p>
 
-<figure>
-  <img src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Upoints_1.png" alt="my img"/>
-  <figcaption> Your text </figcaption>
-</figure>
+<center>This text will be center-aligned.</center> 
 
 5. Create an empty object and name it **Visualization**. We'll use this object to visualize depth and color.
 6. Untick this object. In the **NuitrackManager**, select ' + ' in the **Init Event (NuitrackInitState)**. Drag-and-drop the **Visualization** object to the created field. Select **GameObject/SetActive** from the drop-down list and tick. This ensures that the visualization starts only after Nuitrack initialization. Now, when our scene is set up, we are ready to move on to some more interesting things, such as actual work with depth and color.
