@@ -6,7 +6,7 @@
 3. Generate Visual Studio project files by right-clicking an **.uproject file**.
 
 <p align="center">
-<img width="300" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/unity_generate_files.png"><br>
+<img width="350" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/unity_generate_files.png"><br>
 </p>
 
 4. Add Extra Permissions in **Edit → Project Settings → Platforms → Android → Advanced APKPackaging**:
@@ -54,7 +54,7 @@ Nuitrack::release();
 Nuitrack::update();
 ```
 
-4. Skeleton tracking data will be available inside the `OnSkeletonUpdate` method (that was subscribed to the `OnUpdate` event from the `SkeletonTracker`):
+4. Skeleton tracking data will be available inside the `OnSkeletonUpdate` method (that was subscribed to the `OnUpdate` event from `SkeletonTracker`):
 
 ```cpp
 void ANuiSampleGameModeBase::OnSkeletonUpdate(SkeletonData::Ptr userSkeletons)
@@ -73,36 +73,39 @@ void ANuiSampleGameModeBase::OnSkeletonUpdate(SkeletonData::Ptr userSkeletons)
       * Additional Content: No Starter Content.
 
 <p align="center">
-<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/unity_new_project.png"><br>
+<img width="1000" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/unity_new_project.png"><br>
 </p>
 
 3. Delete all the Labels except **Player Start** from the World.
 
 <p align="center">
-<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/unity_myworld.png"><br>
+<img width="350" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/unity_myworld.png"><br>
 </p>
 
 4. Set **Player Location**, **Rotation** and **Scale** values as in the screenshot below.
 
 <p align="center">
-<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/unity_player_position.png"><br>
+<img width="350" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/unity_player_position.png"><br>
 </p>
 
 5. Save the current World.
 
 <p align="center">
-<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/unity_save.png"><br>
+<img width="350" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/unity_save.png"><br>
 </p>
 
 6. Select **Edit → Project Settings → Maps & Modes:**
 
-      * Set your World as <b>Editor Startup Map</b> and <b>Game Default Map</b>.
+<ol>
+     <li> Set your World as **Editor Startup Map** and **Game Default Map**.
 
 <p align="center">
 <img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/unity_default_maps.png"><br>
 </p>
 
-      * Set **Default GameMode**.
+      <li> Set **Default GameMode**.
+      
+</ol>
 
 <p align="center">
 <img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/unity_maps_modes.png"><br>
