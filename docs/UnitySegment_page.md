@@ -1,4 +1,4 @@
-# UnitySegment_page User Segment Visualization
+# User Segment Visualization
 
 In this tutorial, you'll learn how to visualize a user segment using **Nuitrack SDK**. As a result, the user will be displayed as a colored 2D silhouette. And if there are several people in front of the camera, they will be displayed as several silhouettes of different colors. You can use the user segment for various purposes, for example, to create apps and games. 
 
