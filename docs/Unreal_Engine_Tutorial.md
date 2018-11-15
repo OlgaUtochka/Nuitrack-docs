@@ -8,10 +8,10 @@
 3. Generate Visual Studio project files by right-clicking an **.uproject file**.
 
 <p align="center">
-<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/unity_generate_files.png"><br>
+<img width="300" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/unity_generate_files.png"><br>
 </p>
 
-4. Add Extra Permissions in **Edit> → Project Settings → Platforms → Android → Advanced APKPackaging**:
+4. Add Extra Permissions in **Edit → Project Settings → Platforms → Android → Advanced APKPackaging**:
 
 ```cpp
 android.permission.BLUETOOTH
@@ -22,7 +22,7 @@ android.permission.INTERNET
 ```
 
 <p align="center">
-<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/unity_permissions.png"><br>
+<img width="1000" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/unity_permissions.png"><br>
 </p>
 
 5. Add Nuitrack libraries and headers to the `Build.cs` project dependencies file **(Games/{ProjectName}/Source/{ProjectName}/{ProjectName}.Build.cs)**:
@@ -50,7 +50,7 @@ Nuitrack::run();
 Nuitrack::release();
 ```
 
-3. To raise events with new data from modules, call the `update` method (you can add it to the `Tick(float dt)` method of the `GameMode` class):
+3. To raise events with new data from modules, call the `update` method (you can add it to the `Tick` method of the `GameMode` class):
 
 ```cpp
 Nuitrack::update();
@@ -74,46 +74,55 @@ void ANuiSampleGameModeBase::OnSkeletonUpdate(SkeletonData::Ptr userSkeletons)
       * Graphical Level: Maximum Quality;
       * Additional Content: No Starter Content.
 
-@image html images/unity_new_project.png
-@image latex images/unity_new_project.png
+<p align="center">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/unity_new_project.png"><br>
+</p>
 
 3. Delete all the Labels except **Player Start** from the World.
 
-@image html images/unity_myworld.png
-@image latex images/unity_myworld.png
+<p align="center">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/unity_myworld.png"><br>
+</p>
 
 4. Set **Player Location**, **Rotation** and **Scale** values as in the screenshot below.
 
-@image html images/unity_player_position.png
-@image latex images/unity_player_position.png
+<p align="center">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/unity_player_position.png"><br>
+</p>
 
 5. Save the current World.
 
-@image html images/unity_save.png
-@image latex images/unity_save.png
+<p align="center">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/unity_save.png"><br>
+</p>
 
 6. Select **Edit → Project Settings → Maps & Modes:**
+
       * Set your World as <b>Editor Startup Map</b> and <b>Game Default Map</b>.
 
-@image html images/unity_default_maps.png
-@image latex images/unity_default_maps.png
+<p align="center">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/unity_default_maps.png"><br>
+</p>
 
-      * Set <b>Default GameMode</b>.
+      * Set **Default GameMode**.
 
-@image html images/unity_maps_modes.png
-@image latex images/unity_maps_modes.png
+<p align="center">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/unity_maps_modes.png"><br>
+</p>
 
 7. Select **Edit → Project Settings → Platforms → Android**, press **Configure Now** and **Accept SDK License**,  fill the **Android Package Name** field.
 
-@image html unity_android_package_name.png
-@image latex unity_android_package_name.png
+<p align="center">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/unity_android_package_name.png"><br>
+</p>
 
 8. Set up your project (as it was described in Point **Integrating Nuitrack with Unreal Engine 4.18 Project (Android Only)**)
 
 9. Open **Visual Studio** for writing C++ code
 
-@image html unity_cpp.png
-@image latex unity_cpp.png
+<p align="center">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/unity_cpp.png"><br>
+</p>
 
 10. Files in the **Unreal Projects\{ProjectName}\Source\{ProjectName}** directory should have the following content:
 
