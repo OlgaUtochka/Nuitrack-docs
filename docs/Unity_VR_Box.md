@@ -32,14 +32,14 @@ _**Note:** **Nuitrack** provides improved automatic calibration for Android and 
 4. Hide the head of the Unitychan prefab so that you won't see it from the inside during our VR game: **Character1_Neck → Transform → Scale (0; 0; 0)**
 
 <p align="center">
-<img width="400" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Ubox_1.png"><br>
+<img width="450" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Ubox_1.png"><br>
 <b>Hiding the Head</b><br>
 </p>
 
 5. In the **NuitrackAvatar** settings, drag-and-drop the **HeadParent** to **Element 16**,  so that our avatar will be able to move her head.
 
 <p align="center">
-<img width="400" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Ubox_2.png"><br>
+<img width="450" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Ubox_2.png"><br>
 <b>Setting Up the Head</b><br>
 </p>
 
@@ -102,7 +102,7 @@ private void OnDisable()
 7. Drag-and-drop the script to the dummy. In Unity, drag-and-drop the **Dummy** to **Dummy** and **Character1_Spine** to **Transform Target** (the dummy will be set in relation to this joint). 
 
 <p align="center">
-<img width="400" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Ubox_4.png"><br>
+<img width="450" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Ubox_4.png"><br>
 <b>Setting Up the Punching Dummy</b><br>
 </p>
 
@@ -163,14 +163,14 @@ _**Note:** The `relativeVelocity` property allows to determine the correct colli
 5. In Unity, drag-and-drop this script to the **TorsoBone** and **NeckBone**. In the **Punch Speed Meter** field, specify **PunchSpeedMeter**. 
 
 <p align="center">
-<img width="400" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Ubox_6.png"><br>
+<img width="450" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Ubox_6.png"><br>
 <b>Punch Speed Sender Settings</b><br>
 </p>
 
 6. In Unity, create two objects for the 'boxing gloves' of our avatar: **Create → Empty Object → Left Glove, Right Glove**. Actually, our avatar will punch the dummy with her bare hands, but we need to attach imaginary 'boxing gloves' to her hands in order to calculate the punch speed. Let's add the necessary components: **Add Component → Capsule Collider, RigidBody** to handle the collisions correctly. Select the direction for glove movement along the arm: **Capsule Collider → Direction → X-Axis**. Set the position and size of the 'gloves': **Height → 0.2** (optimum), **Radius → 0.05**. If you want to display the boxing gloves, then create the appropriate prefab and apply the above settings to it. 
 
 <p align="center">
-<img width="700" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Ubox_7.png"><br>
+<img width="800" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Ubox_7.png"><br>
 <b>Setting Up the Gloves</b><br>
 </p>
 
@@ -209,7 +209,7 @@ _**Note:** We use `FixedUpdate` instead of `Update` in case we are dealing with 
 10. Drag-and-drop the script to the right and left glove and specify the **Target (Character1_LeftHand, Character1_RightHand)**.
 
 <p align="center">
-<img width="800" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Ubox_8.png"><br>
+<img width="900" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Ubox_8.png"><br>
 <b>Setting Up the Rigidbody Follower</b><br>
 </p>
 
