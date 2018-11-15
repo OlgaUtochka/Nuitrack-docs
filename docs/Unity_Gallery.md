@@ -1,43 +1,43 @@
-/*!
-@page UnityGallery_page Creating an Interactive Multi-Touch Gallery
-  @tableofcontents
+# Creating an Interactive Multi-Touch Gallery
 
 In this tutorial, you'll learn how to create a virtual gallery that can be controlled using gestures. The gallery will have two modes: preview (several images displayed on one page) and view (when you click on an image, it opens in full screen). The gallery can be controlled with one or two hands (multi-touch) and gestures "click", "swipe up", "swipe left", "swipe right". For this project, you'll need Nuitrack and a sensor (from the list of supported sensors, see the [Nuitrack website] (https://nuitrack.com/)).
 
-You can find the finished project in <b>Nuitrack SDK</b>: <b>Unity 3D → NuitrackSDK.unitypackage → Tutorials → HandTracker</b> 
+You can find the finished project in **Nuitrack SDK**: **Unity 3D → NuitrackSDK.unitypackage → Tutorials → HandTracker** 
 
-@image html images/Ugallery_15.gif 
-@image latex images/Ugallery_15.gif 
+<p align="center">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Ugallery_15.gif">
+</p>
 
-@section gallery_scene Setting Up the Scene
+## Setting Up the Scene
 
-<ol>
-<li> Drag-and-drop the <b>Nuitrack Scripts</b> prefab from the <b>Nuitrack SDK</b> and tick the required modules in the <b>Nuitrack Manager</b> section: <b>Skeleton Tracker Module</b> (tracking of a user), <b>Hands Tracker Module</b> (detecting user's hands), <b>Gestures Recognizer Module</b> (gesture recognition).
+1. Drag-and-drop the **Nuitrack Scripts** prefab from the **Nuitrack SDK** and tick the required modules in the **Nuitrack Manager** section: **Skeleton Tracker Module** (tracking of a user), **Hands Tracker Module** (detecting user's hands), **Gestures Recognizer Module** (gesture recognition).
 
-@image html images/Ugallery_1.png Required Nuitrack modules for this project
-@image latex images/Ugallery_1.png Required Nuitrack modules for this project
+<p align="center">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Ugallery_1.png"><br>
+<b>Required Nuitrack modules for this project</b><br>
+</p>
 
-<li> Create a new script <i>Pointer.cs</i>. It will store the settings of a pointer that is used to control the gallery. In the <i>Start</i> method, subscribe to the <i>onHandsTrackerUpdate</i> event to receive data on the state of user's hands. 
+2. Create a new script `Pointer.cs`. It will store the settings of a pointer that is used to control the gallery. In the `Start` method, subscribe to the `onHandsTrackerUpdate` event to receive data on the state of user's hands. 
 
-@code
+```cs
 private void Start()
 {  	 
 	NuitrackManager.onHandsTrackerUpdate += NuitrackManager_onHandsTrackerUpdate;
 }
-@endcode
+```
 
-<li> Unsubscribe from this event in the <i>OnDestroy</i> method in order to prevent issues with null references when switching to another scene. 
+3. Unsubscribe from this event in the `OnDestroy` method in order to prevent issues with null references when switching to another scene. 
 
-@code
+```cs
 private void OnDestroy()
 {
 	NuitrackManager.onHandsTrackerUpdate -= NuitrackManager_onHandsTrackerUpdate;
 }
-@endcode
+```
 
-<li> In the <i>NuitrackManager_onHandsTrackerUpdate</i> method, check whether the left or the right hand is used for control. Add the processing of data on user's hands to move the corresponding pointer. Define that the "click" event occurs when a user clenches his hand into a fist. If a hand is inactive, it is hidden. 
+4. In the `NuitrackManager_onHandsTrackerUpdate` method, check whether the left or the right hand is used for control. Add the processing of data on user's hands to move the corresponding pointer. Define that the "click" event occurs when a user clenches his hand into a fist. If a hand is inactive, it is hidden. 
 
-@code
+```cs
 private void NuitrackManager_onHandsTrackerUpdate(nuitrack.HandTrackerDatahandTrackerData)
 {
 	bool active = false;
@@ -59,11 +59,11 @@ private void NuitrackManager_onHandsTrackerUpdate(nuitrack.HandTrackerDatahandTr
 		}
 	}
 }
-@endcode
+```
 
-<li> In the <i>Pointer.cs</i> script, add fields for hands and <i>RectTransform</i>, as well as for the background, default sprite and "click" sprite. 
+5. In the `Pointer.cs` script, add fields for hands and `RectTransform`, as well as for the background, default sprite and "click" sprite. 
 
-@code
+```cs
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
@@ -87,41 +87,47 @@ public class Pointer : MonoBehaviour
 	[SerializeField]
 	Sprite pressSprite;
 }
-@endcode
+```
 
-<li> Depending on the state of a hand, the pointer will be either displayed or hidden. To visualize the clenched hand, let's use the "click" sprite and replace this in the <b>Image</b> component.
+6. Depending on the state of a hand, the pointer will be either displayed or hidden. To visualize the clenched hand, let's use the "click" sprite and replace this in the **Image** component.
 
-@code
+```cs
 background.enabled = active;
 background.sprite = active && press ? pressSprite : defaultSprite;
-@endcode
+```
 
-@note
-Learn more about ?: operator at the [Microsoft website] (https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/operators/conditional-operator). 
+_**Note:** Learn more about ?: operator at the [Microsoft website](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/operators/conditional-operator)._
 
-<li> In Unity, create a <b>Canvas</b> to display our gallery. In the <b>Canvas</b>, create the <b>RHand</b> and <b>LHand</b> Images to display the pointers: <b>UI → Image</b>. Set up the <b>Camera</b>: in the <b>Canvas</b>, select <b>Render Mode → Screen Space Camera</b>; <b>Render Camera → Main Camera</b>. 
+7. In Unity, create a **Canvas** to display our gallery. In the **Canvas**, create the **RHand** and **LHand** Images to display the pointers: **UI → Image**. Set up the **Camera**: in the **Canvas**, select **Render Mode → Screen Space Camera**; **Render Camera → Main Camera**. 
 
-@image html images/Ugallery_2.png Canvas settings
-@image latex images/Ugallery_2.png Canvas settings
+<p align="center">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Ugallery_2.png"><br>
+<b>Canvas settings</b><br>
+</p>
 
-<li> Drag-and-drop the <i>Pointer.cs</i> script to the <b>LHand</b> and <b>RHand</b> Images.
-<li> Drag-and-drop the <b>Image</b> (sprite used to visualize a hand) to <b>RHand</b> and <b>LHand</b>. Set the following settings: <b>Rect Transform → Top Left Alignment</b> so that that the origin of coordinates of the pointer is in the upper left corner.
+8. Drag-and-drop the `Pointer.cs` script to the **LHand** and **RHand** Images.
+9. Drag-and-drop the **Image** (sprite used to visualize a hand) to **RHand** and **LHand**. Set the following settings: **Rect Transform → Top Left Alignment** so that that the origin of coordinates of the pointer is in the upper left corner.
 
-@image html images/Ugallery_3.png LHand and RHand settings 
-@image latex images/Ugallery_3.png LHand and RHand settings 
+<p align="center">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Ugallery_3.png"><br>
+<b>LHand and RHand settings</b><br>
+</p>
 
-<li> In Unity, specify the settings of a right hand: <b>Current Hand → Right</b>, make a reference to <b>BaseRect</b>. For a left hand, do the same thing. Create a reference to the <b>Image</b> component: <b>Background → Image</b>. Set the sprite for the "press" pointer: <b>Press Sprite → HandDown</b>.
+10. In Unity, specify the settings of a right hand: **Current Hand → Right**, make a reference to **BaseRect**. For a left hand, do the same thing. Create a reference to the **Image** component: **Background → Image**. Set the sprite for the "press" pointer: **Press Sprite → HandDown**.
 
-@image html images/Ugallery_4.png Pointer settings
-@image latex images/Ugallery_4.png Pointer settings
+<p align="center">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Ugallery_4.png"><br>
+<b>Pointer settings</b><br>
+</p>
 
-<li>  Run the project. The pointers should be displayed and move according to the user's movements. Also, the "press" sprite should appear when the user clenches his hand. 
-</ol>
+11. Run the project. The pointers should be displayed and move according to the user's movements. Also, the "press" sprite should appear when the user clenches his hand. 
 
-@image html images/Ugallery_5.gif Moving pointers
-@image latex images/Ugallery_5.gif Moving pointers
+<p align="center">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Ugallery_5.gif"><br>
+<b>Moving pointers</b><br>
+</p>
 
-@section gallery_create Creating a Gallery
+## Creating a Gallery
 
 <ol>
 <li> In Unity, add an object for scrolling the content in our gallery to the <b>Canvas</b>: <b>GameObject → ScrollView</b>. Edit the <b>ScollView</b> settings: in the <b>Scroll Rect</b>, untick <b>Vertical</b>. For the <b>Scroll Rect</b>, set the alignment along the edges so that it's stretched up to the <b>Canvas</b> edges (even if you resize the screen, it will fill up the entire screen). 
