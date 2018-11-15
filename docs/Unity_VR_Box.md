@@ -2,57 +2,57 @@
 
 So, you've decided to create a VR game with skeleton tracking but don't know what to start with? Well, you're at the right page because in this tutorial you'll learn how to create a VR game using **Nuitrack**. To plunge into the subject and to understand how to animate your avatar's skeleton in a VR game, we recommend you to take a look at our tutorial [Animating the Avatar using Skeleton](http://download.3divi.com/Nuitrack/doc/UnityAnimation_page.html). 
 
-In this tutorial, we'll create a simple VR game, in which your avatar is a boxer and you have to punch a dummy as hard as you can. The maximum punch speed will be measured and displayed at the top of the screen. To make this game, you'll need the <b>Nuitrack SDK</b>, a sensor (from the list of supported sensors, see the [Nuitrack website](https://nuitrack.com/)) and a VR headset (any Mobile VR headset or Gear VR headset).
+In this tutorial, we'll create a simple VR game, in which your avatar is a boxer and you have to punch a dummy as hard as you can. The maximum punch speed will be measured and displayed at the top of the screen. To make this game, you'll need the **Nuitrack SDK**, a sensor (from the list of supported sensors, see the [Nuitrack website](https://nuitrack.com/)) and a VR headset (any Mobile VR headset or Gear VR headset).
 
-You can find the finished project in <b>Nuitrack SDK</b>: <b>Unity 3D → NuitrackSDK.unitypackage → Tutorials → Box</b> 
+You can find the finished project in **Nuitrack SDK**: **Unity 3D → NuitrackSDK.unitypackage → Tutorials → Box** 
 
-@image html images/Ubox_9.gif 
-@image latex images/Ubox_9.gif 
+<p align="center">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Ubox_9.gif">
+</p>
 
-@section box_environment Creating VR Environment and animating the Avatar 
+## Creating VR Environment and animating the Avatar 
 
-<ol>
-<li> Create a new Unity project. 
-<li> Import <b>NuitrackSDK.unitypackage</b> from the <b>Nuitrack SDK: Assets → Import Package → Custom Package</b>. Tick the following folders that we'll need for work:
-<ul>
-<li> <b>Nuitrack</b> (includes all Nuitrack modules and is responsible for skeleton detection, tracking, etc. Also, this folder includes a Head prefab that is used in VR games, and a file with settings for Nuitrack automatic calibration); 
-<li> <b>Platform Changer</b> (changes the Unity settings (<b>PlayerSettings</b>) according to the selected platform); 
-<li> <b>Plugins</b> (includes <b>Android Manifest</b> that specifies permissions and other settings of your app);
-<li> <b>Resources</b> (stores the <b>Platform Changer</b> settings);
-<li> <b>Tutorials → Box</b> (we need this folder for our project because it includes the Dummy prefab. Also, you can find here a finished VR Boxing Game for reference);
-<li> <b>Tutorials → Avatar Animation</b> (includes the Unitychan prefab that we'll use to display our Boxer (very interesting choice, huh?);
-<li> <b>VicoVRCalibrationRGB</b> (includes all the necessary components for calibration in the T-Pose. Calibration is required for any VR game).
-</ul>
+1. Create a new Unity project. 
+2. Import **NuitrackSDK.unitypackage** from the **Nuitrack SDK: Assets → Import Package → Custom Package**. Tick the following folders that we'll need for work:
+	* **Nuitrack** (includes all Nuitrack modules and is responsible for skeleton detection, tracking, etc. Also, this folder includes a Head prefab that is used in VR games, and a file with settings for Nuitrack automatic calibration); 
+	* **Platform Changer** (changes the Unity settings (**PlayerSettings**) according to the selected platform); 
+	* **Plugins** (includes **Android Manifest** that specifies permissions and other settings of your app);
+	* **Resources** (stores the **Platform Changer** settings);
+	* **Tutorials → Box** (we need this folder for our project because it includes the Dummy prefab. Also, you can find here a finished VR Boxing Game for reference);
+	* **Tutorials → Avatar Animation** (includes the Unitychan prefab that we'll use to display our Boxer (quite an interesting choice, huh?);
+	* **VicoVRCalibrationRGB** (includes all the necessary components for calibration in the T-Pose. Calibration is required for any VR game).
 
-@note
-<b>Nuitrack</b> provides improved automatic calibration for Android and Gear VR. Any gyroscope has one unpleasant feature: when you turn the head during a game, its position may become slightly distorted and rotation is not aligned back, which may affect your gaming experience. Fortunately, <b>Nuitrack automatic calibration</b> helps to eliminate this nuisance. By default, automatic calibration is enabled, however, if you'd like to disable it for some reason, you can do it using the <b>VicoVR app: Settings → Developer Options → Autocalibration (Off)</b>.
+_**Note:** **Nuitrack** provides improved automatic calibration for Android and Gear VR. Any gyroscope has one unpleasant feature: when you turn the head during a game, its position may become slightly distorted and rotation is not aligned back, which may affect your gaming experience. Fortunately, **Nuitrack automatic calibration** helps to eliminate this nuisance. By default, automatic calibration is enabled, however, if you'd like to disable it for some reason, you can do it using the **VicoVR app: Settings → Developer Options → Autocalibration (Off)**._
 
-<li> Create a new Scene: <b>File → New Scene</b>. Drag-and-drop the following prefabs to the Scene:
-<ul>
-<li> <b>NuitrackScripts</b> (includes the <b>Nuitrack Manager</b> components (initiates Nuitrack  and its modules), <b>Current User Tracker</b> (responsible for tracking of a current user), <b>T-Pose Calibration</b> (determines the calibration settings), <b>Calibration Info</b> (stores the calibration settings);
-<li> <b>RiggedAvatar2</b> (includes all the components for direct skeleton mapping. In this game, we'll animate the avatar using direct mapping to make its moves more accurate and smooth. Learn more about the difference between direct and indirect mapping in our tutorial [Animating the Avatar using Skeleton](http://download.3divi.com/Nuitrack/doc/UnityAnimation_page.html);
-<li> <b>HeadParent</b> (head of our avatar; contains the camera and scripts that define the rotation of the head). 
-</ul>
-<li> Hide the head of the Unitychan prefab so that you won't see it from the inside during our VR game: <b>Character1_Neck → Transform → Scale (0; 0; 0)</b>
+3. Create a new Scene: **File → New Scene**. Drag-and-drop the following prefabs to the Scene:
+	* **NuitrackScripts** (includes the **Nuitrack Manager** components (initiates Nuitrack  and its modules), **Current User Tracker** (responsible for tracking of a current user), **T-Pose Calibration** (determines the calibration settings), **Calibration Info** (stores the calibration settings);
+	* **RiggedAvatar2** (includes all the components for direct skeleton mapping. In this game, we'll animate the avatar using direct mapping to make its moves more accurate and smooth. Learn more about the difference between direct and indirect mapping in our tutorial [Animating the Avatar using Skeleton](http://download.3divi.com/Nuitrack/doc/UnityAnimation_page.html);
+	* **HeadParent** (head of our avatar; contains the camera and scripts that define the rotation of the head). 
 
-@image html images/Ubox_1.png Hiding the Head
-@image latex images/Ubox_1.png Hiding the Head
+4. Hide the head of the Unitychan prefab so that you won't see it from the inside during our VR game: **Character1_Neck → Transform → Scale (0; 0; 0)**
 
-<li> In the <b>NuitrackAvatar</b> settings, drag-and-drop the <b>HeadParent</b> to <b>Element 16</b>,  so that our avatar will be able to move her head.
+<p align="center">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Ubox_1.png"><br>
+<b>Hiding the Head</b><br>
+</p>
 
-@image html images/Ubox_2.png Setting Up the Head
-@image latex images/Ubox_2.png Setting Up the Head
+5. In the **NuitrackAvatar** settings, drag-and-drop the **HeadParent** to **Element 16**,  so that our avatar will be able to move her head.
 
-@note
-The default platform in a project is <b>Android</b>. Before building the project, you can select the appropriate platform: <b>iOS, Android (default) or GearVR</b>. To do that, select <b>Windows → Platform Changer → TargetPlatform → Change Platform</b>.
+<p align="center">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Ubox_2.png"><br>
+<b>Setting Up the Head</b><br>
+</p>
 
-<li> Build and run the project. Calibration should run and reach 100%. After that, check that your avatar is displayed correctly and her movements correspond to yours. 
-</ol>
+_**Note:** The default platform in a project is **Android**. Before building the project, you can select the appropriate platform: **iOS, Android (default) or GearVR**. To do that, select **Windows → Platform Changer → TargetPlatform → Change Platform**._
 
-@image html images/Ubox_3.gif Calibration in the T-Pose
-@image latex images/Ubox_3.gif Calibration in the T-Pose
+6. Build and run the project. Calibration should run and reach 100%. After that, check that your avatar is displayed correctly and her movements correspond to yours. 
 
-@section box_dummy Setting Up the punching Dummy
+<p align="center">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Ubox_3.gif"><br>
+<b>Calibration in the T-Pose</b><br>
+</p>
+
+## Setting Up the punching Dummy
 
 <ol>
 <li> Now, when we've created our avatar, it's time to introduce our victim - a punching dummy (or, alternatively, you can use the avatar of a person who pisses you off - just kidding).  Drag-and-drop the <b>PunchingDummy</b> prefab to the Scene. 
