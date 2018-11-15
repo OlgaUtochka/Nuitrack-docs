@@ -1,7 +1,5 @@
-# Nuitrack Usage in Unreal Engine Projects
-
-## Nuitrack Usage in UE 4.18 Project (Android Only)
-### Setting up your Project
+# Nuitrack Usage in UE 4.18 Project (Android Only)
+## Setting up your Project
 
 1. Copy the **<Nuitrack>** folder from **{SDK Root}/UnrealEngine** to a project **Source** folder.
 2. Copy the **<Nuitrack>** folder from **{SDK Root}** to a project **Source/Nuitrack** folder.
@@ -32,7 +30,7 @@ PrivateDependencyModuleNames.AddRange(new string[] { "Nuitrack" });
 PrivateIncludePaths.AddRange(new string[] { ModuleDirectory + "Nuitrack/Nuitrack/include" });
 ```
 
-### Nuitrack Usage
+## Nuitrack Usage
 
 1. To initialize Nuitrack, create a skeleton tracker and subscribe to an event, you need to add the following code (for example, to the `BeginPlay` method of the `GameMode` class):
 
@@ -66,7 +64,7 @@ void ANuiSampleGameModeBase::OnSkeletonUpdate(SkeletonData::Ptr userSkeletons)
 }
 ```
 
-### Creating Nuitrack Sample Project in Unreal Engine 4.18 (Android Only)
+## Creating Nuitrack Sample Project in Unreal Engine 4.18 (Android Only)
 
 1. Download Unreal Engine 4.18, run it and install CodeWorks for Android.
 2. Create a New Project: **C++ → Basic Code**. Select the following settings for your project:
@@ -312,4 +310,4 @@ FVector ANuiSampleGameModeBase::RealToPosition(Vector3 real)
 }
 ```
 
-11. To build your project, select <b>File → Package Project → Android</b>. 
+11. To build your project, select **File → Package Project → Android**. 
