@@ -468,23 +468,25 @@ Objects will fall from the top in a random number of seconds in the range of [mi
 
 _**Note:** The speed of falling objects is regulated by adjusting the air resistance of prefabs: **gidBody → Drag**. The lower the value, the lower the air resistance (0 - no resistance)._
 
-<li> Drag-and-drop the prefabs to the <b>Canvas → ObjectSpawner</b>.
+6. Drag-and-drop the prefabs to the **Canvas → ObjectSpawner**.
 
-@image html images/Usegment_15.png Falling Objects specified for Object Spawner
-@image latex images/Usegment_15.png Falling Objects specified for Object Spawner
+<p align="center">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Usegment_15.png"><br>
+<b>Falling Objects specified for Object Spawner</b><br>
+</p>
 
-<li> In the <i>SegmentPaint</i> script, add the <i>ObjectSpawner</i> field to pass the parameters and run.
+7. In the `SegmentPaint` script, add the `ObjectSpawner` field to pass the parameters and run.
 
-@code
+```cs
 ...
 [SerializeField]
 ObjectSpawner objectSpawner;
 ...
-@endcode
+```
 
-<li> In the <i>Start</i> method, pass the parameters to <i>GameObjectSpawner</i>.
+8. In the `Start` method, pass the parameters to `GameObjectSpawner`.
 
-@code
+```cs
 void Start()
 {
 ...
@@ -492,36 +494,38 @@ void Start()
 	objectSpawner.StartSpawn(cols);
 }
 ...
-@endcode
+```
 
-<li> Create a script named <i>FallingObjects.cs</i>, in which we'll define the condition for destruction our falling objects in a collision with other objects. Create the <i>OnCollisionEnter</i> method and call the <i>Destroy</i> method. We use this method because in our game the falling objects are destroyed in a collision with any object.
+9. Create a script named `FallingObjects.cs`, in which we'll define the condition for destruction our falling objects in a collision with other objects. Create the `OnCollisionEnter` method and call the `Destroy` method. We use this method because in our game the falling objects are destroyed in a collision with any object.
 
-@code
+```cs
 private void OnCollisionEnter(Collision collision)
 {
 	Destroy(gameObject);
 }
-@endcode
+```
 
-<li> In Unity, drag-and-drop this script to the falling objects (<b>Capsule, Cube</b>).
-<li> Make a reference to the <b>ObjectSpawner</b> and to <b>MainCamera</b> in <b>SegmentPaint</b>.
+10. In Unity, drag-and-drop this script to the falling objects (**Capsule, Cube**).
+11. Make a reference to the **ObjectSpawner** and to **MainCamera** in **SegmentPaint**.
 
-@image html images/Usegment_16.png Segment Paint (Script) Settings
-@image latex images/Usegment_16.png Segment Paint (Script) Settings
+<p align="center">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Usegment_16.png"><br>
+<b>Segment Paint (Script) Settings</b><br>
+</p>
 
-<li> Run the project. You should see the objects falling from the top and destroyed in a collision with the user segment or bottom line. 
-</ol>
+12. Run the project. You should see the objects falling from the top and destroyed in a collision with the user segment or bottom line. 
 
-@image html images/Usegment_17.gif User Segment and Falling Objects
-@image latex images/Usegment_17.gif User Segment and Falling Objects
+<p align="center">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Usegment_17.gif"><br>
+<b>User Segment and Falling Objects</b><br>
+</p>
 
-@subsection segment_scoring Adding Scoring 
+### Adding Scoring 
 
-<ol>
-<li> So, we added a game element to our project but it still doesn't really look like a game. To make our simple game a little bit more interesting, let's introduce scoring for missed / caught objects. To do that, create a new script named <i>GameProgress.cs</i>. This script will contain all the settings connected to scoring in our game.
-<li> In this script, create the fields that define a singleton (creates a reference to itself) so that the falling objects can call the methods of this class  without having a direct reference to it, as well as the fields for the output text and the number of points added / subtracted when colliding with objects. You can learn more about Singleton [here](https://msdn.microsoft.com/en-us/library/ff650316.aspx). 
+1. So, we added a game element to our project but it still doesn't really look like a game. To make our simple game a little bit more interesting, let's introduce scoring for missed / caught objects. To do that, create a new script named `GameProgress.cs`. This script will contain all the settings connected to scoring in our game.
+2. In this script, create the fields that define a singleton (creates a reference to itself) so that the falling objects can call the methods of this class  without having a direct reference to it, as well as the fields for the output text and the number of points added / subtracted when colliding with objects. You can learn more about Singleton [here](https://msdn.microsoft.com/en-us/library/ff650316.aspx). 
 
-@code
+```cs
 public class GameProgress : MonoBehaviour
 {
 	public static GameProgress instance = null;
@@ -539,20 +543,20 @@ void Awake()
 	else if (instance != this)
 		Destroy(gameObject);
 }
-@endcode 
+```
 
-<li> Create the <i>UpdateScoreText</i> method, which stands for updating the text.
+3. Create the ```UpdateScoreText``` method, which stands for updating the text.
 
-@code
+```cs
 void UpdateScoreText()
 {
 	scoreText.text = "Your score: " + currentScore;
 }
-@endcode 
+```
 
-<li> Add the <i>AddScore</i> and <i>RemoveScore</i> static methods, which define the addition and subtraction of points, respectively. 
+4. Add the `AddScore` and `RemoveScore` static methods, which define the addition and subtraction of points, respectively. 
 
-@code
+```cs
 public void AddScore(int val)
 {
 	currentScore += val;
@@ -564,22 +568,20 @@ public void RemoveScore(int val)
 	currentScore -= val;
 	UpdateScoreText();
 }
+```
 
-@endcode
+5. In the `FallingObject.cs` script, add the `ScoreValue` field that defines the amount of points to be added / subtracted. 
 
-<li> In the <i>FallingObject.cs</i> script, add the <i>ScoreValue</i> field that defines the amount of points to be added / subtracted. 
-
-@code
+```cs
 ...
 [SerializeField]
 int scoreValue = 5;
 ...
-@endcode
+```
 
-<li> In the <i>OnCollisionEnter</i> method, we add a tag check to define that points should be added when the user has 'caught' the falling object, and decreased when the object was 'missed' and fell onto the bottom line. Besides, you have to set the <i>active</i> flag to avoid multiple registration when the user's silhouette touches the falling object. Learn more about the <i>Destroy</i> method [here](https://docs.unity3d.com/ScriptReference/Object.Destroy.html). 
+6. In the `OnCollisionEnter` method, we add a tag check to define that points should be added when the user has 'caught' the falling object, and decreased when the object was 'missed' and fell onto the bottom line. Besides, you have to set the `active` flag to avoid multiple registration when the user's silhouette touches the falling object. Learn more about the `Destroy` method [here](https://docs.unity3d.com/ScriptReference/Object.Destroy.html). 
 
-@code
-
+```cs
 bool active = true;
 
 private void OnCollisionEnter(Collision collision)
@@ -596,26 +598,32 @@ private void OnCollisionEnter(Collision collision)
 	else if (collision.transform.tag == "BottomLine")
 		GameProgress.RemoveScore(scoreValue);
 }
-@endcode
+```
 
-<li> In Unity, set the relevant tags for the <b>UserPixel</b> and <b>BottomLine</b> prefabs: <b>Add Tag → UserPixel / BottomLine</b>. 
+7. In Unity, set the relevant tags for the **UserPixel** and **BottomLine** prefabs: **Add Tag → UserPixel / BottomLine**. 
 
-@image html images/Usegment_18.png Tags required for Prefabs
-@image latex images/Usegment_18.png Tags required for Prefabs
+<p align="center">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Usegment_18.png"><br>
+<b>Tags required for Prefabs</b><br>
+</p>
 
-<li> Create a text field on the canvas: <b>Game Object → UI → Text</b> (place the text field wherever you want).
+8. Create a text field on the canvas: **Game Object → UI → Text** (place the text field wherever you want).
 
-@image html images/Usegment_19.png New Text Field
-@image latex images/Usegment_19.png New Text Field
+<p align="center">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Usegment_19.png"><br>
+<b>New Text Field</b><br>
+</p>
 
-<li> Drag-and-drop the <b>GameProgress (Script)</b> to the <b>Main Camera</b>. Drag-and-drop the <b>Text</b> that we've just created to the <b>ScoreText</b> for displaying the text on the screen. 
+9. Drag-and-drop the **GameProgress (Script)** to the **Main Camera**. Drag-and-drop the **Text** that we've just created to the **ScoreText** for displaying the text on the screen. 
 
-@image html images/Usegment_20.png Specified Text Field
-@image latex images/Usegment_20.png Specified Text Field
+<p align="center">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Usegment_20.png"><br>
+<b>Specified Text Field</b><br>
+</p>
 
-<li> Run the project. You should see that now points are added when you destroy the falling objects. If the objects fall on the bottom line, the points are subtracted. 
-</ol>
+10. Run the project. You should see that now points are added when you destroy the falling objects. If the objects fall on the bottom line, the points are subtracted. 
 
-@image html images/Usegment_21.gif Final Game with a User Segment and Scoring
-@image latex images/Usegment_21.gif Final Game with a User Segment and Scoring
-*/ 
+<p align="center">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Usegment_21.gif"><br>
+<b>Final Game with a User Segment and Scoring</b><br>
+</p>
