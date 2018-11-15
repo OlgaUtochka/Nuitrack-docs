@@ -54,69 +54,70 @@ _**Note:** The default platform in a project is **Android**. Before building the
 
 ## Setting Up the punching Dummy
 
-<ol>
-<li> Now, when we've created our avatar, it's time to introduce our victim - a punching dummy (or, alternatively, you can use the avatar of a person who pisses you off - just kidding).  Drag-and-drop the <b>PunchingDummy</b> prefab to the Scene. 
-<li> Create a new script <i>PunchSpeedMeter.cs</i>. In this script, we'll determine when the dummy appears and also define all the settings associated with the speed of our punch. In the script, create fields for the dummy and transformTarget (which is a spine joint; we use this very joint because this is the first moving joint in the hierarchy and it defines the moves of other body joints). 
+1. Now, when we've created our avatar, it's time to introduce our victim - a punching dummy (or, alternatively, you can use the avatar of a person who pisses you off - just kidding).  Drag-and-drop the **PunchingDummy** prefab to the Scene. 
+2. Create a new script `PunchSpeedMeter.cs`. In this script, we'll determine when the dummy appears and also define all the settings associated with the speed of our punch. In the script, create fields for the dummy and transformTarget (which is a spine joint; we use this very joint because this is the first moving joint in the hierarchy and it defines the moves of other body joints). 
 
-@code
+```cs
 [SerializeField] GameObject dummy;
 [SerializeField] Transform transformTarget;
-@endcode
+```
 
-<li> Create the <i>Awake</i> method that will be executed at startup: deactivate the dummy so that it isn't displayed during calibration.  
+3. Create the `Awake` method that will be executed at startup: deactivate the dummy so that it isn't displayed during calibration.  
 
-@code
+```cs
 private void Awake()
 {
 	dummy.SetActive(false);
 }
-@endcode
+```
 
-<li> Create the <i>OnEnable</i> method. Subscribe to the <i>onSuccess</i> event from the <i>TPoseCalibration</i> script. It's called if calibration is successful. 
+4. Create the `OnEnable` method. Subscribe to the `onSuccess` event from the `TPoseCalibration` script. It's called if calibration is successful. 
 
-@code
+```cs
 private void OnEnable()
 {    
 	TPoseCalibration.Instance.onSuccess += OnSuccessCalibration;
 }
-@endcode
+```
 
-<li> Create the <i>OnSuccessCalibration</i> method and specify the required argument <i>(Quaternion rotation)</i>. In this method, we define the initial position of the dummy in front of our avatar. The dummy is activated after successful calibration and stands at a distance of 1m from the user and 1m below the target joint set in the editor (you can specify any distance that you want). 
+5. Create the `OnSuccessCalibration` method and specify the required argument `(Quaternion rotation)`. In this method, we define the initial position of the dummy in front of our avatar. The dummy is activated after successful calibration and stands at a distance of 1m from the user and 1m below the target joint set in the editor (you can specify any distance that you want). 
 
-@code
+```cs
 void OnSuccessCalibration(Quaternion rotation)
 {
 	dummy.SetActive(true);
 	transform.position = transformTarget.position + new Vector3(0, -1, 1);
 }
-@endcode
+```
 
-<li> Don't forget to unsubscribe from the <i>OnSuccessCalibration</i> event.
+6. Don't forget to unsubscribe from the ``OnSuccessCalibration` event.
 
-@code
+```cs
 private void OnDisable()
 {
 	TPoseCalibration.Instance.onSuccess -= OnSuccessCalibration;
 }
-@endcode 
+```
 
-<li> Drag-and-drop the script to the dummy. In Unity, drag-and-drop the <b>Dummy</b> to <b>Dummy</b> and <b>Character1_Spine</b> to <b>Transform Target</b> (the dummy will be set in relation to this joint). 
+7. Drag-and-drop the script to the dummy. In Unity, drag-and-drop the **Dummy** to **Dummy** and **Character1_Spine** to **Transform Target** (the dummy will be set in relation to this joint). 
 
-@image html images/Ubox_4.png Setting Up the Punching Dummy
-@image latex images/Ubox_4.png Setting Up the Punching Dummy
+<p align="center">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Ubox_4.png"><br>
+<b>Setting Up the Punching Dummy</b><br>
+</p>
 
-<li> Run the project and check that the dummy is displayed correctly. At this stage, you won't be able to punch him because we haven't set up the hands of our character yet, so, the hand will just move through the dummy.
-</ol>
+8. Run the project and check that the dummy is displayed correctly. At this stage, you won't be able to punch him because we haven't set up the hands of our character yet, so, the hand will just move through the dummy.
 
-@image html images/Ubox_5.gif You should see the dummy after calibration
-@image latex images/Ubox_5.gif You should see the dummy after calibration
+<p align="center">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Ubox_5.gif"><br>
+<b>You should see the dummy after calibration</b><br>
+</p>
 
-@section box_speed Punching the Dummy and displaying the Punch Speed
+## Punching the Dummy and displaying the Punch Speed
 
-<ol>
-<li> Have you ever played on the 'Punching Bag' game machine that measures the force of your punch? In this project, you'll have the opportunity to break your record several times: the maximum speed of your punch will be displayed above the dummy and will be updated every time the record is broken. In the <i>PunchSpeedMeter.cs</i> script, add the <i>UI</i> namespace, which we need to display text with information about the speed of our punch. Also, create the <i>Text</i> field.
+1. Have you ever played on the 'Punching Bag' game machine that measures the force of your punch? In this project, you'll have the opportunity to break your record several times: the maximum speed of your punch will be displayed above the dummy and will be updated every time the record is broken. In the `PunchSpeedMeter.cs` script, add the `UI` namespace, which we need to display text with information about the speed of our punch. Also, create the `Text` field.
 
-@code
+```cs
 using UnityEngine.UI;
 
 public class PunchSpeedMeter : MonoBehaviour {
@@ -124,28 +125,28 @@ public class PunchSpeedMeter : MonoBehaviour {
 	[SerializeField] Text speedMeterText;
 	...
 }
-@endcode 
+```
 
-<li> In the <i>PunchSpeedMeter</i> class, add the <i>maximumPunchSpeed</i> variable to store the information about the maximum speed of a punch. 
+2. In the `PunchSpeedMeter` class, add the `maximumPunchSpeed` variable to store the information about the maximum speed of a punch. 
 
-@code
+```cs
 float maximumPunchSpeed = 0;
-@endcode
+```
 
-<li> Create the <i>CalculateMaxPunchSpeed</i> method (which takes the punch speed). If the new speed is greater than the current speed, the counter will be updated, otherwise the result will not change. 
+3. Create the `CalculateMaxPunchSpeed` method (which takes the punch speed). If the new speed is greater than the current speed, the counter will be updated, otherwise the result will not change. 
 
-@code
+```cs
 public void CalculateMaxHitSpeed(float speed)
 {
 	if (maximumPunchSpeed < speed)
 	    maximumPunchSpeed = speed;
 	speedMeterText.text = maximumPunchSpeed + " m/s ";
 }
-@endcode
+```
 
-<li> Create a new script <i>PunchSpeedSender.cs</i>. We need a handler for punches, since we can punch the dummy in several body parts (<b>TorsoBone</b> and <b>NeckBone</b>). When you punch the dummy in one of these parts, the <b>PunchSpeedSender</b> sends the info about that event to the <b>PunchSpeedMeter</b>. In this script, make a reference to the <b>PunchSpeedMeter</b> and create the  <i>OnCollisionEnter</i> method. When two objects collide, we'll get the relative punch speed. 
+4. Create a new script `PunchSpeedSender.cs`. We need a handler for punches, since we can punch the dummy in several body parts (**TorsoBone** and **NeckBone**). When you punch the dummy in one of these parts, the **PunchSpeedSender** sends the info about that event to the **PunchSpeedMeter**. In this script, make a reference to the **PunchSpeedMeter** and create the  `OnCollisionEnter` method. When two objects collide, we'll get the relative punch speed. 
 
-@code
+```cs
 public class HitSpeedSender : MonoBehaviour {
  
 	[SerializeField] HitSpeedMeter hitSpeedMeter;
@@ -155,64 +156,68 @@ public class HitSpeedSender : MonoBehaviour {
 		hitSpeedMeter.CalculateMaxHitSpeed(collision.relativeVelocity.magnitude);
 	}
 }
-@endcode
+```
 
-@note
-The <i>relativeVelocity</i> property allows to determine the correct collision speed of two objects (in our case, these are the Unitychan's fist and the dummy). In case we only determined the speed of the fist, we'd get an incorrect value.  To learn more about <i>relativeVelocity</i>, click [here](https://docs.unity3d.com/ScriptReference/Collision-relativeVelocity.html). 
+_**Note:** The `relativeVelocity` property allows to determine the correct collision speed of two objects (in our case, these are the Unitychan's fist and the dummy). In case we only determined the speed of the fist, we'd get an incorrect value. To learn more about `relativeVelocity`, click [here](https://docs.unity3d.com/ScriptReference/Collision-relativeVelocity.html)._
 
-<li> In Unity, drag-and-drop this script to the <b>TorsoBone</b> and <b>NeckBone</b>. In the <b>Punch Speed Meter</b> field, specify <b>PunchSpeedMeter</b>. 
+5. In Unity, drag-and-drop this script to the **TorsoBone** and **NeckBone**. In the **Punch Speed Meter** field, specify **PunchSpeedMeter**. 
 
-@image html images/Ubox_6.png Punch Speed Sender Settings
-@image latex images/Ubox_6.png Punch Speed Sender Settings
+<p align="center">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Ubox_6.png"><br>
+<b>Punch Speed Sender Settings</b><br>
+</p>
 
-<li> In Unity, create two objects for the 'boxing gloves' of our avatar: <b>Create → Empty Object → Left Glove, Right Glove</b>. Actually, our avatar will punch the dummy with her bare hands, but we need to attach imaginary 'boxing gloves' to her hands in order to calculate the punch speed. Let's add the necessary components: <b>Add Component → Capsule Collider, RigidBody</b> to handle the collisions correctly. Select the direction for glove movement along the arm: <b>Capsule Collider → Direction → X-Axis</b>. Set the position and size of the 'gloves': <b>Height → 0.2</b> (optimum), <b>Radius → 0.05</b>. If you want to display the boxing gloves, then create the appropriate prefab and apply the above settings to it. 
+6. In Unity, create two objects for the 'boxing gloves' of our avatar: **Create → Empty Object → Left Glove, Right Glove**. Actually, our avatar will punch the dummy with her bare hands, but we need to attach imaginary 'boxing gloves' to her hands in order to calculate the punch speed. Let's add the necessary components: **Add Component → Capsule Collider, RigidBody** to handle the collisions correctly. Select the direction for glove movement along the arm: **Capsule Collider → Direction → X-Axis**. Set the position and size of the 'gloves': **Height → 0.2** (optimum), **Radius → 0.05**. If you want to display the boxing gloves, then create the appropriate prefab and apply the above settings to it. 
 
-@image html images/Ubox_7.png Setting Up the Gloves
-@image latex images/Ubox_7.png Setting Up the Gloves
+<p align="center">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Ubox_7.png"><br>
+<b>Setting Up the Gloves</b><br>
+</p>
 
-<li> Create the script <i>RigidbodyFollower.cs</i> and describe the behavior of our 'gloves'. Create the <i>target</i> field  so that our 'gloves' will follow these target objects (in our case, these are the avatar's hands). Also, create the <i>rigidbody</i> field. 
+7. Create the script `RigidbodyFollower.cs` and describe the behavior of our 'gloves'. Create the `target` field  so that our 'gloves' will follow these target objects (in our case, these are the avatar's hands). Also, create the `rigidbody` field. 
 
-@code
+```cs
 public class RigidbodyFollower : MonoBehaviour
 {
 	[SerializeField] Transform target;
  
 	Rigidbody rigidbody;
 }
-@endcode
+```
 
-<li> At the start of the game, a reference to the Rigidbody that's attached to the capsule will be received. 
+8. At the start of the game, a reference to the Rigidbody that's attached to the capsule will be received. 
 
-@code
+```cs
 void Start()
 {
 	rigidbody = GetComponent<Rigidbody>();
 }
-@endcode
+```
 
-<li> Create the <i>FixedUpdate</i> method. In this method, we'll describe the behavior of the capsule: it will move (position, rotation) according to the target transform. In this project we use <i>MovePosition</i> instead of <i>transform.position</i> because the gloves of our avatar should move using the RigidBody Physics. A simple change of position may be processed incorrectly because every time the transform would 'teleport' ignoring the physics.  
+9. Create the `FixedUpdate` method. In this method, we'll describe the behavior of the capsule: it will move (position, rotation) according to the target transform. In this project we use `MovePosition` instead of `transform.position` because the gloves of our avatar should move using the RigidBody Physics. A simple change of position may be processed incorrectly because every time the transform would 'teleport' ignoring the physics.  
 
-@code
+```cs
 void FixedUpdate()
 {
 	rigidbody.MovePosition(target.position);
 	rigidbody.MoveRotation(target.rotation);
 }
-@endcode
+```
 
-@note
-We use <i>FixedUpdate</i> instead of <i>Update</i> in case we are dealing with <i>Rigidbody</i>.
+_**Note:** We use `FixedUpdate` instead of `Update` in case we are dealing with `Rigidbody`._
 
-<li> Drag-and-drop the script to the right and left glove and specify the <b>Target (Character1_LeftHand, Character1_RightHand)</b>.
+10. Drag-and-drop the script to the right and left glove and specify the **Target (Character1_LeftHand, Character1_RightHand)**.
 
-@image html images/Ubox_8.png Setting Up the Rigidbody Follower
-@image latex images/Ubox_8.png Setting Up the Rigidbody Follower
+<p align="center">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Ubox_8.png"><br>
+<b>Setting Up the Rigidbody Follower</b><br>
+</p>
 
-<li> Run the project and punch the dummy. Check the displayed speed of your punch: it should be displayed above the dummy. Try to break your record several times! 
+11. Run the project and punch the dummy. Check the displayed speed of your punch: it should be displayed above the dummy. Try to break your record several times! 
 
-@image html images/Ubox_9.gif Beat him up!
-@image latex images/Ubox_9.gif Beat him up!
+<p align="center">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Ubox_9.gif"><br>
+<b>Beat him up!</b><br>
+</p>
 
 Congratulations! You've just created a VR Boxing Game with skeleton tracking! 
-</ol>
-*/
