@@ -129,13 +129,14 @@ _**Note:** Learn more about ?: operator at the [Microsoft website](https://docs.
 
 ## Creating a Gallery
 
-<ol>
-<li> In Unity, add an object for scrolling the content in our gallery to the <b>Canvas</b>: <b>GameObject → ScrollView</b>. Edit the <b>ScollView</b> settings: in the <b>Scroll Rect</b>, untick <b>Vertical</b>. For the <b>Scroll Rect</b>, set the alignment along the edges so that it's stretched up to the <b>Canvas</b> edges (even if you resize the screen, it will fill up the entire screen). 
+1. In Unity, add an object for scrolling the content in our gallery to the **Canvas**: **GameObject → ScrollView**. Edit the **ScollView** settings: in the **Scroll Rect**, untick **Vertical**. For the **Scroll Rect**, set the alignment along the edges so that it's stretched up to the **Canvas** edges (even if you resize the screen, it will fill up the entire screen). 
 
-@image html images/Ugallery_6.png Scroll View settings
-@image latex images/Ugallery_6.png Scroll View settings
+<p align="center">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Ugallery_6.png"><br>
+<b>Scroll View settings</b><br>
+</p>
 
-<li> For the <b>Content</b>, set the Top Left alignment so that it does not move to the side and the origin of coordinates is at the top left of the <b>ScrollRect</b>. 
+2. For the **Content**, set the Top Left alignment so that it does not move to the side and the origin of coordinates is at the top left of the **ScrollRect**. 
 
 @image html images/Ugallery_7.png Content settings
 @image latex images/Ugallery_7.png Content settings
