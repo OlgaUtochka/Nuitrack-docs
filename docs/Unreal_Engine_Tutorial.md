@@ -96,38 +96,35 @@ void ANuiSampleGameModeBase::OnSkeletonUpdate(SkeletonData::Ptr userSkeletons)
 
 6. Select **Edit → Project Settings → Maps & Modes:**
 
-<ol>
-     <li> Set your World as **Editor Startup Map** and **Game Default Map**.
+6.1. Set your World as **Editor Startup Map** and **Game Default Map**.
 
 <p align="center">
 <img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/unity_default_maps.png"><br>
 </p>
 
-      <li> Set **Default GameMode**.
-      
-</ol>
+6.2. Set **Default GameMode**.
 
 <p align="center">
-<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/unity_maps_modes.png"><br>
+<img width="650" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/unity_maps_modes.png"><br>
 </p>
 
 7. Select **Edit → Project Settings → Platforms → Android**, press **Configure Now** and **Accept SDK License**,  fill the **Android Package Name** field.
 
 <p align="center">
-<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/unity_android_package_name.png"><br>
+<img width="450" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/unity_android_package_name.png"><br>
 </p>
 
-8. Set up your project (as it was described in Point **Integrating Nuitrack with Unreal Engine 4.18 Project (Android Only)**)
+8. Set up your project (as described above).
 
-9. Open **Visual Studio** for writing C++ code
+9. Open **Visual Studio** for writing C++ code.
 
 <p align="center">
-<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/unity_cpp.png"><br>
+<img width="650" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/unity_cpp.png"><br>
 </p>
 
 10. Files in the **Unreal Projects\{ProjectName}\Source\{ProjectName}** directory should have the following content:
 
-      * `NuiSample.Build.cs` File:
+10.1. `NuiSample.Build.cs`:
 
 ```cpp
 using UnrealBuildTool;
@@ -149,7 +146,7 @@ public class NuiSample : ModuleRules
 ```
 
 
-      * `NuiSample.h` File:
+10.2. `NuiSample.h`:
 
 ```cpp
 #pragma once
@@ -170,7 +167,7 @@ using namespace tdv::nuitrack;
 ```
 
 
-      * `NuiSample.cpp` File:
+10.3.`NuiSample.cpp`:
 
 ```cpp
 #include "NuiSample.h"
@@ -212,7 +209,7 @@ class NUISAMPLE_API ANuiSampleGameModeBase : public AGameModeBase
 ```
 
 
-      * `NuiSampleGameModeBase.cpp` File:
+10.4. `NuiSampleGameModeBase.cpp`:
 
 ```cpp
 #include "NuiSampleGameModeBase.h"
