@@ -223,7 +223,7 @@ In this section of our tutorial, we are going to make a simple game, in which th
 1. Let's change the **Canvas** settings. Change its position so that the **Canvas** is located not over the screen but in front of the camera: **Main Camera → Camera → Screen Space**. Now the **Canvas** moves in accordance with the camera movement. Set the distance so that the **Canvas** is in the scope of the camera.
 
 <p align="center">
-<img width="1200" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Usegment_6.png"><br>
+<img width="1300" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Usegment_6.png"><br>
 <b>Canvas Settings</b><br>
 </p>
 
