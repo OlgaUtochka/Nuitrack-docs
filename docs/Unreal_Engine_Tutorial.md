@@ -96,13 +96,13 @@ void ANuiSampleGameModeBase::OnSkeletonUpdate(SkeletonData::Ptr userSkeletons)
 
 6. Select **Edit → Project Settings → Maps & Modes:**
 
-	6.1. Set your World as **Editor Startup Map** and **Game Default Map**.
+6.1. Set your World as **Editor Startup Map** and **Game Default Map**.
 
 <p align="center">
 <img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/unity_default_maps.png"><br>
 </p>
 
-	6.2. Set **Default GameMode**.
+6.2. Set **Default GameMode**.
 
 <p align="center">
 <img width="650" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/unity_maps_modes.png"><br>
@@ -124,7 +124,7 @@ void ANuiSampleGameModeBase::OnSkeletonUpdate(SkeletonData::Ptr userSkeletons)
 
 10. Files in the **Unreal Projects\{ProjectName}\Source\{ProjectName}** directory should have the following content:
 
-	10.1. `NuiSample.Build.cs`:
+10.1. `NuiSample.Build.cs`:
 
 ```cpp
 using UnrealBuildTool;
@@ -146,7 +146,7 @@ public class NuiSample : ModuleRules
 ```
 
 
-	10.2. `NuiSample.h`:
+10.2. `NuiSample.h`:
 
 ```cpp
 #pragma once
@@ -167,7 +167,7 @@ using namespace tdv::nuitrack;
 ```
 
 
-	10.3. `NuiSample.cpp`:
+10.3. `NuiSample.cpp`:
 
 ```cpp
 #include "NuiSample.h"
@@ -176,7 +176,7 @@ IMPLEMENT_PRIMARY_GAME_MODULE( FDefaultGameModuleImpl, NuiSample, "NuiSample" );
 ```
 
 
-	10.4. `NuiSampleGameModeBase.h`:
+10.4. `NuiSampleGameModeBase.h`:
 
 ```cpp
 #pragma once
@@ -209,7 +209,7 @@ class NUISAMPLE_API ANuiSampleGameModeBase : public AGameModeBase
 ```
 
 
-	10.5. `NuiSampleGameModeBase.cpp`:
+10.5. `NuiSampleGameModeBase.cpp`:
 
 ```cpp
 #include "NuiSampleGameModeBase.h"
