@@ -17,7 +17,7 @@ In this part of our tutorial, we'll describe the process of segment visualizatio
 1. Before we begin to visualize the user segment, we first need to check whether the user is detected by the camera or not. First of all, import the **Nuitrack Prefab** from the **Nuitrack SDK** to your Unity project. Tick the Nuitrack modules required for this project (**Depth Module, User Tracker Module, Skeleton Tracker Module**). We'll need these very modules, because in our sample we'll use the depth data of the sensor, as well as the data about the users standing in front of the sensor.
 
 <p align="center">
-<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Usegment_1.png"><br>
+<img width="400" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Usegment_1.png"><br>
 <b>Nuitrack Modules Required for this Project</b><br>
 </p>
 
@@ -182,7 +182,7 @@ segmentTexture.Apply();
 ...
 ```
 
-13. Apply the texture to the sprite. As arguments, specify the texture, rectangle, offset (multiply Vector3 by 0.5 to set the image center), texture detail, extrude (amount by which the sprite mesh should be expanded outwards), mesh type. As we use the **FullRect** mesh type, the size of the sprite would increase, but the processing time is significantly reduced. You can learn more about the `Sprite.Create` parameters [here](https://docs.unity3d.com/ScriptReference/Sprite.Create.html).
+13. Apply the texture to the sprite. As arguments, specify the texture, rectangle, offset (multiply `Vector3` by 0.5 to set the image center), texture detail, extrude (amount by which the sprite mesh should be expanded outwards), mesh type. As we use the **FullRect** mesh type, the size of the sprite would increase, but the processing time is significantly reduced. You can learn more about the `Sprite.Create` parameters [here](https://docs.unity3d.com/ScriptReference/Sprite.Create.html).
 
 ```cs
 ...
@@ -201,7 +201,7 @@ segmentOut.sprite = segmentSprite;
 15. In Unity, configure the **Segment Paint (Script)**. Set the colors for coloring the segments. The first color should be transparent (Alpha = 0) as it is used when the user is not found. As for the other 6 colors, you can select any colors you want. All in all, you should select 7 colors. In the **Segment Out** settings, make a reference to the **Segment Image** from the **Canvas**. 
 
 <p align="center">
-<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Usegment_4.png"><br>
+<img width="400" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Usegment_4.png"><br>
 <b>Selected Colors</b><br>
 </p>
 
@@ -223,7 +223,7 @@ In this section of our tutorial, we are going to make a simple game, in which th
 1. Let's change the **Canvas** settings. Change its position so that the **Canvas** is located not over the screen but in front of the camera: **Main Camera → Camera → Screen Space**. Now the **Canvas** moves in accordance with the camera movement. Set the distance so that the **Canvas** is in the scope of the camera.
 
 <p align="center">
-<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Usegment_6.png"><br>
+<img width="1000" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Usegment_6.png"><br>
 <b>Canvas Settings</b><br>
 </p>
 
@@ -455,14 +455,14 @@ Objects will fall from the top in a random number of seconds in the range of [mi
 4.  In Unity, create an empty object, drag-and-drop it to the **Canvas**, add the **Rectangle Transform** component so that this object is always located at the top of the **Canvas**. Perform top center alignment. After that, drag-and-drop **ObjectSpawner** to this object. This object will determine the point, which is used to calculate the start position of object falling. 
 
 <p align="center">
-<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Usegment_13.png"><br>
+<img width="1000" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Usegment_13.png"><br>
 <b>ObjectSpawner Settings</b><br>
 </p>
 
 5. In Unity, create two prefabs: **Capsule** and **Cube**, which will be used for displaying the game objects falling from the top. The user has to 'destroy' these objects. Add the **RigidBody** component to these prefabs. Drag-and-drop the objects to the **ObjectSpawner** section of the **MainCamera**. Fill in the `fallingObjects` array with the created prefabs.
 
 <p align="center">
-<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Usegment_14.png"><br>
+<img width="400" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Usegment_14.png"><br>
 <b>Specified Capsule and Cube</b><br>
 </p>
 
@@ -471,7 +471,7 @@ _**Note:** The speed of falling objects is regulated by adjusting the air resist
 6. Drag-and-drop the prefabs to the **Canvas → ObjectSpawner**.
 
 <p align="center">
-<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Usegment_15.png"><br>
+<img width="400" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Usegment_15.png"><br>
 <b>Falling Objects specified for Object Spawner</b><br>
 </p>
 
@@ -509,7 +509,7 @@ private void OnCollisionEnter(Collision collision)
 11. Make a reference to the **ObjectSpawner** and to **MainCamera** in **SegmentPaint**.
 
 <p align="center">
-<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Usegment_16.png"><br>
+<img width="400" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Usegment_16.png"><br>
 <b>Segment Paint (Script) Settings</b><br>
 </p>
 
@@ -523,7 +523,7 @@ private void OnCollisionEnter(Collision collision)
 ### Adding Scoring 
 
 1. So, we added a game element to our project but it still doesn't really look like a game. To make our simple game a little bit more interesting, let's introduce scoring for missed / caught objects. To do that, create a new script named `GameProgress.cs`. This script will contain all the settings connected to scoring in our game.
-2. In this script, create the fields that define a singleton (creates a reference to itself) so that the falling objects can call the methods of this class  without having a direct reference to it, as well as the fields for the output text and the number of points added / subtracted when colliding with objects. You can learn more about Singleton [here](https://msdn.microsoft.com/en-us/library/ff650316.aspx). 
+2. In this script, create the fields that define a singleton (creates a reference to itself) so that the falling objects can call the methods of this class  without having a direct reference to it, as well as the fields for the output text and the number of points added / subtracted when colliding with objects. You can learn more about `Singleton` [here](https://msdn.microsoft.com/en-us/library/ff650316.aspx). 
 
 ```cs
 public class GameProgress : MonoBehaviour
@@ -603,21 +603,21 @@ private void OnCollisionEnter(Collision collision)
 7. In Unity, set the relevant tags for the **UserPixel** and **BottomLine** prefabs: **Add Tag → UserPixel / BottomLine**. 
 
 <p align="center">
-<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Usegment_18.png"><br>
+<img width="350" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Usegment_18.png"><br>
 <b>Tags required for Prefabs</b><br>
 </p>
 
 8. Create a text field on the canvas: **Game Object → UI → Text** (place the text field wherever you want).
 
 <p align="center">
-<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Usegment_19.png"><br>
+<img width="1000" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Usegment_19.png"><br>
 <b>New Text Field</b><br>
 </p>
 
 9. Drag-and-drop the **GameProgress (Script)** to the **Main Camera**. Drag-and-drop the **Text** that we've just created to the **ScoreText** for displaying the text on the screen. 
 
 <p align="center">
-<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Usegment_20.png"><br>
+<img width="400" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Usegment_20.png"><br>
 <b>Specified Text Field</b><br>
 </p>
 
