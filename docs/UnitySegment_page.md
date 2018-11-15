@@ -12,7 +12,7 @@ You can find the finished project in **Nuitrack SDK**: **Unity 3D → NuitrackSD
 
 In this part of our tutorial, we'll describe the process of segment visualization. To create a user segment, you'll only need **Nuitrack SDK** and compatible sensor (see the list of compatible sensors at [our website](https://nuitrack.com/)).
 
-## Checking User Presence 
+### Checking User Presence 
 
 1. Before we begin to visualize the user segment, we first need to check whether the user is detected by the camera or not. First of all, import the **Nuitrack Prefab** from the **Nuitrack SDK** to your Unity project. Tick the Nuitrack modules required for this project (**Depth Module, User Tracker Module, Skeleton Tracker Module**). We'll need these very modules, because in our sample we'll use the depth data of the sensor, as well as the data about the users standing in front of the sensor.
 
@@ -68,12 +68,12 @@ private void OnGUI()
 <b>'User found' message displayed</b><br>
 </p>
 
-## Creating and Rendering the User Segment
+### Creating and Rendering the User Segment
 
 1. On the Scene, create a **Canvas** that will be used for displaying the user segment: **GameObject → UI → Canvas**.
 2. The **Main Camera** settings remain default.
 
-_**Note: *You can select either **Orthographic** or **Perspective** camera projection because the canvas size will in any case be automatically adjusted.*_
+_**Note**: You can select either **Orthographic** or **Perspective** camera projection because the canvas size will in any case be automatically adjusted._
 
 3. Add a game object for displaying the user segment to the **Canvas**: **Game Object → UI → Image** and name it **Segment**. The size of this object should coincide with the **Canvas** size. Stretch the width of this object so that it coincides with the **Canvas**. Make sure that **Rect Transform** settings are set as shown in the picture below.
 
@@ -205,30 +205,32 @@ segmentOut.sprite = segmentSprite;
 <b>Selected Colors</b><br>
 </p>
 
-<li> Run the project. At this stage, you should see a colored user segment on the screen.
+16. Run the project. At this stage, you should see a colored user segment on the screen.
 
-@image html images/Usegment_5.gif User Segment
-@image latex images/Usegment_5.gif User Segment
-</ol>
+<p align="center">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Usegment_5.gif"><br>
+<b>User Segment</b><br>
+</p>
 
-Congratulations, you've just visualized a user segment using <b>Nuitrack SDK</b>! Now you can use it to create various apps and games. If you want to learn how to create a game in Unity using this segment, check out the second part of this tutorial. 
+Congratulations, you've just visualized a user segment using **Nuitrack SDK**! Now you can use it to create various apps and games. If you want to learn how to create a game in Unity using this segment, check out the second part of this tutorial. 
 
-@section segment_game Creating a Game with a User Segment
+## Creating a Game with a User Segment
 
 In this section of our tutorial, we are going to make a simple game, in which the user is displayed as a segment and your goal is to destroy as much objects falling from the top as you can. You get points for each falling object that you destroyed. If you miss the object and it touches the bottom line, you lose points. You can create this game even if you don't have much experience with Unity.
 
-@subsection preparing_segment Modifying a Segment for Interacting with Game Objects
+### Modifying a Segment for Interacting with Game Objects
 
-<ol> 
-<li> Let's change the <b>Canvas</b> settings. Change its position so that the <b>Canvas</b> is located not over the screen but in front of the camera: <b>Main Camera → Camera → Screen Space</b>. Now the <b>Canvas</b> moves in accordance with the camera movement. Set the distance so that the <b>Canvas</b> is in the scope of the camera.
+1. Let's change the **Canvas** settings. Change its position so that the **Canvas** is located not over the screen but in front of the camera: **Main Camera → Camera → Screen Space**. Now the **Canvas** moves in accordance with the camera movement. Set the distance so that the **Canvas** is in the scope of the camera.
 
-@image html images/Usegment_6.png Canvas Settings
-@image latex images/Usegment_6.png Canvas Settings
+<p align="center">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Usegment_6.png"><br>
+<b>Canvas Settings</b><br>
+</p>
 
-<li> Now we have to attach colliders to our segment, which will interact with other game objects. Let's describe the colliders behavior in a new script named <i>GameColliders.cs</i>.
-<li> In the <i>GameColliders</i> class, create the necessary fields:
+2. Now we have to attach colliders to our segment, which will interact with other game objects. Let's describe the colliders behavior in a new script named `GameColliders.cs`.
+3. In the `GameColliders` class, create the necessary fields:
 
-@code
+```cs
 public class GameColliders : MonoBehaviour
 {
 	[SerializeField]
@@ -248,37 +250,37 @@ public class GameColliders : MonoBehaviour
 	[SerializeField]
 	float colliderDetails = 1f; // set the detail of colliders
 }
-@endcode 
+```
 
-<li> Create the <i>CreateColliders</i> public method, which takes the input data (number of columns and rows) from the sensor. In this method, calculate the new size of colliders in accordance with the level of detail of colliders, that we've set (<i>colliderDetails</i>) by multiplying the number of columns and rows to the level of detail. 
+4. Create the `CreateColliders` public method, which takes the input data (number of columns and rows) from the sensor. In this method, calculate the new size of colliders in accordance with the level of detail of colliders, that we've set (`colliderDetails`) by multiplying the number of columns and rows to the level of detail. 
 
-@code
+```cs
 public void CreateColliders(int imageCols, int imageRows)
 {
 	cols = (int)(colliderDetails * imageCols);
 	rows = (int)(colliderDetails * imageRows);
 }
-@endcode
+```
 
-<li> Create an array of objects and set its size.
+5. Create an array of objects and set its size.
 
-@code
+```cs
 ...	
 colliderObjects = new GameObject[cols, rows];
 ...
-@endcode 
+```
 
-<li> Using the <i>imageScale</i> variable, scale the size of the matrix of colliders and the image. The image will be aligned either by width or by height, depending on the image received from the sensor. You can learn more about properties of the <i>Screen</i> class [here](https://docs.unity3d.com/ScriptReference/Screen.html).
+6. Using the `imageScale` variable, scale the size of the matrix of colliders and the image. The image will be aligned either by width or by height, depending on the image received from the sensor. You can learn more about properties of the `Screen` class [here](https://docs.unity3d.com/ScriptReference/Screen.html).
 
-@code
+```cs
 ...
 float imageScale = Mathf.Min((float)Screen.width / cols, (float)Screen.height / rows);
 ...
-@endcode
+```
 
-<li> Fill the array with objects in a loop.  
+7. Fill the array with objects in a loop.  
 
-@code
+```cs
 for (int c = 0; c < cols; c++)
 {
 	for (int r = 0; r < rows; r++)
@@ -292,59 +294,63 @@ for (int c = 0; c < cols; c++)
 		colliderObjects[c, r] = currentCollider; // put a collider into the matrix of colliders  
 	}
 }
-@endcode
+```
 
-<li> Create a bottom line and set up its characteristics just like with the <i>UserPixel</i>: set its parent, define its position and scale. 
+8. Create a bottom line and set up its characteristics just like with the `UserPixel`: set its parent, define its position and scale. 
 
-@code
+```cs
 ...
 GameObject bottomLine = Instantiate(bottomLinePrefab);
 bottomLine.transform.SetParent(parentObject, false);
 bottomLine.transform.localPosition = new Vector3(0, -(rows / 2) * imageScale, 0);
 bottomLine.transform.localScale = new Vector3(imageScale * cols, imageScale, imageScale); // stretch by the image width 
 ...
-@endcode
+```
 
-<li> In the <i>SegmentPaint</i> script, add the <i>gameColliders</i> field for passing the image width and height.
+9. In the `SegmentPaint` script, add the `gameColliders` field for passing the image width and height.
 
-@code
+```cs
 ...	
 [SerializeField]
 GameColliders gameColliders;
 ...
-@endcode
+```
 
-<li> In this script, call the <i>gameColliders</i> method (pass the columns and rows) in the <i>Start</i> method to create colliders.
+10. In this script, call the `gameColliders` method (pass the columns and rows) in the `Start` method to create colliders.
 
-@code
+```cs
 ...
 gameColliders.CreateColliders(cols, rows);
 ...
-@endcode
+```
 
-<li> In Unity, create two prefabs for displaying the bottom line (we named it 'BottomLine') and pixels for creating the user's silhouette (we named it 'UserPixel'). They should be in the form of a cube. For convenience, make them in different colors (for example, red for the bottom line and yellow for the pixel). Add the <b>Rigidbody</b> component for the user pixel object and tick <b>Is Kinematic</b> so that physics does not affect it during collision with other objects. 
-<li> Drag-and-drop the <b>GameColliders</b> script to the camera. In Unity, specify the <b>userPixelPrefab</b> and <b>bottomLinePrefab</b> for the script. Drag-and-drop the <b>Canvas</b> to the <b>parentObject</b>. Specify the level of details in <b>colliderDetails</b> by selecting a number in the range from 0 to 1 (the lower it is, the higher the performance is).
+11. In Unity, create two prefabs for displaying the bottom line (we named it 'BottomLine') and pixels for creating the user's silhouette (we named it 'UserPixel'). They should be in the form of a cube. For convenience, make them in different colors (for example, red for the bottom line and yellow for the pixel). Add the **Rigidbody** component for the user pixel object and tick **Is Kinematic** so that physics does not affect it during collision with other objects. 
+12. Drag-and-drop the **GameColliders** script to the camera. In Unity, specify the **userPixelPrefab** and **bottomLinePrefab** for the script. Drag-and-drop the **Canvas** to the **parentObject**. Specify the level of details in **colliderDetails** by selecting a number in the range from 0 to 1 (the lower it is, the higher the performance is).
 
-@image html images/Usegment_7.png Game Colliders (Script) Settings
-@image latex images/Usegment_7.png Game Colliders (Script) Settings
+<p align="center">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Usegment_7.png"><br>
+<b>Game Colliders (Script) Settings</b><br>
+</p>
 
-<li> In the <b>SegmentPaint</b>, make a reference to the <b>GameColliders</b>.
+13. In the **SegmentPaint**, make a reference to the **GameColliders**.
 
-@image html images/Usegment_8.png Reference to GameColliders 
-@image latex images/Usegment_8.png Reference to GameColliders
+<p align="center">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Usegment_8.png"><br>
+<b>Reference to GameColliders</b><br>
+</p>
 
-<li> Run the project and check that game objects are created correctly. At this stage, you won't see the segment because the <b>Canvas</b> is yet completely covered by colliders. The bottom line is displayed. 
-</ol>
+14. Run the project and check that game objects are created correctly. At this stage, you won't see the segment because the **Canvas** is yet completely covered by colliders. The bottom line is displayed. 
 
-@image html images/Usegment_9.png Canvas covered by created Colliders
-@image latex images/Usegment_9.png Canvas covered by created Colliders
+<p align="center">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Usegment_9.png"><br>
+<b>Canvas covered by created Colliders</b><br>
+</p>
 
-@subsection segment_game_objects Creating a Segment with Game Objects
+### Creating a Segment with Game Objects
 
-<ol>
-<li> In the <i>GameColliders.cs</i> script, create the <i>UpdateFrame</i> method. If a user is in the frame, the game objects for displaying the silhouette are activated, otherwise, they are hidden. 
+1. In the `GameColliders.cs` script, create the `UpdateFrame` method. If a user is in the frame, the game objects for displaying the silhouette are activated, otherwise, they are hidden. 
 
-@code
+```cs
 public void UpdateFrame(nuitrack.UserFrame frame) // update the frame
 {
 	for (int c = 0; c < cols; c++) // loop over the columns
@@ -360,41 +366,45 @@ public void UpdateFrame(nuitrack.UserFrame frame) // update the frame
 		}
 	}
 }
-@endcode
+```
 
-<li> Call this method in the <i>ColorizeUser</i> method of the <i>SegmentPaint</i> script.
+2. Call this method in the `ColorizeUser` method of the `SegmentPaint` script.
 
-@code
+```cs
 void ColorizeUser(nuitrack.UserFrame frame)
 {
 ...
 	gameColliders.UpdateFrame(frame);
 }
 ...
-@endcode
+```
 
-<li> If you run the project at this stage, the user silhouette is displayed as a texture. You can see game objects that overlap the texture.
+3. If you run the project at this stage, the user silhouette is displayed as a texture. You can see game objects that overlap the texture.
 
-@image html images/Usegment_10.gif User Segment overlapped by Game Objects
-@image latex images/Usegment_10.gif User Segment overlapped by Game Objects
+<p align="center">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Usegment_10.gif"><br>
+<b>User Segment overlapped by Game Objects</b><br>
+</p>
 
-<li> In Unity, untick the <b>Mesh Renderer</b> component from the <b>UserPixel</b> prefab so that the cube mesh is not rendered (the cube will be transparent).
+4. In Unity, untick the **Mesh Renderer** component from the **UserPixel** prefab so that the cube mesh is not rendered (the cube will be transparent).
 
-@image html images/Usegment_11.png Unticked Mesh Renderer Component
-@image latex images/Usegment_11.png Unticked Mesh Renderer Component
+<p align="center">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Usegment_11.png"><br>
+<b>Unticked Mesh Renderer Component</b><br>
+</p>
  
-<li> Run the project and check that the segment is displayed without colliders (as a texture).
-</ol>
+5. Run the project and check that the segment is displayed without colliders (as a texture).
 
-@image html images/Usegment_12.png User Segment without Colliders
-@image latex images/Usegment_12.png User Segment without Colliders
+<p align="center">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Usegment_12.png"><br>
+<b>User Segment without Colliders</b><br>
+</p>
 
-@subsection create_falling_objects Creating Falling Objects
+### Creating Falling Objects
 
-<ol>
-<li> Create a new script named <i>ObjectSpawner.cs</i>. In this script, create an array with objects: <i>GameObject[] fallingObjects</i>. Specify the minimum (1 sec) and maximum (2 sec) time interval between falling of objects. The <i>halfWidth</i> variable defines the distance from the center of the image to one of its edges in width.
+1. Create a new script named `ObjectSpawner.cs`. In this script, create an array with objects: `GameObject[] fallingObjects`. Specify the minimum (1 sec) and maximum (2 sec) time interval between falling of objects. The `halfWidth` variable defines the distance from the center of the image to one of its edges in width.
 
-@code
+```cs
 public class ObjectSpawner : MonoBehaviour
 {
 	[SerializeField]
@@ -410,21 +420,21 @@ public class ObjectSpawner : MonoBehaviour
 	 
 	float halfWidth;
 }
-@endcode
+```
 
-<li> Create the <i>StartSpawn</i> method. Get original image width and start a coroutine.
+2. Create the `StartSpawn` method. Get original image width and start a coroutine.
 
-@code
+```cs
 public void StartSpawn(float widthImage)
 {
 	halfWidth = widthImage / 2;
 	StartCoroutine(SpawnObject(0f));
 }
-@endcode
+```
 
-<li> Let's describe the coroutine contents. 
+3. Let's describe the coroutine contents. 
 
-@code
+```cs
 IEnumerator SpawnObject(float waitingTime)
 {
 	yield return new WaitForSeconds(waitingTime); // delay 
@@ -439,21 +449,24 @@ IEnumerator SpawnObject(float waitingTime)
 	 
 	StartCoroutine(SpawnObject(Random.Range(minTimeInterval, maxTimeInterval))); // restart the coroutine for the next object
 } 
-@endcode
+```
 
-Objects will fall from the top in a random number of seconds in the range of  [minimum time interval ... maximum time interval]. You can learn more about the <i>Random</i> class [here](https://docs.unity3d.com/ScriptReference/Random.html).
-<li> In Unity, create an empty object, drag-and-drop it to the <b>Canvas</b>, add the <b>Rectangle Transform</b> component so that this object is always located at the top of the <b>Canvas</b>. Perform top center alignment. After that, drag-and-drop <b>ObjectSpawner</b> to this object. This object will determine the point, which is used to calculate the start position of object falling. 
+Objects will fall from the top in a random number of seconds in the range of [minimum time interval ... maximum time interval]. You can learn more about the `Random` class [here](https://docs.unity3d.com/ScriptReference/Random.html).
+4.  In Unity, create an empty object, drag-and-drop it to the **Canvas**, add the **Rectangle Transform** component so that this object is always located at the top of the **Canvas**. Perform top center alignment. After that, drag-and-drop **ObjectSpawner** to this object. This object will determine the point, which is used to calculate the start position of object falling. 
 
-@image html images/Usegment_13.png ObjectSpawner Settings
-@image latex images/Usegment_13.png ObjectSpawner Settings
+<p align="center">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Usegment_13.png"><br>
+<b>ObjectSpawner Settings</b><br>
+</p>
 
-<li> In Unity, create two prefabs: <b>Capsule</b> and <b>Cube</b>, which will be used for displaying the game objects falling from the top. The user has to 'destroy' these objects. Add the <b>RigidBody</b> component to these prefabs. Drag-and-drop the objects to the <b>ObjectSpawner</b> section of the <b>MainCamera</b>. Fill in the <i>fallingObjects</i> array with the created prefabs.
+5. In Unity, create two prefabs: **Capsule** and **Cube**, which will be used for displaying the game objects falling from the top. The user has to 'destroy' these objects. Add the **RigidBody** component to these prefabs. Drag-and-drop the objects to the **ObjectSpawner** section of the **MainCamera**. Fill in the `fallingObjects` array with the created prefabs.
 
-@image html images/Usegment_14.png Specified Capsule and Cube
-@image latex images/Usegment_14.png Specified Capsule and Cube
+<p align="center">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Usegment_14.png"><br>
+<b>Specified Capsule and Cube</b><br>
+</p>
 
-@note
-The speed of falling objects is regulated by adjusting the air resistance of prefabs: <b>RigidBody → Drag</b>. The lower the value, the lower the air resistance (0 - no resistance). 
+_**Note:** The speed of falling objects is regulated by adjusting the air resistance of prefabs: **gidBody → Drag**. The lower the value, the lower the air resistance (0 - no resistance)._
 
 <li> Drag-and-drop the prefabs to the <b>Canvas → ObjectSpawner</b>.
 
