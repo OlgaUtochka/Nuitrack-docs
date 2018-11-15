@@ -201,7 +201,7 @@ segmentOut.sprite = segmentSprite;
 15. In Unity, configure the **Segment Paint (Script)**. Set the colors for coloring the segments. The first color should be transparent (Alpha = 0) as it is used when the user is not found. As for the other 6 colors, you can select any colors you want. All in all, you should select 7 colors. In the **Segment Out** settings, make a reference to the **Segment Image** from the **Canvas**. 
 
 <p align="center">
-<img width="400" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Usegment_4.png"><br>
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Usegment_4.png"><br>
 <b>Selected Colors</b><br>
 </p>
 
@@ -223,7 +223,7 @@ In this section of our tutorial, we are going to make a simple game, in which th
 1. Let's change the **Canvas** settings. Change its position so that the **Canvas** is located not over the screen but in front of the camera: **Main Camera → Camera → Screen Space**. Now the **Canvas** moves in accordance with the camera movement. Set the distance so that the **Canvas** is in the scope of the camera.
 
 <p align="center">
-<img width="1000" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Usegment_6.png"><br>
+<img width="1200" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Usegment_6.png"><br>
 <b>Canvas Settings</b><br>
 </p>
 
@@ -509,7 +509,7 @@ private void OnCollisionEnter(Collision collision)
 11. Make a reference to the **ObjectSpawner** and to **MainCamera** in **SegmentPaint**.
 
 <p align="center">
-<img width="400" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Usegment_16.png"><br>
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Usegment_16.png"><br>
 <b>Segment Paint (Script) Settings</b><br>
 </p>
 
@@ -603,14 +603,14 @@ private void OnCollisionEnter(Collision collision)
 7. In Unity, set the relevant tags for the **UserPixel** and **BottomLine** prefabs: **Add Tag → UserPixel / BottomLine**. 
 
 <p align="center">
-<img width="350" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Usegment_18.png"><br>
+<img width="400" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Usegment_18.png"><br>
 <b>Tags required for Prefabs</b><br>
 </p>
 
 8. Create a text field on the canvas: **Game Object → UI → Text** (place the text field wherever you want).
 
 <p align="center">
-<img width="1000" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Usegment_19.png"><br>
+<img width="1100" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Usegment_19.png"><br>
 <b>New Text Field</b><br>
 </p>
 
