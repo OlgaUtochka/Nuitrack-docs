@@ -1,6 +1,6 @@
 # Creating an Interactive Multi-Touch Gallery
 
-In this tutorial, you'll learn how to create a virtual gallery that can be controlled using gestures. The gallery will have two modes: preview (several images displayed on one page) and view (when you click on an image, it opens in full screen). The gallery can be controlled with one or two hands (multi-touch) and gestures "click", "swipe up", "swipe left", "swipe right". For this project, you'll need Nuitrack and a sensor (from the list of supported sensors, see the [Nuitrack website] (https://nuitrack.com/)).
+In this tutorial, you'll learn how to create a virtual gallery that can be controlled using gestures. The gallery will have two modes: preview (several images displayed on one page) and view (when you click on an image, it opens in full screen). The gallery can be controlled with one or two hands (multi-touch) and gestures "click", "swipe up", "swipe left", "swipe right". For this project, you'll need Nuitrack and a sensor (from the list of supported sensors, see the [Nuitrack website](https://nuitrack.com/)).
 
 You can find the finished project in **Nuitrack SDK**: **Unity 3D → NuitrackSDK.unitypackage → Tutorials → HandTracker** 
 
@@ -13,7 +13,7 @@ You can find the finished project in **Nuitrack SDK**: **Unity 3D → NuitrackSD
 1. Drag-and-drop the **Nuitrack Scripts** prefab from the **Nuitrack SDK** and tick the required modules in the **Nuitrack Manager** section: **Skeleton Tracker Module** (tracking of a user), **Hands Tracker Module** (detecting user's hands), **Gestures Recognizer Module** (gesture recognition).
 
 <p align="center">
-<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Ugallery_1.png"><br>
+<img width="450" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Ugallery_1.png"><br>
 <b>Required Nuitrack modules for this project</b><br>
 </p>
 
@@ -96,7 +96,7 @@ background.enabled = active;
 background.sprite = active && press ? pressSprite : defaultSprite;
 ```
 
-_**Note:** Learn more about ?: operator at the [Microsoft website](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/operators/conditional-operator)._
+_**Note:** Learn more about `?:` operator at the [Microsoft website](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/operators/conditional-operator)._
 
 7. In Unity, create a **Canvas** to display our gallery. In the **Canvas**, create the **RHand** and **LHand** Images to display the pointers: **UI → Image**. Set up the **Camera**: in the **Canvas**, select **Render Mode → Screen Space Camera**; **Render Camera → Main Camera**. 
 
@@ -109,14 +109,14 @@ _**Note:** Learn more about ?: operator at the [Microsoft website](https://docs.
 9. Drag-and-drop the **Image** (sprite used to visualize a hand) to **RHand** and **LHand**. Set the following settings: **Rect Transform → Top Left Alignment** so that that the origin of coordinates of the pointer is in the upper left corner.
 
 <p align="center">
-<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Ugallery_3.png"><br>
+<img width="800" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Ugallery_3.png"><br>
 <b>LHand and RHand settings</b><br>
 </p>
 
 10. In Unity, specify the settings of a right hand: **Current Hand → Right**, make a reference to **BaseRect**. For a left hand, do the same thing. Create a reference to the **Image** component: **Background → Image**. Set the sprite for the "press" pointer: **Press Sprite → HandDown**.
 
 <p align="center">
-<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Ugallery_4.png"><br>
+<img width="800" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Ugallery_4.png"><br>
 <b>Pointer settings</b><br>
 </p>
 
@@ -132,14 +132,14 @@ _**Note:** Learn more about ?: operator at the [Microsoft website](https://docs.
 1. In Unity, add an object for scrolling the content in our gallery to the **Canvas**: **GameObject → ScrollView**. Edit the **ScollView** settings: in the **Scroll Rect**, untick **Vertical**. For the **Scroll Rect**, set the alignment along the edges so that it's stretched up to the **Canvas** edges (even if you resize the screen, it will fill up the entire screen). 
 
 <p align="center">
-<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Ugallery_6.png"><br>
+<img width="450" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Ugallery_6.png"><br>
 <b>Scroll View settings</b><br>
 </p>
 
 2. For the **Content**, set the Top Left alignment so that it does not move to the side and the origin of coordinates is at the top left of the **ScrollRect**. 
 
 <p align="center">
-<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Ugallery_7.png"><br>
+<img width="450" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Ugallery_7.png"><br>
 <b>Content settings</b><br>
 </p>
 
@@ -224,14 +224,14 @@ void Start()
 6. In Unity, drag-and-drop the `GalleryControl.cs` script to the **Canvas**. Drag-and-drop: **Scroll Rect → Scroll View**,  **Content → Content**. Create an **Image** object for an image: **Content →  GameObject → UI → Image**. Create a prefab and drag-and-drop the **Image** object to this prefab. Drag-and-drop this prefab to **GalleryControl** (**Gallery Control → Image Item Prefab**). In the **GalleryControl** settings, set the desired number of columns and rows with images.
 
 <p align="center">
-<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Ugallery_8.png"><br>
+<img width="450" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Ugallery_8.png"><br>
 <b>Gallery Control settings</b><br>
 </p>
 
 _**Note:** The gif below shows a quick way to fill your gallery with images:_
 
 <p align="center">
-<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Ugallery_9.gif"><br>
+<img width="1000" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Ugallery_9.gif"><br>
 <b>Fill your gallery with images in seconds!</b><br>
 </p>
 
@@ -317,7 +317,7 @@ private void Update()
 2. In Unity, drag-and-drop this script to the **ImageItem**, set the lighting of images in the gallery depending on the pointer position. 
 
 <p align="center">
-<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Ugallery_11.png"><br>
+<img width="450" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Ugallery_11.png"><br>
 <b>Lighting settings</b><br>
 </p>
 
@@ -371,7 +371,7 @@ if (newButton != selectedButton)
 5. In Unity, set the camera that will be used in **Pointer** for raycasting: **RHand и LHand → Pointer → Raycasting → Cam → Main Cam**.
 
 <p align="center">
-<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Ugallery_12.png"><br>
+<img width="450" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Ugallery_12.png"><br>
 <b>Raycasting settings</b><br>
 </p>
  
@@ -565,7 +565,7 @@ private void NuitrackManager_onNewGesture(nuitrack.Gesture gesture)
 16. Drag-and-drop the area that will contain an image in the view mode to the Canvas: **Gallery Control → View Rect → View (Rect Transform)**.
 
 <p align="center">
-<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Ugallery_13.png"><br>
+<img width="450" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Ugallery_13.png"><br>
 <b>Setting the View Rect</b><br>
 </p>
 
