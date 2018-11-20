@@ -138,15 +138,16 @@ _**Note:** Learn more about ?: operator at the [Microsoft website](https://docs.
 
 2. For the **Content**, set the Top Left alignment so that it does not move to the side and the origin of coordinates is at the top left of the **ScrollRect**. 
 
-@image html images/Ugallery_7.png Content settings
-@image latex images/Ugallery_7.png Content settings
+<p align="center">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Ugallery_7.png"><br>
+<b>Content settings</b><br>
+</p>
 
-@note
-We disable <b>Vertical</b> in our project because we would like to scroll our gallery only horizontally. However, you can create a gallery with a vertical scroll or a vertical and horizontal scroll, if you'd like to. 
+_**Note:** We disable **Vertical** in our project because we would like to scroll our gallery only horizontally. However, you can create a gallery with a vertical scroll or a vertical and horizontal scroll, if you'd like to._
 
-<li> Create a new script <i>GalleryControl.cs</i>. In this script, we'll define the settings and types of control for our gallery. Add the fields for the image display mode, control elements and additional configuration settings of our gallery. The gallery supports two modes: previewing and viewing images. 
+3. Create a new script `GalleryControl.cs`. In this script, we'll define the settings and types of control for our gallery. Add the fields for the image display mode, control elements and additional configuration settings of our gallery. The gallery supports two modes: previewing and viewing images. 
 
-@code
+```cs
 public class GalleryControl : MonoBehaviour
 {
 	enum ViewMode { Preview, View };
@@ -159,11 +160,11 @@ public class GalleryControl : MonoBehaviour
 	[SerializeField] RectTransform content;
 	[SerializeField] GameObject imageItemPrefab;
 }
-@endcode
+```
 
-<li> Set the number of columns and rows displayed on a page in the gallery view mode (you can set any positive numbers that you want). Set the variables to store a page size, number of pages and size of an image in the preview mode. 
+4. Set the number of columns and rows displayed on a page in the gallery view mode (you can set any positive numbers that you want). Set the variables to store a page size, number of pages and size of an image in the preview mode. 
 
-@code
+```cs
 [Range(1, 10)]
 [SerializeField] int rowsNumber = 3;
 [Range(1, 10)]
@@ -173,11 +174,11 @@ Vector2 pageSize;
 int numberOfPages = 0;
 
 Vector2 defaultSize;
-@endcode
+```
 
-<li> In the <i>Start</i> method, fill the gallery with pictures. 
+5. In the `Start` method, fill the gallery with pictures. 
 
-@code
+```cs
 void Start()
 {
 	pageSize = new Vector2(Screen.width, Screen.height);
@@ -218,26 +219,27 @@ void Start()
 
 	content.sizeDelta = new Vector2(Screen.width * numberOfPages, Screen.height); // set the content size
 }
-@endcode
+```
 
-<li> In Unity, drag-and-drop the <i>GalleryControl.cs</i> script to the <b>Canvas</b>. Drag-and-drop: <b>Scroll Rect → Scroll View</b>,  <b>Content → Content</b>. Create an <b>Image</b> object for an image: <b>Content →  GameObject → UI → Image</b>. Create a prefab and drag-and-drop the <b>Image</b> object to this prefab. Drag-and-drop this prefab to <b>GalleryControl</b> (<b>Gallery Control → Image Item Prefab</b>). In the <b>GalleryControl</b> settings, set the desired number of columns and rows with images.
+6. In Unity, drag-and-drop the `GalleryControl.cs` script to the **Canvas**. Drag-and-drop: **Scroll Rect → Scroll View**,  **Content → Content**. Create an **Image** object for an image: **Content →  GameObject → UI → Image**. Create a prefab and drag-and-drop the **Image** object to this prefab. Drag-and-drop this prefab to **GalleryControl** (**Gallery Control → Image Item Prefab**). In the **GalleryControl** settings, set the desired number of columns and rows with images.
 
-@image html images/Ugallery_8.png Gallery Control settings
-@image latex images/Ugallery_8.png Gallery Control settings
+<p align="center">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Ugallery_8.png"><br>
+<b>Gallery Control settings</b><br>
+</p>
 
-@note
-The gif below shows a quick way to fill your gallery with images:
-</ol>
+_**Note:** The gif below shows a quick way to fill your gallery with images:_
 
-@image html images/Ugallery_9.gif Fill your gallery with images in seconds! 
-@image latex images/Ugallery_9.gif Fill your gallery with images in seconds! 
+<p align="center">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Ugallery_9.gif"><br>
+<b>Fill your gallery with images in seconds!</b><br>
+</p>
 
-@section gallery_pages Turning the Pages
+## Turning the Pages
 
-<ol>
-<li> To add the function of turning the pages to our gallery, add the fields with the values that define the speed of turning the page, offset step for the <i>ScrollRect</i> element and the current page number. 
+1. To add the function of turning the pages to our gallery, add the fields with the values that define the speed of turning the page, offset step for the `ScrollRect` element and the current page number. 
 
-@code
+```cs
 [Header("Scroll")]
  
 [Range(0.1f, 10)]
@@ -246,11 +248,11 @@ The gif below shows a quick way to fill your gallery with images:
 float scrollStep = 0;
 
 int currentPage = 0;
-@endcode
+```
 
-<li> In the <i>GalleryControl.cs</i> script in the <i>Start</i> method, subscribe the <i>NuitrackManager_onNewGesture</i> method to the <i>onNewGesture</i> event of the <b>NuitrackManager</b> component to receive events of gestures. Unsubscribe from this event in the <i>OnDestroy</i> method.
+2. In the `GalleryControl.cs` script in the `Start` method, subscribe the `NuitrackManager_onNewGesture` method to the `onNewGesture` event of the **NuitrackManager** component to receive events of gestures. Unsubscribe from this event in the `OnDestroy` method.
 
-@code
+```cs
 void Start()
 {
 	NuitrackManager.onNewGesture += NuitrackManager_onNewGesture;
@@ -260,18 +262,18 @@ void Start()
 	{
 		NuitrackManager.onNewGesture -= NuitrackManager_onNewGesture;
 	}
-@endcode
+```
 
-<li> Calculate the scrolling step in the <i>Start</i> method.
+3. Calculate the scrolling step in the `Start` method.
 
-@code
+```cs
 if (numberOfPages > 1)
 	scrollStep = 1f / (numberOfPages - 1); // 1/(n-1) given that the Scrollbar takes values from 0 to 1 and one page is already displayed
-@endcode
+```
 
-<li> First, check the gallery mode (View, Preview) in the <i>NuitrackManager_onNewGesture</i> method, then define the gesture type and, depending on the result, increment or decrement the number of the current page. To ensure that the page number is not out of range, let's set the value in the range  from 0 to the total number of pages in the <i>Mathf.Clamp</i> function.
+4. First, check the gallery mode (View, Preview) in the `NuitrackManager_onNewGesture` method, then define the gesture type and, depending on the result, increment or decrement the number of the current page. To ensure that the page number is not out of range, let's set the value in the range  from 0 to the total number of pages in the `Mathf.Clamp` function.
 
-@code
+```cs
 private void NuitrackManager_onNewGesture(nuitrack.Gesture gesture)
 {
 	switch (currentViewMode)
@@ -287,42 +289,43 @@ private void NuitrackManager_onNewGesture(nuitrack.Gesture gesture)
 		break;
 	}
 }
-@endcode
+```
 
-@note
-<b>Nuitrack</b> supports the following types of gestures: Waving, Push, Swipe Up, Swipe Down, Swipe Left, Swipe Right. 
+_**Note:** **Nuitrack** supports the following types of gestures: Waving, Push, Swipe Up, Swipe Down, Swipe Left, Swipe Right._ 
 
-<li> In the <i>Update</i> method, add smooth turning of pages to the current page.  
+5. In the `Update` method, add smooth turning of pages to the current page.  
 
-@code
+```cs
 private void Update()
 {
 	case ViewMode.Preview:
 		scrollRect.horizontalScrollbar.value = Mathf.Lerp(scrollRect.horizontalScrollbar.value, scrollStep * currentPage, Time.deltaTime * scrollSpeed); // move the content until the current page is displayed 
 	break;
 }
-@endcode
+```
 
-<li> Run the project. You should see a gallery with images that can be scrolled to the left or to the right. 
-</ol> 
+6. Run the project. You should see a gallery with images that can be scrolled to the left or to the right. 
 
-@image html images/Ugallery_10.gif Scrolling the gallery
-@image latex images/Ugallery_10.gif Scrolling the gallery
+<p align="center">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Ugallery_10.gif"><br>
+<b>Scrolling the gallery</b><br>
+</p>
 
-@section gallery_interaction Adding Interaction with Gallery Elements and the "Click" event
+## Adding Interaction with Gallery Elements and the "Click" event
 
-<ol>
-<li> Create a new script <i>ImageItem.cs</i>. In this script, we'll describe the interaction with images in our gallery. Inherit it not from the <i>MonoBehaviour</i> class but from the [<i>Selectable</i>](https://docs.unity3d.com/ScriptReference/UI.Selectable.html) class so that it conforms to the general rules of interaction with the UI system in Unity. 
-<li> In Unity, drag-and-drop this script to the <b>ImageItem</b>, set the lighting of images in the gallery depending on the pointer position. 
+1. Create a new script `ImageItem.cs`. In this script, we'll describe the interaction with images in our gallery. Inherit it not from the `MonoBehaviour` class but from the [`Selectable`](https://docs.unity3d.com/ScriptReference/UI.Selectable.html) class so that it conforms to the general rules of interaction with the UI system in Unity. 
+2. In Unity, drag-and-drop this script to the **ImageItem**, set the lighting of images in the gallery depending on the pointer position. 
 
-@image html images/Ugallery_11.png Lighting settings
-@image latex images/Ugallery_11.png Lighting settings
+<p align="center">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Ugallery_11.png"><br>
+<b>Lighting settings</b><br>
+</p>
 
-<li> To interact with elements in the UI, we need to know, which element the user points to. If you use the  mouse pointer, the process is performed using the built-in Unity  components [<i>StandaloneInputModule</i>](https://docs.unity3d.com/Manual/script-StandaloneInputModule.html), [<i>EventSystem</i>](https://docs.unity3d.com/ScriptReference/EventSystems.EventSystem.html) and [<i>GraphicRaycaster</i>](https://docs.unity3d.com/Manual/script-GraphicRaycaster.html). In our case, we use our custom pointers, and we have to determine their logic of interaction. Similarly to the mouse pointer, to get the interface element that is located under our  pointer, we use <i>RayCast</i> for the UI system that "penetrates" the <b>Canvas</b> and all the elements and returns a list of all the "penetrated" items. 
+3. To interact with elements in the UI, we need to know, which element the user points to. If you use the  mouse pointer, the process is performed using the built-in Unity  components [`StandaloneInputModule`](https://docs.unity3d.com/Manual/script-StandaloneInputModule.html), [`EventSystem`](https://docs.unity3d.com/ScriptReference/EventSystems.EventSystem.html) and [`GraphicRaycaster`](https://docs.unity3d.com/Manual/script-GraphicRaycaster.html). In our case, we use our custom pointers, and we have to determine their logic of interaction. Similarly to the mouse pointer, to get the interface element that is located under our  pointer, we use `RayCast` for the UI system that "penetrates" the **Canvas** and all the elements and returns a list of all the "penetrated" items. 
 
-To implement  <i>RayCast</i>, we need a camera from which we will throw a beam, a variable storing the current element, a variable storing the data on the point ([<i>PointerEventData</i>](https://docs.unity3d.com/ScriptReference/EventSystems.PointerEventData.html)) selected by the user, and a list of elements acting as a temporary results storage <i>RayCast</i>. 
+To implement `RayCast`, we need a camera from which we will throw a beam, a variable storing the current element, a variable storing the data on the point ([`PointerEventData`](https://docs.unity3d.com/ScriptReference/EventSystems.PointerEventData.html)) selected by the user, and a list of elements acting as a temporary results storage `RayCast`. 
 
-@code
+```cs
 [Header("Raycasting")]
  
 [SerializeField]
@@ -332,11 +335,11 @@ ImageItem selectedButton;
  
 PointerEventData eventData = new PointerEventData(null);
 List<RaycastResult> raycastResults = new List<RaycastResult>();
-@endcode
+```
 
-<li> If the pointer is active, we can determine which element the user is pointing to. First, define the point at which the ray will be thrown. Then project the position of the pointer relative to the screen: to do this, call  the <i>WorldToScreenPoint</i> camera method. Also, define the pointer offset, which we will need later. Clear the <i>RayCast</i> list of elements from the previous frame and perform raycasting using <i>RaycastAll</i>. Then iterate the list in a loop to find the element with the <i>ImageItem</i> component for interaction.
+4. If the pointer is active, we can determine which element the user is pointing to. First, define the point at which the ray will be thrown. Then project the position of the pointer relative to the screen: to do this, call  the `WorldToScreenPoint` camera method. Also, define the pointer offset, which we will need later. Clear the `RayCast` list of elements from the previous frame and perform raycasting using `RaycastAll`. Then iterate the list in a loop to find the element with the `ImageItem` component for interaction.
 
-@code
+```cs
 if (!active)
     return;
 
@@ -363,16 +366,18 @@ if (newButton != selectedButton)
 	if (selectedButton != null)
 		selectedButton.OnPointerEnter(eventData);
 }
-@endcode
+```
 
-<li> In Unity, set the camera that will be used in <b>Pointer</b> for raycasting: <b>RHand и LHand → Pointer → Raycasting → Cam → Main Cam</b>.
+5. In Unity, set the camera that will be used in **Pointer** for raycasting: **RHand и LHand → Pointer → Raycasting → Cam → Main Cam**.
 
-@image html images/Ugallery_12.png Raycasting settings
-@image latex images/Ugallery_12.png Raycasting settings
+<p align="center">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Ugallery_12.png"><br>
+<b>Raycasting settings</b><br>
+</p>
  
-<li> In the <i>Pointer.cs</i> script, add the "press / release" event handling.  The "click" event will be performed if the user's hand moves at a speed lower than the one specified in <i>dragSensitivity</i>. This is necessary to get rid of "phantom" clicks when the user actively moves his hand. 
+6. In the `Pointer.cs` script, add the "press / release" event handling. The "click" event will be performed if the user's hand moves at a speed lower than the one specified in `dragSensitivity`. This is necessary to get rid of "phantom" clicks when the user actively moves his hand. 
 
-@code
+```cs
 else if (selectedButton != null)
 {
 	if (press)
@@ -389,21 +394,21 @@ else if (selectedButton != null)
 		selectedButton.OnPointerUp(eventData);
 	}
 }
-@endcode
+```
 
-<li> In the <i>ImageItem.cs</i> script, define the "click" event. 
+7. In the `ImageItem.cs` script, define the "click" event. 
 
-@code
+```cs
 public class ImageItem : Selectable
 {
 	public delegate void Click(ImageItem currentItem);
 	public event Click OnClick;
 }
-@endcode
+```
 
-<li> Override the <i>OnPointerUp</i> method: when the hand is released, the click will be counted. 
+8. Override the `OnPointerUp` method: when the hand is released, the click will be counted. 
 
-@code
+```cs
 public override void OnPointerUp(PointerEventData eventData)
 {
 	OnClick(this);
@@ -411,11 +416,11 @@ public override void OnPointerUp(PointerEventData eventData)
  
 	base.OnPointerUp(eventData);
 }
-@endcode
+```
 
-<li> In the <i>GalleryControl.cs</i> script in the <i>Start</i> method, add a field for <i>canvasGroup</i>, and also define the parameters for full-screen image view. 
+9. In the `GalleryControl.cs` script in the `Start` method, add a field for `canvasGroup`, and also define the parameters for full-screen image view. 
 
-@code
+```cs
 [SerializeField] CanvasGroup canvasGroup;
 
 [Header("View")]
@@ -430,11 +435,11 @@ ImageItem selectedItem = null;
 
 bool animated = false;
 float t = 0; // current animation time
-@endcode
+```
 
-<li> Subscribe to the "click" event. 
+10. Subscribe to the "click" event. 
 
-@code
+```cs
 for (int i = 0; i < imagesOnCurrentPage.Length; i++)
 {
 ...
@@ -444,11 +449,11 @@ for (int i = 0; i < imagesOnCurrentPage.Length; i++)
 	ImageItem currentImageItem = currentItem.GetComponent<ImageItem>();
 	currentImageItem.OnClick += CurrentImageItem_OnClick;
 }
-@endcode
+```
 
-<li> Add the mode check: from the preview mode, the switching to the view mode is performed. If a user clicks on the picture, the picture is thrown to the <i>viewRect</i>, so that it does not fade like the other pictures on the content (in <b>Scroll Rect</b>). Using the [<i>canvasGroup.interactable</i>](https://docs.unity3d.com/Manual/class-CanvasGroup.html) variable, disable interactivity of all  pictures left from the content (the actions of the <i>canvasGroup</i> script are applied to all its children, that is, when we disable its interactivity, then interactivity is disabled for all its children, too).
+11. Add the mode check: from the preview mode, the switching to the view mode is performed. If a user clicks on the picture, the picture is thrown to the `viewRect`, so that it does not fade like the other pictures on the content (in **Scroll Rect**). Using the [`canvasGroup.interactable`](https://docs.unity3d.com/Manual/class-CanvasGroup.html) variable, disable interactivity of all  pictures left from the content (the actions of the `canvasGroup` script are applied to all its children, that is, when we disable its interactivity, then interactivity is disabled for all its children, too).
 
-@code
+```cs
 private void CurrentImageItem_OnClick(ImageItem currentItem)
 {
 	if (currentViewMode == ViewMode.Preview)
@@ -464,11 +469,11 @@ private void CurrentImageItem_OnClick(ImageItem currentItem)
 		defaultPosition = selectedItem.transform.localPosition;
 	}
 }
-@endcode
+```
 
-<li> In the <i>Update</i> method, determine the characteristics of the animation in the gallery: when you click and switch to the view mode, the image opens in full screen. 
+12. In the `Update` method, determine the characteristics of the animation in the gallery: when you click and switch to the view mode, the image opens in full screen. 
 
-@code
+```cs
 private void Update()
 {
 	switch (currentViewMode)
@@ -493,11 +498,11 @@ private void Update()
 	...
 	}
 }
-@endcode
+```
 
-<li> Add the animation in case the "preview" mode is selected. 
+13. Add the animation in case the "preview" mode is selected. 
 
-@code
+```cs
 ...
 case ViewMode.Preview:
  
@@ -532,11 +537,11 @@ case ViewMode.Preview:
 		scrollRect.horizontalScrollbar.value = Mathf.Lerp(scrollRect.horizontalScrollbar.value, scrollStep * currentPage, Time.deltaTime * scrollSpeed);
 
 break;
-@endcode
+```
 
-<li> Add the actions to be performed when exiting the view mode.
+14. Add the actions to be performed when exiting the view mode.
 
-@code
+```cs
 private void NuitrackManager_onNewGesture(nuitrack.Gesture gesture)
 {
 	case ViewMode.View:
@@ -550,30 +555,30 @@ private void NuitrackManager_onNewGesture(nuitrack.Gesture gesture)
 
 	break;
 }
-@endcode
+```
 
-<li> In Unity, add the <b>Canvas Group</b> component, which we need to make the background  transparent when the image opens in the view mode: <b>Unity → Scroll View → Add Component → Canvas Group</b>. In the <b>Canvas</b>, set black as the background color (to make our gallery even more beautiful). Add the <b>Panel</b> object to the Canvas so that we have an empty rectangle, in which we will put the picture in the view mode: <b>Canvas → GameObject → UI → Panel</b> and delete the <b>Image</b> component. To correctly display the gallery and pointers, <b>Canvas</b> should have the following hierarchy: 
-<ul>
-<li> Scroll View
-<li> View
-<li> RHand
-<li> LHand
-</ul>
-<li> Drag-and-drop the area that will contain an image in the view mode to the Canvas: <b>Gallery Control → View Rect → View (Rect Transform)</b>.
+15. In Unity, add the <b>Canvas Group</b> component, which we need to make the background transparent when the image opens in the view mode: **Unity → Scroll View → Add Component → Canvas Group**. In the **Canvas**, set black as the background color (to make our gallery even more beautiful). Add the **Panel** object to the Canvas so that we have an empty rectangle, in which we will put the picture in the view mode: **Canvas → GameObject → UI → Panel** and delete the **Image** component. To correctly display the gallery and pointers, **Canvas** should have the following hierarchy: 
+	* Scroll View
+	* View
+	* RHand
+	* LHand
+16. Drag-and-drop the area that will contain an image in the view mode to the Canvas: **Gallery Control → View Rect → View (Rect Transform)**.
 
-@image html images/Ugallery_13.png Setting the View Rect
-@image latex images/Ugallery_13.png Setting the View Rect
+<p align="center">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Ugallery_13.png"><br>
+<b>Setting the View Rect</b><br>
+</p>
 
-<li> Run the project. Images will now change color depending on the cursor position. After the click, the image will open in the view mode. You can close the image with a swipe up. 
-</ol>
+17. Run the project. Images will now change color depending on the cursor position. After the click, the image will open in the view mode. You can close the image with a swipe up. 
 
-@image html images/Ugallery_14.gif Interactive gallery 
-@image latex images/Ugallery_14.gif Interactive gallery 
+<p align="center">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Ugallery_14.gif"><br>
+<b>Interactive gallery</b><br>
+</p>
 
-@section gallery_dragging Dragging, zooming and rotating the Images in View Mode
+## Dragging, zooming and rotating the Images in View Mode
 
-<ol>
-<li> In the <i>ImagItem.cs</i> script, add the handling for One-Touch and Multi-Touch events. Add fields for storing current touches, initial position, rotation, and the image scale.
+1.<li> In the <i>ImagItem.cs</i> script, add the handling for One-Touch and Multi-Touch events. Add fields for storing current touches, initial position, rotation, and the image scale.
 
 @code
 List<PointerEventData> touches = new List<PointerEventData>();
