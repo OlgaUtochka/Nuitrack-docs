@@ -578,9 +578,9 @@ private void NuitrackManager_onNewGesture(nuitrack.Gesture gesture)
 
 ## Dragging, zooming and rotating the Images in View Mode
 
-1.<li> In the <i>ImagItem.cs</i> script, add the handling for One-Touch and Multi-Touch events. Add fields for storing current touches, initial position, rotation, and the image scale.
+1. In the `ImagItem.cs` script, add the handling for One-Touch and Multi-Touch events. Add fields for storing current touches, initial position, rotation, and the image scale.
 
-@code
+```cs
 List<PointerEventData> touches = new List<PointerEventData>();
 
 Vector3 startCenter;
@@ -591,21 +591,20 @@ float startHandDistance;
 
 float startAngle;
 Quaternion startRotation;
-@endcode
+```
 
-<li> Override the <i>OnPointerExit</i> method: if the hand is outside the picture, then the touch is canceled. 
+2. Override the `OnPointerExit` method: if the hand is outside the picture, then the touch is canceled. 
 
-@code
+```cs
 public override void OnPointerExit(PointerEventData eventData)
 {
 	touches.Remove(eventData);
 	base.OnPointerExit(eventData);
 }
-@endcode
+```
+3. Since the change in the image state will be calculated based on the changes made since the start of capture until the current moment, determine the method for saving the initial image state.
 
-<li> Since the change in the image state will be calculated based on the changes made since the start of capture until the current moment, determine the method for saving the initial image state.
-
-@code
+```cs
 void UpdateInitialState()
 {
 	if (OneTouch)
@@ -625,11 +624,11 @@ void UpdateInitialState()
 	startPosition = transform.localPosition;
 	startRotation = transform.localRotation;
 }
-@endcode
+```
 
-<li> Override the <i>OnPointerDown</i> method: if the hand is pressed, then the touch is added.
+4. Override the `OnPointerDown` method: if the hand is pressed, then the touch is added.
 
-@code
+```cs
 public override void OnPointerDown(PointerEventData eventData)
 {
 	if (!touches.Contains(eventData))
@@ -640,25 +639,25 @@ public override void OnPointerDown(PointerEventData eventData)
 
 	base.OnPointerDown(eventData);
 }
-@endcode
+```
 
-<li> Override the <i>OnPointerUp</i> method: when the hand is unclenched, the image is no longer held.
+5. Override the `OnPointerUp` method: when the hand is unclenched, the image is no longer held.
 
-@code
+```cs
 public override void OnPointerUp(PointerEventData eventData)
 {
 	touches.Remove(eventData);
 	UpdateInitialState();
 	...
 }
-@endcode
+```
 
-<li> Add support for the [<i>IDragHandler</i>](https://docs.unity3d.com/ScriptReference/EventSystems.IDragHandler.html) interface for handling drag-and-drop.
+6. Add support for the [`IDragHandler`](https://docs.unity3d.com/ScriptReference/EventSystems.IDragHandler.html) interface for handling drag-and-drop.
 
-@note
-In this project, you can move images not only with hands, but also with the mouse pointer. 
+_**Note:** In this project, you can move images not only with hands, but also with the mouse pointer._
 
-<li> Define the <i>OnDrag</i> method: it will perform dragging, scaling and rotating of an image. For one pointer, only drag-and-drop is available. For two pointers, all actions are available.
+7. 
+efine the <i>OnDrag</i> method: it will perform dragging, scaling and rotating of an image. For one pointer, only drag-and-drop is available. For two pointers, all actions are available.
 
 @code
 public void OnDrag(PointerEventData eventData)
