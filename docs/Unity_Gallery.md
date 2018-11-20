@@ -656,10 +656,9 @@ public override void OnPointerUp(PointerEventData eventData)
 
 _**Note:** In this project, you can move images not only with hands, but also with the mouse pointer._
 
-7. 
-efine the <i>OnDrag</i> method: it will perform dragging, scaling and rotating of an image. For one pointer, only drag-and-drop is available. For two pointers, all actions are available.
+7. Define the `OnDrag` method: it will perform dragging, scaling and rotating of an image. For one pointer, only drag-and-drop is available. For two pointers, all actions are available.
 
-@code
+```cs
 public void OnDrag(PointerEventData eventData)
 {
 	if (interactable || !eventData.dragging)
@@ -689,20 +688,20 @@ public void OnDrag(PointerEventData eventData)
 		transform.localRotation = startRotation * Quaternion.Euler(0, 0, startAngle - angle);
 	}
 }
-@endcode
+```
 
-<li> In the <i>Pointer.cs</i> script, add calling the <i>OnDrag</i> method of the current element to perform drag-and-drop. 
+8. In the `Pointer.cs` script, add calling the `OnDrag` method of the current element to perform drag-and-drop. 
 
-@code
+```cs
 if (press)
 	selectedButton.OnDrag(eventData);
-@endcode
+```
 
-<li> Run the project. The image in the preview mode can be dragged with one or two hands, scaled and rotated with two hands. 
+9. Run the project. The image in the preview mode can be dragged with one or two hands, scaled and rotated with two hands. 
 
-@image html images/Ugallery_15.gif The owl is coming!
-@image latex images/Ugallery_15.gif The owl is coming!
+<p align="center">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Ugallery_15.gif"><br>
+<b>The owl is coming!</b><br>
+</p>
 
 Congratulations, you've just created a gallery with images that you can control with gestures!
-</ol>
-*/
