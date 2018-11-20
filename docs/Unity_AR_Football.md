@@ -12,63 +12,60 @@ To create this game, you'll need a couple of things:
 
 Hardware: 
 * **TVico** (with the pre-installed Nuitrack.apk) or a desktop with a connected sensor from the [list of supported devices](https://nuitrack.com/) 
-<li> [<b>ARCore compatible device</b>] (https://developers.google.com/ar/discover/supported-devices)
-</ul>
+* [`ARCore compatible device`](https://developers.google.com/ar/discover/supported-devices)
 
 Software:
-<ul>
-<li> <b>ARCore Unity SDK</b> (we’ve built this project with v1.2.1)
-<li> <b>Nuitrack SDK</b> (we’ve built this project with v1.3.3)
-<li> <b>Unity</b> (we’ve built this project with v2017.4.0f1)
-</ul>
+* **ARCore Unity SDK** (we’ve built this project with v1.2.1)
+* **Nuitrack SDK** (we’ve built this project with v1.3.3)
+* **Unity** (we’ve built this project with v2017.4.0f1)
 
-@section arcore_settings Setting Up the Project  
+## Setting Up the Project  
 
-<ol>
-<li> To create an ARCore project, you need to download [ARCore SDK] (https://developers.google.com/ar/develop/downloads).
-<li> Create a new Unity project. 
-<li> Select the <b>Android</b> platform in <b>File → Build Settings</b>. 
+1. To create an ARCore project, you need to download [ARCore SDK](https://developers.google.com/ar/develop/downloads).
+2. Create a new Unity project. 
+3. Select the **Android** platform in **File → Build Settings**. 
 
-@image html images/UARCore_2.png
-@image latex images/UARCore_2.png
+<p align="center">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/UARCore_2.png">
+</p>
 
-<li> In <b>Player Settings</b>, fill in the <b>Company Name</b> and <b>Product Name</b>. 
+4. In **Player Settings**, fill in the **Company Name** and **Product Name**. 
 
-@image html images/UARCore_3.png
-@image latex images/UARCore_3.png
+<p align="center">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/UARCore_3.png">
+</p>
 
-<li> Go to <b>XR Settings</b> and enable <b>ARCore support</b>. 
+5. Go to **XR Settings** and enable **ARCore support**. 
 
-@image html images/UARCore_4.png
-@image latex images/UARCore_4.png
+<p align="center">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/UARCore_4.png">
+</p>
 
-<li> In <b>Other Settings</b>, select <b>Minimum API Level 7.0</b> (which is required by ARCore), disable <b>Multithreaded Rendering</b> (which is an ARCore requirement as well) and fill in the <b>Package Name</b> in the <b>Identification</b> section.
+6. In **Other Settings**, select **Minimum API Level 7.0** (which is required by ARCore), disable **Multithreaded Rendering** (which is an ARCore requirement as well) and fill in the **Package Name** in the **Identification** section.
 
-@image html images/UARCore_5.png
-@image latex images/UARCore_5.png
+<p align="center">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/UARCore_5.png">
+</p>
 
-<li> Import <b>Arcore SDK</b> and <b>NuitrackSDk.unitypackage</b> from Nuitrack SDK to your project: <b>Assets → Import Package → Custom Package</b>. 
-</ol>
+7. Import **Arcore SDK** and **NuitrackSDk.unitypackage** from Nuitrack SDK to your project: **Assets → Import Package → Custom Package**. 
 
-@section arcore_integration Integrating ARCore to the Project
+## Integrating ARCore to the Project
 
-<ol>
-<li> This project is based on the <b>HelloAR</b> project, which is a simple example of using ARCore by Google. Create a new scene and name it, for example, <b>Striker</b>. Delete <b>Main Camera</b> and <b>Directional Light</b> from the scene as we’ll need other objects in this project. Copy all the objects from the HelloAR scene to this scene (<b>Google ARCore → Examples → HelloAR → Scenes → HelloAR</b>):
-<ul>
-<li> <b>ARCore Device</b> - an object that contains the camera. The camera moves according to the movement of an Android device; the image received from the  camera of the Android device becomes the background of the project. 
-<li> <b>Canvas</b> - this object is used to display the "Searching for planes" message.
-<li> <b>Example Controller</b> - an object that is responsible for user interaction with gaming ARCore planes.
-<li> <b>Plane Generator</b> - well, you guessed it, this object creates planes.
-<li> <b>Point Cloud</b> - used to visualize a point cloud for creating the planes. 
-</ul>
+1. This project is based on the **HelloAR** project, which is a simple example of using ARCore by Google. Create a new scene and name it, for example, **Striker**. Delete **Main Camera** and **Directional Light** from the scene as we’ll need other objects in this project. Copy all the objects from the HelloAR scene to this scene (**Google ARCore → Examples → HelloAR → Scenes → HelloAR**):
+* **ARCore Device** - an object that contains the camera. The camera moves according to the movement of an Android device; the image received from the  camera of the Android device becomes the background of the project. 
+* **Canvas** - this object is used to display the "Searching for planes" message.
+* **Example Controller** - an object that is responsible for user interaction with gaming ARCore planes.
+* **Plane Generator** - well, you guessed it, this object creates planes.
+* **Point Cloud** - used to visualize a point cloud for creating the planes. 
 
-@image html images/UARCore_6.png
-@image latex images/UARCore_6.png
+<p align="center">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/UARCore_6.png">
+</p>
 
-<li> Drag-and-drop the <b>Environment</b> object from Nuitrack SDK to the scene. This object is very important because it represents a goal with a goalkeeper. 
-<li> Create a new C# Script <i>Environment.cs</i>, in which we'll describe the behavior of this object. This script will contain a reference to the <b>Target</b> object (target for the ball) that's already attached to our prefab. Also, the size of the Environment object will be set at start.
+2. Drag-and-drop the **Environment** object from Nuitrack SDK to the scene. This object is very important because it represents a goal with a goalkeeper. 
+3. Create a new C# Script `Environment.cs`, in which we'll describe the behavior of this object. This script will contain a reference to the **Target** object (target for the ball) that's already attached to our prefab. Also, the size of the Environment object will be set at start.
 
-@code
+```cs
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -82,17 +79,19 @@ public class Environment : MonoBehaviour {
 		transform.localScale = clientSize;
 	}
 }
-@endcode
-<li> Drag-and-drop the <b>Target</b> object to the <b>aim</b> field. Set an appropriate size of the <b>Environment</b> object in the <b>Size</b> field, for example, (0.1,0.1,0.1).
+```
 
-@image html images/UARCore_7.png
-@image latex images/UARCore_7.png
+4. Drag-and-drop the **Target** object to the **aim** field. Set an appropriate size of the **Environment** object in the **Size** field, for example, (0.1,0.1,0.1).
 
-<li> Rename <b>Example Controller</b> to <b>Football Controller</b>, just for the sake of convenience. Delete the <i>HelloARController</i> script. Instead, let's create our own script <i>FootballARController.cs</i>: <b>Add Component → C# Script → FootballARController</b>. In this script, we’ll describe interaction of a user with AR.
-<li> Add the <i>GoogleARCore</i> and <i>UnityEngine.Networking</i> namespaces to the script.
-<li> Add some necessary fields:
+<p align="center">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/UARCore_7.png">
+</p>
 
-@code
+5. Rename **Example Controller** to **Football Controller**, just for the sake of convenience. Delete the `HelloARController` script. Instead, let's create our own script `FootballARController.cs`: **Add Component → C# Script → FootballARController**. In this script, we’ll describe interaction of a user with AR.
+6. Add the `GoogleARCore` and `UnityEngine.Networking` namespaces to the script.
+7. Add some necessary fields:
+
+```cs
 // After ARCore finds the anchor points in the real world, the camera starts to move around the scene.
 public Camera mainCamera;
 
@@ -111,11 +110,11 @@ private const float modelRotation = 180.0f; // Rotate the Environment to make it
 private List<DetectedPlane> allPlanes = new List<DetectedPlane>();
 
 [SerializeField] Transform aRCoreDevice; // Must be the parent of the camera. 
-@endcode
+```
 
-<li> Get found surfaces in <i>Update</i>. Create a variable to show / hide a surface. If at least one surface in tracked, the message "Searching for Surface" is hidden.
+8. Get found surfaces in `Update`. Create a variable to show / hide a surface. If at least one surface in tracked, the message "Searching for Surface" is hidden.
 
-@code
+```cs
 public void Update()
 {
 	// Hide snackbar when currently tracking at least one plane.
@@ -135,32 +134,31 @@ public void Update()
 	// Hide or show the message "Searching for Surfaces..."
 	searchingForPlaneUI.SetActive(showSearchingUI);
 }
-@endcode
+```
 
-<li> In <i>Update</i>, check whether the "striker" user touches the screen or not.
+9. In `Update`, check whether the "striker" user touches the screen or not.
 
-@code
+```cs
 // If the player has not touched the screen, we are done with this update.
 Touch touch;
 if (Input.touchCount < 1 || (touch = Input.GetTouch(0)).phase != TouchPhase.Began)
 {
 	return;
 }
+```
 
-@endcode
+10. In `Update`, create a variable to store the information about the ray (after the user touched the screen). It stores the coordinates of the place, from where the ray is cast. Add the filter that specifies the surfaces for collision with the ray. 
 
-<li> In <i>Update</i>, create a variable to store the information about the ray (after the user touched the screen). It stores the coordinates of the place, from where the ray is cast. Add the filter that specifies the surfaces for collision with the ray. 
-
-@code
+```cs
 // Raycast against the location the player touched to search for planes.
 TrackableHit hit;
 TrackableHitFlags raycastFilter = TrackableHitFlags.PlaneWithinPolygon |
 TrackableHitFlags.FeaturePointWithSurfaceNormal;
-@endcode
+```
 
-<li> In <i>Update</i>, process the raycasting: we make sure that the surface is tracked and then cast the ray from the appropriate side (because it’s against the football rules to throw the ball in the back of the goalkeeper). Then we process the throwing of a ball. The goal should be placed on the way of the ball; if not, we place the goal with the goalkeeper (<b>Environment</b>) and turn it accordingly. In this project, we use two rays - one is an ARCore ray (detects the surfaces), and the other is a Unity ray (which detects the required Unity object, the goal). 
+11. In `Update`, process the raycasting: we make sure that the surface is tracked and then cast the ray from the appropriate side (because it’s against the football rules to throw the ball in the back of the goalkeeper). Then we process the throwing of a ball. The goal should be placed on the way of the ball; if not, we place the goal with the goalkeeper (**Environment**) and turn it accordingly. In this project, we use two rays - one is an ARCore ray (detects the surfaces), and the other is a Unity ray (which detects the required Unity object, the goal). 
 
-@code
+```cs
 environment = FindObjectOfType<Environment>();
 
 // Casting the ray to the surface found by ARCore.
@@ -190,11 +188,11 @@ else
 	// If there are no surfaces but the goal on the way of the ARCore ray, then kick the ball.
 	KickBall();
 }
-@endcode
+```
 
-<li> Check whether there is the goal on the way of the ball: if yes, kick the ball. Set up our ray, which is cast to the place defined by the user's touch. Put the target point if the ball touched anything. In the script, make the camera child to the <b>Environment</b> in order to find the local position (coordinates) of the camera in relation to the <b>Environment</b>. We need to do all that stuff to find the point from which the ball should be thrown.  Create a ball on the scene, set its position, rotation and the child object (<b>Environment</b>) (the same settings as the camera). Set the target point. Return the camera to the original position above the <b>ARCoreDevice</b>. The return method returns true only if the ball hit some object (and there was the goal), otherwise false. 
+12. Check whether there is the goal on the way of the ball: if yes, kick the ball. Set up our ray, which is cast to the place defined by the user's touch. Put the target point if the ball touched anything. In the script, make the camera child to the **Environment** in order to find the local position (coordinates) of the camera in relation to the **Environment**. We need to do all that stuff to find the point from which the ball should be thrown.  Create a ball on the scene, set its position, rotation and the child object (**Environment**) (the same settings as the camera). Set the target point. Return the camera to the original position above the **ARCoreDevice**. The return method returns true only if the ball hit some object (and there was the goal), otherwise false. 
 
-@code
+```cs
 // If all conditions are satisfied, kick the ball and return true, otherwise, false.
 bool KickBall()
 {
@@ -212,37 +210,37 @@ bool KickBall()
 	}
 	return false;
 }
-@endcode
+```
 
-<li> In Unity, set the fields in <b>FootballController</b> as shown in the picture below: 
+13. In Unity, set the fields in **FootballController** as shown in the picture below: 
 
-@image html images/UARCore_8.png
-@image latex images/UARCore_8.png
+<p align="center">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/UARCore_8.png">
+</p>
 
-<li> Connect your Android device to the PC and run the project. When a user points the camera of the Android device at real surfaces (for example, a table), he will see a grid. As the user touches the grid, an ARCore goal with a goalkeeper are placed. By default, a user sees one goal with a goalkeeper, which is created automatically after the start of the project. 
+14. Connect your Android device to the PC and run the project. When a user points the camera of the Android device at real surfaces (for example, a table), he will see a grid. As the user touches the grid, an ARCore goal with a goalkeeper are placed. By default, a user sees one goal with a goalkeeper, which is created automatically after the start of the project. 
 
-@image html images/UARCore_9.gif
-@image latex images/UARCore_9.gif
+<p align="center">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/UARCore_9.gif">
+</p>
 
-@note
-It's not necessary to build the project to test some ARCore functions - they're available from the Unity editor. You just need to connect your Android device via USB and run the project. If you don't need this function, you can easily disable it: untick <b>Edit/Project Settings/Arcore/Instant Preview enabled</b> 
-</ol>
+_**Note:** It's not necessary to build the project to test some ARCore functions - they're available from the Unity editor. You just need to connect your Android device via USB and run the project. If you don't need this function, you can easily disable it: untick **Edit/Project Settings/Arcore/Instant Preview enabled**._ 
 
-@section arcore_multiplayer Creating a Multiplayer
+## Creating a Multiplayer
 
-Since several players can participate in our game (one goalkeeper and several strikers), we have to create a server and client for network play.  The goalkeeper will be a server and strikers will connect to it as clients. All players should be in one Wi-Fi network. To connect to the server, a client will only need to press the <b>Connect</b> button. 
+Since several players can participate in our game (one goalkeeper and several strikers), we have to create a server and client for network play.  The goalkeeper will be a server and strikers will connect to it as clients. All players should be in one Wi-Fi network. To connect to the server, a client will only need to press the **Connect** button. 
 
-<ol>
-<li> We'll use <i>Network Manager.cs</i>, which is a standard Unity script for networking. Add a new object to the <b>Striker</b> scene: <b>Empty Object → Network Manager</b>, and add the <b>Network Manager(Script)</b> component. 
-<li> Save the <b>Environment</b> prefab and delete it from the scene.
-<li> Add the <b>Environment</b> prefab to <b>Network Manager</b> to make our system know that this object should be spawned: <b>Network Manager (Script) → Registered Spawnable Prefabs</b>.
+1. We'll use `Network Manager.cs`, which is a standard Unity script for networking. Add a new object to the **Striker** scene: **Empty Object → Network Manager**, and add the **Network Manager(Script)** component. 
+2. Save the **Environment** prefab and delete it from the scene.
+3. Add the **Environment** prefab to **Network Manager** to make our system know that this object should be spawned: **Network Manager (Script) → Registered Spawnable Prefabs**.
 
-@image html images/UARCore_10.png
-@image latex images/UARCore_10.png
+<p align="center">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/UARCore_10.png">
+</p>
 
-<li> The <i>Network Discovery</i> script defines the searching of servers in the local network. This is a standard Unity script as well. We'll modify this script to make our game a little bit simpler for a user. By default, a user has to select the required server from the list of found servers. We'll make this project a bit more user-friendly: the connection to the server will be automatic. Create a new script <i>QuickConnectNetworkDiscovery.cs</i>. The <i>QuickConnectNetworkDiscovery</i> class must inherit from the standard <i>NetworkDiscovery</i> class.
+4. The `Network Discovery` script defines the searching of servers in the local network. This is a standard Unity script as well. We'll modify this script to make our game a little bit simpler for a user. By default, a user has to select the required server from the list of found servers. We'll make this project a bit more user-friendly: the connection to the server will be automatic. Create a new script `QuickConnectNetworkDiscovery.cs`. The `QuickConnectNetworkDiscovery` class must inherit from the standard `NetworkDiscovery` class.
 
-@code
+```cs
 using UnityEngine.Networking;
 
 public class QuickConnectNetworkDiscovery : NetworkDiscovery {
@@ -258,19 +256,20 @@ public class QuickConnectNetworkDiscovery : NetworkDiscovery {
 		NetworkManager.singleton.StartClient(); // Connection.
 	}
 }
-@endcode
+```
 
-<li> Drag-and-drop the <i>QuickConnectNetworkDiscovery</i> script to <b>NetworkManager</b>.
-<li> In Unity, find <b>Network Manager</b>, select <b>QuickConnectNetworkDiscovery</b>, tick <b>Use Network Manager</b> and untick <b>Show GUI</b> to hide a debug menu.
+5. Drag-and-drop the `QuickConnectNetworkDiscovery` script to **NetworkManager**.
+6. In Unity, find **Network Manager**, select **QuickConnectNetworkDiscovery**, tick **Use Network Manager** and untick **Show GUI** to hide a debug menu.
 
-@image html images/UARCore_11.png
-@image latex images/UARCore_11.png
+<p align="center">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/UARCore_11.png">
+</p>
 
-<li> Create a new script <i>NetworkController.cs</i>. In this script, we'll create a client and a server, and describe the actions of the server when the client is connected. 
-<li> Add the namespaces <i>UnityEngine.UI</i> and <i>UnityEngine.Networking</i>. 
-<li> Add the fields for scores, client / server, text fields. Hide the scores field to prevent setting the scores from the Unity editor. 
+7. Create a new script `NetworkController.cs`. In this script, we'll create a client and a server, and describe the actions of the server when the client is connected. 
+8. Add the namespaces `UnityEngine.UI` and `UnityEngine.Networking`. 
+9. Add the fields for scores, client / server, text fields. Hide the scores field to prevent setting the scores from the Unity editor. 
 
-@code
+```cs
 [HideInInspector]public int score;
 public bool isClient; // Select the client or server.
 
@@ -281,12 +280,12 @@ public bool isClient; // Select the client or server.
 
 [Header("Client")]
 [SerializeField] Text connectText; // Text showing the connection state.
-@endcode
+```
 
-<li> If the <b>GoalKeeper</b> scene is run, the server is started. 
-<li> In the <i>StartClient</i> method, the client is initialized and started. Similar, in the <i>StartServer</i> method the server, as well as the host, are initialized and started. The goalkeeper (as server) will see the scores, and the strikers (the client) will see the number of connected players. The <i>StartClient</i> method is bound to the <b>Connect</b> button. 
+10. If the **GoalKeeper** scene is run, the server is started. 
+11. In the `StartClient` method, the client is initialized and started. Similar, in the `StartServer` method the server, as well as the host, are initialized and started. The goalkeeper (as server) will see the scores, and the strikers (the client) will see the number of connected players. The `StartClient` method is bound to the **Connect** button. 
 
-@code
+```cs
 private void Start()
 {
 	// If it's not a client, create a server.
@@ -311,14 +310,13 @@ void StartServer()
 	GameObject environment = (GameObject)Instantiate(environmentPrefab);
 	NetworkServer.Spawn(environment);
 }
-@endcode
+```
 
-@note
-You can learn more about clients and servers in Unity [here] (https://docs.unity3d.com/Manual/UNetDiscovery.html).
+_**Note:** You can learn more about clients and servers in Unity [here](https://docs.unity3d.com/Manual/UNetDiscovery.html)._
 
-<li> In <i>Update</i>, update the text with the scores and number of connected players. Also, we'll add the button showing the text with the connection state (<b>Connect</b> or <b>Connected</b>).
+12. In `Update`, update the text with the scores and number of connected players. Also, we'll add the button showing the text with the connection state (**Connect** or **Connected**).
 
-@code
+```cs
 private void Update()
 {
 	if (isClient == false)
@@ -334,39 +332,43 @@ private void Update()
 			connectText.text = "Connect";
 	}
 }
-@endcode
+```
 
-<li> Drag-and-drop the <i>NetworkController.cs</i> script to the <b>Network Manager</b>. Tick <b>Is Client</b> (as this script describes the client's behavior). 
+13. Drag-and-drop the `NetworkController.cs` script to the **Network Manager**. Tick **Is Client** (as this script describes the client's behavior). 
 
-@image html images/UARCore_12.png
-@image latex images/UARCore_12.png
+<p align="center">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/UARCore_12.png">
+</p>
 
-<li> Create a <b>Canvas</b> that will be used to display the <b>Connect</b> button: <b>Create → UI → Canvas</b>. Create a button on it: <b>UI → Button</b> (the <b>Connect</b> button). 
-<li> Select the button and add the object from the scene: <b>Button → OnClick + NetworkManager</b>, then select <b>Function → NetworkController → StartClient()</b> (when we press the button, the <i>StartClient</i> method is called). 
+14. Create a **Canvas** that will be used to display the **Connect** button: **Create → UI → Canvas**. Create a button on it: **UI → Button** (the **Connect** button). 
+15. Select the button and add the object from the scene: **Button → OnClick + NetworkManager**, then select **Function → NetworkController → StartClient()** (when we press the button, the `StartClient` method is called). 
 
-@image html images/UARCore_13.png
-@image latex images/UARCore_13.png
+<p align="center">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/UARCore_13.png">
+</p>
 
-<li> Drag-and-drop the text from the <b>Button</b> to the <b>Connect Text</b> field in <b>Network Controller</b>. 
+16. Drag-and-drop the text from the **Button** to the **Connect Text** field in **Network Controller**. 
 
-@image html images/UARCore_14.png
-@image latex images/UARCore_14.png
+<p align="center">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/UARCore_14.png">
+</p>
  
-<li> Create a new scene and name it, for example, <b>GoalKeeper</b>. 
-<li> Set the camera position to (0, 1, -5) so that the goal with the goalkeeper are displayed correctly.
+17. Create a new scene and name it, for example, **GoalKeeper**. 
+18. Set the camera position to (0, 1, -5) so that the goal with the goalkeeper are displayed correctly.
 
-@image html images/UARCore_15.png
-@image latex images/UARCore_15.png
+<p align="center">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/UARCore_15.png">
+</p>
 
-<li> Add the <b>NuitrackScripts</b> prefab from <b>NuitrackSDK.unitypackage</b> to the scene. Tick <b>Skeleton Module On</b> for skeleton tracking.
+19. Add the **NuitrackScripts** prefab from **NuitrackSDK.unitypackage** to the scene. Tick **Skeleton Module On** for skeleton tracking.
 
-@image html images/UARCore_16.png
-@image latex images/UARCore_16.png
+<p align="center">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/UARCore_16.png">
+</p>
 
-<li> Create a <b>Canvas</b> on this scene and create two text fields - <b>ScoreText</b> and <b>ConnectedText</b> - for displaying the scores and connection text. Place the text fields on the <b>Canvas</b> the way you want.
-</ol>
+20. Create a **Canvas** on this scene and create two text fields - **ScoreText** and **ConnectedText** - for displaying the scores and connection text. Place the text fields on the **Canvas** the way you want.
 
-@section arcore_ball Creating a Ball
+## Creating a Ball
 
 <ol>
 <li> Time to create a ball on the <b>Striker</b> scene! We have to create two objects for the ball: the first object <b>Ball</b> always stays in one place and becomes child to the <b>Environment</b> when a user kicks the ball; the second object <b>Ball Model</b> is child to the <b>Ball</b> and moves when a user kicks the ball. Only the <b>Ball Model</b> object is synchronized. Create <b>Empty → Ball</b> and then add a standard script <b>Network Transform</b>, which synchronizes the movement and rotation of GameObjects across the network. 
