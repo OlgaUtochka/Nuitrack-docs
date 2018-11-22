@@ -59,7 +59,7 @@ Software:
 * **Point Cloud** - used to visualize a point cloud for creating the planes. 
 
 <p align="center">
-<img width="250" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/UARCore_6.png">
+<img width="200" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/UARCore_6.png">
 </p>
 
 2. Drag-and-drop the **Environment** object from Nuitrack SDK to the scene. This object is very important because it represents a goal with a goalkeeper. 
@@ -235,7 +235,7 @@ Since several players can participate in our game (one goalkeeper and several st
 3. Add the **Environment** prefab to **Network Manager** to make our system know that this object should be spawned: **Network Manager (Script) → Registered Spawnable Prefabs**.
 
 <p align="center">
-<img width="400" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/UARCore_10.png">
+<img width="450" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/UARCore_10.png">
 </p>
 
 4. The `Network Discovery` script defines the searching of servers in the local network. This is a standard Unity script as well. We'll modify this script to make our game a little bit simpler for a user. By default, a user has to select the required server from the list of found servers. We'll make this project a bit more user-friendly: the connection to the server will be automatic. Create a new script `QuickConnectNetworkDiscovery.cs`. The `QuickConnectNetworkDiscovery` class must inherit from the standard `NetworkDiscovery` class.
@@ -592,7 +592,7 @@ void Start()
 12. In **Build Settings**, untick **GoalKeeper** (as we don’t need it on the Android device)
 
 <p align="center">
-<img width="250" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/UARCore_29.png">
+<img width="200" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/UARCore_29.png">
 </p>
 
 13. Go to **Player Settings → XR Settings** and untick **ARCore** (as it's not needed on TVico).
