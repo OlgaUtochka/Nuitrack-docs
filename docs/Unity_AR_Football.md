@@ -5,7 +5,7 @@ In this tutorial you'll learn how to create an interesting multiplayer game usin
 You can find the finished project in **Nuitrack SDK**: **Unity 3D → NuitrackSDK.unitypackage → Tutorials → AR Football**
 
 <p align="center">
-<img width="350" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/UARCore_1.gif">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/UARCore_1.gif">
 </p>
 
 To create this game, you'll need a couple of things: 
@@ -26,19 +26,19 @@ Software:
 3. Select the **Android** platform in **File → Build Settings**. 
 
 <p align="center">
-<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/UARCore_2.png">
+<img width="300" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/UARCore_2.png">
 </p>
 
 4. In **Player Settings**, fill in the **Company Name** and **Product Name**. 
 
 <p align="center">
-<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/UARCore_3.png">
+<img width="450" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/UARCore_3.png">
 </p>
 
 5. Go to **XR Settings** and enable **ARCore support**. 
 
 <p align="center">
-<img width="400" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/UARCore_4.png">
+<img width="350" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/UARCore_4.png">
 </p>
 
 6. In **Other Settings**, select **Minimum API Level 7.0** (which is required by ARCore), disable **Multithreaded Rendering** (which is an ARCore requirement as well) and fill in the **Package Name** in the **Identification** section.
