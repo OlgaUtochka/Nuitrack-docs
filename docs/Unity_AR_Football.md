@@ -26,7 +26,7 @@ Software:
 3. Select the **Android** platform in **File → Build Settings**. 
 
 <p align="center">
-<img width="300" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/UARCore_2.png">
+<img width="250" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/UARCore_2.png">
 </p>
 
 4. In **Player Settings**, fill in the **Company Name** and **Product Name**. 
@@ -59,7 +59,7 @@ Software:
 * **Point Cloud** - used to visualize a point cloud for creating the planes. 
 
 <p align="center">
-<img width="300" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/UARCore_6.png">
+<img width="250" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/UARCore_6.png">
 </p>
 
 2. Drag-and-drop the **Environment** object from Nuitrack SDK to the scene. This object is very important because it represents a goal with a goalkeeper. 
@@ -337,7 +337,7 @@ private void Update()
 13. Drag-and-drop the `NetworkController.cs` script to the **Network Manager**. Tick **Is Client** (as this script describes the client's behavior). 
 
 <p align="center">
-<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/UARCore_12.png">
+<img width="450" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/UARCore_12.png">
 </p>
 
 14. Create a **Canvas** that will be used to display the **Connect** button: **Create → UI → Canvas**. Create a button on it: **UI → Button** (the **Connect** button). 
@@ -592,7 +592,7 @@ void Start()
 12. In **Build Settings**, untick **GoalKeeper** (as we don’t need it on the Android device)
 
 <p align="center">
-<img width="300" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/UARCore_29.png">
+<img width="250" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/UARCore_29.png">
 </p>
 
 13. Go to **Player Settings → XR Settings** and untick **ARCore** (as it's not needed on TVico).
