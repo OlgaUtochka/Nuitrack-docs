@@ -614,22 +614,21 @@ void Start()
 
 Our project is almost ready: a "striker" user places the goal and goalkeeper on the grid and throws the ball. In his turn, the "goalkeeper" user tries to catch the ball using the TV screen / desktop. 
 
-@image html images/UARCore_32.gif
-@image latex images/UARCore_32.gif
+<p align="center">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/UARCore_32.gif">
+</p>
 
 However, at this stage the "striker" can notice that the goalkeeper's avatar does not move but somehow catches the ball. To eliminate this issue, we have to synchronize the server and client. 
 
-@section arcore_sync Synchronizing the Server and Client
+## Synchronizing the Server and Client
 
-<ol>
-<li> All right, it's time to write some more code to synchronize the movement of avatars. Create a new script, let's call it <i>AvatarSync.cs</i>. 
+1. All right, it's time to write some more code to synchronize the movement of avatars. Create a new script, let's call it `AvatarSync.cs`. 
 
-@note
-As an alternative, you can synchronize the server and client without writing the script: just use 11 components (10 bones and the Avatar) of the Network Transform Child. We've synchronized the Ball using this way.
+_**Note:** As an alternative, you can synchronize the server and client without writing the script: just use 11 components (10 bones and the Avatar) of the Network Transform Child. We've synchronized the Ball using this way._
 
-<li> Add the <i>Networking</i> namespace and inherit the <i>AvatarSync</i> class from <i>NetworkBehaviour</i>. Add an array with bones and avatar transform that will be synchronized. When the rotation of bones and position of the avatar are changed, the server sends messages. 
+2. Add the `Networking` namespace and inherit the `AvatarSync` class from `NetworkBehaviour`. Add an array with bones and avatar transform that will be synchronized. When the rotation of bones and position of the avatar are changed, the server sends messages. 
 
-@code
+```cs
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -656,11 +655,11 @@ public class BonesInfoMessage : MessageBase
 	public Quaternion[] bonesRot;  // Rotations of bones.
 	public Vector3 avatarPos;  // Avatar position.
 }
-@endcode
+```
 
-<li> Check whether it is the server or not in the <i>FixedUpdate</i> method.
+3. Check whether it is the server or not in the `FixedUpdate` method.
 
-@code
+```cs
 private void FixedUpdate()
 {
 	if (isServer)
@@ -668,11 +667,11 @@ private void FixedUpdate()
 		BoneUpdate(syncBones);
 	}
 }
-@endcode
+```
 
-<li> Update the information about the bones and avatar and send a message. 
+4. Update the information about the bones and avatar and send a message. 
 
-@code
+```cs
 public void BoneUpdate(Transform[] bones)
 {
 	List<Quaternion> rotations = new List<Quaternion>();
@@ -688,17 +687,17 @@ public void BoneUpdate(Transform[] bones)
  
 	RpcOnBonesTransformUpdate(msg); // Sending the message. 
 }
-@endcode
+```
 
-<li> Drag-and-drop the script to the <b>Environment</b> prefab.
-<li> Put the <b>RiggedAvatar</b> object to the <b>Avatar</b> field. Fill in the <b>Sync Bones</b> array with the bones: you can find the bones on the <b>Rigged Avatar</b> object in the <b>Rigged Avatar</b> array: <b>Rigged Model → Model Joints</b> (all in all, you have to select 10 bones).
+5. Drag-and-drop the script to the **Environment** prefab.
+6. Put the **RiggedAvatar** object to the **Avatar** field. Fill in the **Sync Bones** array with the bones: you can find the bones on the **Rigged Avatar** object in the **Rigged Avatar** array: **Rigged Model → Model Joints** (all in all, you have to select 10 bones).
 
-@image html images/UARCore_33.png
-@image latex images/UARCore_33.png
+<p align="center">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/UARCore_33.png">
+</p>
  
-<li> Run the project. Now everything is ready for play: the server and client are synchronized, avatars are moving and you're ready to have fun with your friends!  
-</ol>
+7. Run the project. Now everything is ready for play: the server and client are synchronized, avatars are moving and you're ready to have fun with your friends!  
 
-@image html images/UARCore_34.gif
-@image latex images/UARCore_34.gif
-*/
+<p align="center">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/UARCore_34.gif">
+</p>
