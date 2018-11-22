@@ -5,13 +5,13 @@ In this tutorial you'll learn how to create an interesting multiplayer game usin
 You can find the finished project in **Nuitrack SDK**: **Unity 3D → NuitrackSDK.unitypackage → Tutorials → AR Football**
 
 <p align="center">
-<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/UARCore_1.gif">
+<img width="350" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/UARCore_1.gif">
 </p>
 
 To create this game, you'll need a couple of things: 
 
 Hardware: 
-* **TVico** (with the pre-installed Nuitrack.apk) or a desktop with a connected sensor from the [list of supported devices](https://nuitrack.com/) 
+* **TVico** (with the pre-installed Nuitrack.apk) or a desktop with a connected sensor from [the list of supported devices](https://nuitrack.com/) 
 * [`ARCore compatible device`](https://developers.google.com/ar/discover/supported-devices)
 
 Software:
@@ -38,13 +38,13 @@ Software:
 5. Go to **XR Settings** and enable **ARCore support**. 
 
 <p align="center">
-<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/UARCore_4.png">
+<img width="400" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/UARCore_4.png">
 </p>
 
 6. In **Other Settings**, select **Minimum API Level 7.0** (which is required by ARCore), disable **Multithreaded Rendering** (which is an ARCore requirement as well) and fill in the **Package Name** in the **Identification** section.
 
 <p align="center">
-<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/UARCore_5.png">
+<img width="450" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/UARCore_5.png">
 </p>
 
 7. Import **Arcore SDK** and **NuitrackSDk.unitypackage** from Nuitrack SDK to your project: **Assets → Import Package → Custom Package**. 
@@ -59,7 +59,7 @@ Software:
 * **Point Cloud** - used to visualize a point cloud for creating the planes. 
 
 <p align="center">
-<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/UARCore_6.png">
+<img width="300" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/UARCore_6.png">
 </p>
 
 2. Drag-and-drop the **Environment** object from Nuitrack SDK to the scene. This object is very important because it represents a goal with a goalkeeper. 
@@ -69,8 +69,8 @@ Software:
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class Environment : MonoBehaviour {
-
+public class Environment : MonoBehaviour 
+{
 	public Transform aim;
 	[SerializeField] Vector3 clientSize;
 
@@ -84,7 +84,7 @@ public class Environment : MonoBehaviour {
 4. Drag-and-drop the **Target** object to the **aim** field. Set an appropriate size of the **Environment** object in the **Size** field, for example, (0.1,0.1,0.1).
 
 <p align="center">
-<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/UARCore_7.png">
+<img width="450" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/UARCore_7.png">
 </p>
 
 5. Rename **Example Controller** to **Football Controller**, just for the sake of convenience. Delete the `HelloARController` script. Instead, let's create our own script `FootballARController.cs`: **Add Component → C# Script → FootballARController**. In this script, we’ll describe interaction of a user with AR.
@@ -215,7 +215,7 @@ bool KickBall()
 13. In Unity, set the fields in **FootballController** as shown in the picture below: 
 
 <p align="center">
-<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/UARCore_8.png">
+<img width="450" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/UARCore_8.png">
 </p>
 
 14. Connect your Android device to the PC and run the project. When a user points the camera of the Android device at real surfaces (for example, a table), he will see a grid. As the user touches the grid, an ARCore goal with a goalkeeper are placed. By default, a user sees one goal with a goalkeeper, which is created automatically after the start of the project. 
@@ -235,7 +235,7 @@ Since several players can participate in our game (one goalkeeper and several st
 3. Add the **Environment** prefab to **Network Manager** to make our system know that this object should be spawned: **Network Manager (Script) → Registered Spawnable Prefabs**.
 
 <p align="center">
-<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/UARCore_10.png">
+<img width="400" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/UARCore_10.png">
 </p>
 
 4. The `Network Discovery` script defines the searching of servers in the local network. This is a standard Unity script as well. We'll modify this script to make our game a little bit simpler for a user. By default, a user has to select the required server from the list of found servers. We'll make this project a bit more user-friendly: the connection to the server will be automatic. Create a new script `QuickConnectNetworkDiscovery.cs`. The `QuickConnectNetworkDiscovery` class must inherit from the standard `NetworkDiscovery` class.
@@ -262,7 +262,7 @@ public class QuickConnectNetworkDiscovery : NetworkDiscovery {
 6. In Unity, find **Network Manager**, select **QuickConnectNetworkDiscovery**, tick **Use Network Manager** and untick **Show GUI** to hide a debug menu.
 
 <p align="center">
-<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/UARCore_11.png">
+<img width="450" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/UARCore_11.png">
 </p>
 
 7. Create a new script `NetworkController.cs`. In this script, we'll create a client and a server, and describe the actions of the server when the client is connected. 
@@ -344,26 +344,26 @@ private void Update()
 15. Select the button and add the object from the scene: **Button → OnClick + NetworkManager**, then select **Function → NetworkController → StartClient()** (when we press the button, the `StartClient` method is called). 
 
 <p align="center">
-<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/UARCore_13.png">
+<img width="450" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/UARCore_13.png">
 </p>
 
 16. Drag-and-drop the text from the **Button** to the **Connect Text** field in **Network Controller**. 
 
 <p align="center">
-<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/UARCore_14.png">
+<img width="450" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/UARCore_14.png">
 </p>
  
 17. Create a new scene and name it, for example, **GoalKeeper**. 
 18. Set the camera position to (0, 1, -5) so that the goal with the goalkeeper are displayed correctly.
 
 <p align="center">
-<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/UARCore_15.png">
+<img width="450" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/UARCore_15.png">
 </p>
 
 19. Add the **NuitrackScripts** prefab from **NuitrackSDK.unitypackage** to the scene. Tick **Skeleton Module On** for skeleton tracking.
 
 <p align="center">
-<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/UARCore_16.png">
+<img width="450" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/UARCore_16.png">
 </p>
 
 20. Create a **Canvas** on this scene and create two text fields - **ScoreText** and **ConnectedText** - for displaying the scores and connection text. Place the text fields on the **Canvas** the way you want.
@@ -374,31 +374,31 @@ private void Update()
 2. In **Network Transform**, set **Network Send Rate - 0** (as we don't synchronize the parent object), the other settings remain the same.
 
 <p align="center">
-<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/UARCore_17.png">
+<img width="450" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/UARCore_17.png">
 </p>
  
 3. Add one more component to the **Ball** - **Network Transform Child** - and set its **Network Send Rate** to **20** (20 packages / 1 sec, this will make our ball move smoothly).
 
 <p align="center">
-<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/UARCore_18.png">
+<img width="450" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/UARCore_18.png">
 </p>
 
 4. Create a child sphere on the **Ball**: **Create 3D → Object → Sphere** and call it, for example, **Ball Model**. Set up the **Ball Model**: Scale (0.3, 0.3, 0.3), Position (0, 0, 0), Rotation (0, 0, 0). 
 
 <p align="center">
-<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/UARCore_19.png">
+<img width="450" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/UARCore_19.png">
 </p>
 
 5. Add the **RigidBody** component and untick **Use Gravity**.
 
 <p align="center">
-<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/UARCore_20.png">
+<img width="450" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/UARCore_20.png">
 </p>
  
 6. In the **Ball** object, select **Network Transform Child → Target: Ball Model** (so that the position of the child object is synchronized between the server and client).
 
 <p align="center">
-<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/UARCore_21.png">
+<img width="450" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/UARCore_21.png">
 </p>
  
 7. Create a script `BallController.cs`, in which we'll describe the behaviour of our ball. Add the field `startPosition` for the initial position of our ball and `networkController` that we'll use to differentiate the client from server, set its local coordinates and position. 
@@ -493,13 +493,13 @@ public class CollideChecker : MonoBehaviour
 13. Drag-and-drop the `BallController.cs` script to the **Ball** and put the **Ball Model** to the **Ball** field.
 
 <p align="center">
-<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/UARCore_22.png">
+<img width="450" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/UARCore_22.png">
 </p>
 
 14. Save the **Ball** as a prefab and delete it from the scene. After that define that the **Ball** will be automatically spawned on the server and on the client:  **Network Manager - Network Manager (Script) → Spawn Info → Registered Spawnable Prefabs → Ball - Ball**.
 
 <p align="center">
-<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/UARCore_23.png">
+<img width="450" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/UARCore_23.png">
 </p>
 
 ## Creating a Striker
@@ -551,32 +551,32 @@ bool KickBall()
 5. Then select **NetworkManager → Network Manager (Script) → Spawn Info** and drag-and-drop **Player** to **Player Prefab** (please note that the **Player** prefab should have the **Network Identity** component). 
 
 <p align="center">
-<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/UARCore_24.png">
+<img width="450" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/UARCore_24.png">
 </p>
 
 6. Copy the **NetworkManager** object to the **GoalKeeper** scene. 
 7. On the **GoalKeeper** scene, untick **AutoCreatePlayer** in **Network Manager** so that a new player is not created in this scene - we need only one goalkeeper.
 
 <p align="center">
-<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/UARCore_25.png">
+<img width="450" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/UARCore_25.png">
 </p>
  
 8. Untick **Is Client** on the server. 
 
 <p align="center">
-<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/UARCore_26.png">
+<img width="450" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/UARCore_26.png">
 </p>
 
 9. In **Network Manager**, select **Server** and set the fields for the scores and connection texts: **ScoreText - ScoreText (Text)**, **Connection Text - Connection Text (Text)**. 
 
 <p align="center">
-<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/UARCore_27.png">
+<img width="450" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/UARCore_27.png">
 </p>
 
 10. Put the **Environment** prefab to the **Environment Prefab** field.
 
 <p align="center">
-<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/UARCore_28.png">
+<img width="450" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/UARCore_28.png">
 </p>
 
 11. To keep the size of the **Environment** on the server, add the following code to the `Start` method of the `Environment.cs` script:
@@ -592,19 +592,19 @@ void Start()
 12. In **Build Settings**, untick **GoalKeeper** (as we don’t need it on the Android device)
 
 <p align="center">
-<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/UARCore_29.png">
+<img width="300" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/UARCore_29.png">
 </p>
 
 13. Go to **Player Settings → XR Settings** and untick **ARCore** (as it's not needed on TVico).
 
 <p align="center">
-<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/UARCore_30.png">
+<img width="300" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/UARCore_30.png">
 </p>
 
 14. Select the **Android version** as on TVico: **Other Settings → Android** (our version on TVico is 5.1.1).
 
 <p align="center">
-<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/UARCore_31.png">
+<img width="450" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/UARCore_31.png">
 </p>
 
 15. Connect your TVico to your PC via USB, click **Build and Run** or just connect a compatible sensor to the desktop. 
@@ -693,7 +693,7 @@ public void BoneUpdate(Transform[] bones)
 6. Put the **RiggedAvatar** object to the **Avatar** field. Fill in the **Sync Bones** array with the bones: you can find the bones on the **Rigged Avatar** object in the **Rigged Avatar** array: **Rigged Model → Model Joints** (all in all, you have to select 10 bones).
 
 <p align="center">
-<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/UARCore_33.png">
+<img width="450" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/UARCore_33.png">
 </p>
  
 7. Run the project. Now everything is ready for play: the server and client are synchronized, avatars are moving and you're ready to have fun with your friends!  
