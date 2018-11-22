@@ -609,8 +609,8 @@ void Start()
 
 15. Connect your TVico to your PC via USB, click **Build and Run** or just connect a compatible sensor to the desktop. 
 16. Build the project in two stages: 
-16.1. First of all, build the <b>Striker</b> scene with ARCore on the Android device.
-16.2. Then, build the <b>GoalKeeper</b> scene without ARCore on the TVico or PC with a sensor.
+	16.1. First of all, build the <b>Striker</b> scene with ARCore on the Android device.
+	16.2. Then, build the <b>GoalKeeper</b> scene without ARCore on the TVico or PC with a sensor.
 
 Our project is almost ready: a "striker" user places the goal and goalkeeper on the grid and throws the ball. In his turn, the "goalkeeper" user tries to catch the ball using the TV screen / desktop. 
 
