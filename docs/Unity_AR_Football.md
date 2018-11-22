@@ -370,36 +370,40 @@ private void Update()
 
 ## Creating a Ball
 
-<ol>
-<li> Time to create a ball on the <b>Striker</b> scene! We have to create two objects for the ball: the first object <b>Ball</b> always stays in one place and becomes child to the <b>Environment</b> when a user kicks the ball; the second object <b>Ball Model</b> is child to the <b>Ball</b> and moves when a user kicks the ball. Only the <b>Ball Model</b> object is synchronized. Create <b>Empty → Ball</b> and then add a standard script <b>Network Transform</b>, which synchronizes the movement and rotation of GameObjects across the network. 
-<li> In <b>Network Transform</b>, set <b>Network Send Rate - 0</b> (as we don't synchronize the parent object), the other settings remain the same.
+1. Time to create a ball on the **Striker** scene! We have to create two objects for the ball: the first object **Ball** always stays in one place and becomes child to the **Environment** when a user kicks the ball; the second object **Ball Model** is child to the **Ball** and moves when a user kicks the ball. Only the **Ball Model** object is synchronized. Create **Empty → Ball** and then add a standard script **Network Transform**, which synchronizes the movement and rotation of GameObjects across the network. 
+2. In **Network Transform**, set **Network Send Rate - 0** (as we don't synchronize the parent object), the other settings remain the same.
 
-@image html images/UARCore_17.png
-@image latex images/UARCore_17.png
+<p align="center">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/UARCore_17.png">
+</p>
  
-<li> Add one more component to the <b>Ball</b> - <b>Network Transform Child</b> - and set its <b>Network Send Rate</b> to <b>20</b> (20 packages / 1 sec, this will make our ball move smoothly).
+3. Add one more component to the **Ball** - **Network Transform Child** - and set its **Network Send Rate** to **20** (20 packages / 1 sec, this will make our ball move smoothly).
 
-@image html images/UARCore_18.png
-@image latex images/UARCore_18.png
+<p align="center">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/UARCore_18.png">
+</p>
 
-<li> Create a child sphere on the <b>Ball</b>: <b>Create 3D → Object → Sphere</b> and call it, for example, <b>Ball Model</b>. Set up the <b>Ball Model</b>: Scale (0.3, 0.3, 0.3), Position (0, 0, 0), Rotation (0, 0, 0). 
+4. Create a child sphere on the **Ball**: **Create 3D → Object → Sphere** and call it, for example, **Ball Model**. Set up the **Ball Model**: Scale (0.3, 0.3, 0.3), Position (0, 0, 0), Rotation (0, 0, 0). 
 
-@image html images/UARCore_19.png
-@image latex images/UARCore_19.png
+<p align="center">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/UARCore_19.png">
+</p>
 
-<li> Add the <b>RigidBody</b> component and untick <b>Use Gravity</b>.
+5. Add the **RigidBody** component and untick **Use Gravity**.
 
-@image html images/UARCore_20.png
-@image latex images/UARCore_20.png
+<p align="center">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/UARCore_20.png">
+</p>
  
-<li> In the <b>Ball</b> object, select <b>Network Transform Child → Target: Ball Model</b> (so that the position of the child object is synchronized between the server and client).
+6. In the **Ball** object, select **Network Transform Child → Target: Ball Model** (so that the position of the child object is synchronized between the server and client).
 
-@image html images/UARCore_21.png
-@image latex images/UARCore_21.png
+<p align="center">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/UARCore_21.png">
+</p>
  
-<li> Create a script <i>BallController.cs</i>, in which we'll describe the behaviour of our ball. Add the field <i>startPosition</i> for the initial position of our ball and <i>networkController</i> that we'll use to differentiate the client from server, set its local coordinates and position. 
+7. Create a script `BallController.cs`, in which we'll describe the behaviour of our ball. Add the field `startPosition` for the initial position of our ball and `networkController` that we'll use to differentiate the client from server, set its local coordinates and position. 
 
-@code
+```cs
 [SerializeField]
 GameObject ball;
 Vector3 startPosition;
@@ -425,10 +429,11 @@ void Start()
 
 	networkController = FindObjectOfType<NetworkController>();
 }
-@endcode
-<li> In <i>Update</i>, define the movement of our ball if it's in play. When the ball is in game, it moves to a specified point. The movement of the ball according to the script and Unity physics is processed on the server. The clients only receives the position of the ball.
+```
 
-@code
+8. In `Update`, define the movement of our ball if it's in play. When the ball is in game, it moves to a specified point. The movement of the ball according to the script and Unity physics is processed on the server. The clients only receives the position of the ball.
+
+```cs
 void Update () {
 	if (inGame && networkController.isClient == false) 
 	{
@@ -436,24 +441,23 @@ void Update () {
 		ball.transform.Rotate(Vector3.one * ballSpeed); // Rotating the ball when it moves (just for fun).
 	}
 }
-@endcode
+```
 
-@note
-You can learn more about Vector3.MoveTowards in Unity [here] (https://docs.unity3d.com/ScriptReference/Vector3.MoveTowards.html).
+_**Note:** You can learn more about Vector3.MoveTowards in Unity [here](https://docs.unity3d.com/ScriptReference/Vector3.MoveTowards.html)._
 
-<li> In the <i>Setup</i> method, set the start and end positions of the ball.
+9. In the `Setup` method, set the start and end positions of the ball.
 
-@code
+```cs
 public void Setup(Vector3 startPos, Vector3 endPos)
 {
 	endPosition = endPos;
 	startPosition = startPos;
 }
-@endcode
+```
 
-<li> When the ball touches other objects, the physics is enabled. If the ball touches the hand, one point is added. 
+10. When the ball touches other objects, the physics is enabled. If the ball touches the hand, one point is added. 
 
-@code
+```cs
 public void OnCollide(Collision collision)
 {
 	// If the ball touched something, the inGame variable changes its status to false so that collisions are no longer processed.
@@ -469,11 +473,11 @@ public void OnCollide(Collision collision)
 		inGame = false;
 	}
 }
-@endcode
+```
 
-<li> The <b>Ball Model</b> object, which is a child to the <b>Ball</b>, includes colliders, unlike its parent. Let's create a new script <i>CollideChecker.cs</i>, in which we'll describe the behavior of our ball when it collides with other objects.
+11. The **Ball Model** object, which is a child to the **Ball**, includes colliders, unlike its parent. Let's create a new script `CollideChecker.cs`, in which we'll describe the behavior of our ball when it collides with other objects.
 
-@code
+```cs
 using UnityEngine;
  
 public class CollideChecker : MonoBehaviour 
@@ -483,27 +487,27 @@ public class CollideChecker : MonoBehaviour
 		GetComponentInParent<BallController>().OnCollide(collision); // If the ball touched any object, send this information to BallController, which is attached to a parenting object.
 	}
 }
-@endcode
+```
 
-<li> Drag-and-drop the script to the <b>Ball Model</b>.
-<li> Drag-and-drop the <i>BallController.cs</i> script to the <b>Ball</b> and put the <b>Ball Model</b> to the <b>Ball</b> field.
+12. Drag-and-drop the script to the **Ball Model**.
+13. Drag-and-drop the `BallController.cs` script to the **Ball** and put the **Ball Model** to the **Ball** field.
 
-@image html images/UARCore_22.png
-@image latex images/UARCore_22.png
+<p align="center">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/UARCore_22.png">
+</p>
 
-<li> Save the <b>Ball</b> as a prefab and delete it from the scene. After that define that the <b>Ball</b> will be automatically spawned on the server and on the client:  <b>Network Manager - Network Manager (Script) → Spawn Info → Registered Spawnable Prefabs → Ball - Ball</b>.
-</ol>
+14. Save the **Ball** as a prefab and delete it from the scene. After that define that the **Ball** will be automatically spawned on the server and on the client:  **Network Manager - Network Manager (Script) → Spawn Info → Registered Spawnable Prefabs → Ball - Ball**.
 
-@image html images/UARCore_23.png
-@image latex images/UARCore_23.png
+<p align="center">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/UARCore_23.png">
+</p>
 
-@section arcore_striker Creating a Striker
+## Creating a Striker
 
-<ol>
-<li> In Unity, let's create one more important player for our game - a striker: <b>Empty Object → Player</b>. 
-<li> Create a new script called <i>PlayerController.cs</i>, in which we'll describe the actions of the striker. Add the <i>Networking</i> namespace to the script. Inherit the class from <i>NetworkBehaviour</i> so that it can send and receive the messages from the server. Create a field for the <i>ballPrefab</i>. Create a new method <i>Kick</i>, in which we'll set the start and end positions of the ball. This method is called on the server. To call the method on the server, add the <i>[Command]</i> attribute and the <i>Cmd</i> method prefix. 
+1. In Unity, let's create one more important player for our game - a striker: **Empty Object → Player**. 
+2. Create a new script called `PlayerController.cs`, in which we'll describe the actions of the striker. Add the `Networking` namespace to the script. Inherit the class from `NetworkBehaviour` so that it can send and receive the messages from the server. Create a field for the `ballPrefab`. Create a new method `Kick`, in which we'll set the start and end positions of the ball. This method is called on the server. To call the method on the server, add the `[Command]` attribute and the `Cmd` method prefix. 
 
-@code
+```cs
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -524,12 +528,12 @@ public class PlayerController : NetworkBehaviour {
 		CmdKick(startPos, endPos);
 	}
 }
-@endcode
+```
 
-<li> Drag-and-drop <i>PlayerController.cs</i> to the <b>Player Controller</b> object and drag-and-drop the <b>Ball</b> to the <b>Ball Prefab</b> field. Save the <b>Player</b> object as a prefab and delete it from the scene. 
-<li> Add the sending of a message on the ball kick to the server. 
+3. Drag-and-drop `PlayerController.cs` to the **Player Controller** object and drag-and-drop the **Ball** to the **Ball Prefab** field. Save the **Player** object as a prefab and delete it from the scene. 
+4. Add the sending of a message on the ball kick to the server. 
 
-@code
+```cs
 bool KickBall()
 {
 ...
@@ -542,66 +546,71 @@ bool KickBall()
 		return true;
 	}
 }
-@endcode
+```
 
-<li> Then select <b>NetworkManager → Network Manager (Script) → Spawn Info</b> and drag-and-drop <b>Player</b> to <b>Player Prefab</b> (please note that the <b>Player</b> prefab should have the <b>Network Identity</b> component). 
+5. Then select **NetworkManager → Network Manager (Script) → Spawn Info** and drag-and-drop **Player** to **Player Prefab** (please note that the **Player** prefab should have the **Network Identity** component). 
 
-@image html images/UARCore_24.png
-@image latex images/UARCore_24.png
+<p align="center">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/UARCore_24.png">
+</p>
 
-<li> Copy the <b>NetworkManager</b> object to the <b>GoalKeeper</b> scene. 
-<li> On the <b>GoalKeeper</b> scene, untick <b>AutoCreatePlayer</b> in <b>Network Manager</b> so that a new player is not created in this scene - we need only one goalkeeper.
+6. Copy the **NetworkManager** object to the **GoalKeeper** scene. 
+7. On the **GoalKeeper** scene, untick **AutoCreatePlayer** in **Network Manager** so that a new player is not created in this scene - we need only one goalkeeper.
 
-@image html images/UARCore_25.png
-@image latex images/UARCore_25.png
+<p align="center">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/UARCore_25.png">
+</p>
  
-<li> Untick <b>Is Client</b> on the server. 
+8. Untick **Is Client** on the server. 
 
-@image html images/UARCore_26.png
-@image latex images/UARCore_26.png
+<p align="center">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/UARCore_26.png">
+</p>
 
-<li> In <b>Network Manager</b>, select <b>Server</b> and set the fields for the scores and connection texts: <b>ScoreText - ScoreText (Text)</b>, <b>Connection Text - Connection Text (Text)</b>. 
+9. In **Network Manager**, select **Server** and set the fields for the scores and connection texts: **ScoreText - ScoreText (Text)**, **Connection Text - Connection Text (Text)**. 
 
-@image html images/UARCore_27.png
-@image latex images/UARCore_27.png
+<p align="center">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/UARCore_27.png">
+</p>
 
-<li> Put the <b>Environment</b> prefab to the <b>Environment Prefab</b> field.
+10. Put the **Environment** prefab to the **Environment Prefab** field.
 
-@image html images/UARCore_28.png
-@image latex images/UARCore_28.png
+<p align="center">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/UARCore_28.png">
+</p>
 
-<li> To keep the size of the <b>Environment</b> on the server, add the following code to the <i>Start</i> method of the <i>Environment.cs</i> script:
+11. To keep the size of the **Environment** on the server, add the following code to the `Start` method of the `Environment.cs` script:
 
-@code
+```cs
 void Start()
 {
 	if(FindObjectOfType<NetworkIdentity>().isServer == false)
 		transform.localScale = clientSize;
 }
-@endcode
+```
 
-<li> In <b>Build Settings</b>, untick <b>GoalKeeper</b> (as we don’t need it on the Android device)
+12. In **Build Settings**, untick **GoalKeeper** (as we don’t need it on the Android device)
 
-@image html images/UARCore_29.png
-@image latex images/UARCore_29.png
+<p align="center">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/UARCore_29.png">
+</p>
 
-<li> Go to <b>Player Settings → XR Settings</b> and untick <b>ARCore</b> (as it's not needed on TVico).
+13. Go to **Player Settings → XR Settings** and untick **ARCore** (as it's not needed on TVico).
 
-@image html images/UARCore_30.png
-@image latex images/UARCore_30.png
+<p align="center">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/UARCore_30.png">
+</p>
 
-<li> Select the <b>Android version</b> as on TVico: <b>Other Settings → Android</b> (our version on TVico is 5.1.1).
+14. Select the **Android version** as on TVico: **Other Settings → Android** (our version on TVico is 5.1.1).
 
-@image html images/UARCore_31.png
-@image latex images/UARCore_31.png
+<p align="center">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/UARCore_31.png">
+</p>
 
-<li> Connect your TVico to your PC via USB, click <b>Build and Run</b> or just connect a compatible sensor to the desktop. 
-<li> Build the project in two stages: 
-<ol>
-<li> First of all, build the <b>Striker</b> scene with ARCore on the Android device.
-<li> Then, build the <b>GoalKeeper</b> scene without ARCore on the TVico or PC with a sensor.
-</ol>
-</ol>
+15. Connect your TVico to your PC via USB, click **Build and Run** or just connect a compatible sensor to the desktop. 
+16. Build the project in two stages: 
+16.1. First of all, build the <b>Striker</b> scene with ARCore on the Android device.
+16.2. Then, build the <b>GoalKeeper</b> scene without ARCore on the TVico or PC with a sensor.
 
 Our project is almost ready: a "striker" user places the goal and goalkeeper on the grid and throws the ball. In his turn, the "goalkeeper" user tries to catch the ball using the TV screen / desktop. 
 
