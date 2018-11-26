@@ -1,0 +1,519 @@
+# Zombie Nightmare (Oculus Rift) 
+
+In this tutorial you'll learn how to create a super duper cool project using Oculus Rift and Nuitrack. We'll create a VR game called "Zombie Nightmare". The player's goal is to kill all zombies that randomly appear from everywhere. The player has a limited number of lives. If a zombie takes a bite of a player, the player's health slightly decreases and eventually he can die :( So what is that bewitching little detail of that seemingly trivial project? The point is that the player has to destroy zombies not with his hands... but with his **LEGS**! Have you ever used your legs when playing with Oculus Rift? We haven't! And now your wildest dreams come true thanks to Nuitrack! 
+
+@image html images/Uzombies_10.gif
+@image latex images/Uzombies_10.gif
+
+You'll need just a couple of things for this project: 
+
+Hardware: 
+<ul>
+<li> Powerful PC (check out [minimum system specifications] (https://support.oculus.com/170128916778795/))
+<li> Oculus Rift (headset + 2 sensors + Oculus Touches)
+<li> Depth sensor (see the list of supported cameras at [our website] (https://nuitrack.com/))
+</ul>
+
+Software:
+<ul>
+<li> Nuitrack (we used 0.23.1)
+<li> Windows (we used Windows 10)
+<li> [Oculus Integration] (https://assetstore.unity.com/packages/tools/integration/oculus-integration-82022) package from Unity Asset Store
+<li> [Nuitrack Skeleton Tracking] (https://assetstore.unity.com/packages/templates/packs/nuitrack-skeleton-tracking-127675) package from Unity Asset Store
+</ul>
+
+@section zombies_settings Setting Up the Project
+
+<ol>
+<li> Create a new project and name it as you wish (for example, “Incredible Zombie Game with Nuitrack”).
+<li> Download [Nuitrack Skeleton Tracking package] (https://assetstore.unity.com/packages/templates/packs/nuitrack-skeleton-tracking-127675) from Unity Asset Store and import it to the project: <b>Assets → Import Package → Custom Package</b>.
+<li> Open the scene <b>"City" (Nuitrack SDK → Tutorials → Zombie Nightmare (RIFT) → City)</b>. Our zombie apocalypse begins in a developed megalopolis (New York? Who knows...).
+
+@image html images/Uzombies_2.png
+@image latex images/Uzombies_2.png
+
+<li> Download [Oculus Integration package] (https://assetstore.unity.com/packages/tools/integration/oculus-integration-82022) from Unity Asset Store, which provides Advanced Oculus Rift, Touch, and Gear VR support for rendering, audio, social, and avatars, and import it to the project.
+<li> Enable VR support in Unity settings: <b>Build Settings → Player Settings → XR Settings → Virtual Reality Supported</b>. 
+
+@image html images/Uzombies_3.png
+@image latex images/Uzombies_3.png
+
+<li> Drag-and-drop the <b>OVRCameraRig</b> prefab to the scene: <b>Assets → Oculus → VR → Prefabs</b>. This is gonna be the player's head. Set its Position/Rotation/Scale to (0, 0, 0) so that the player is standing in the center of the scene (as he is the new hope of mankind in our game). Set  <b>Tracking Origin Type</b> in settings of the <b>OVRCameraRig</b> prefab: <b>OVRManager → Tracking → Tracking Origin Type → Floor Level</b> so that the camera is located at the player's height level.
+
+@image html images/Uzombies_4.png
+@image latex images/Uzombies_4.png
+
+<li> Drag-and-drop the <b>LocalAvatar</b> prefab to the scene: <b>Assets → Oculus → Avatar → Content → Prefabs</b>. This is gonna be the player's body. This body will mesmerize our zombies and they will run towards it. 
+<li> Drag-and-drop the <b>NuitrackScripts</b> prefab to the scene: <b>Nuitrack SDK → Nuitrack → Prefabs</b>. Tick the required modules for user's skeleton tracking: <b>Skeleton Tracker Module On, User Tracker Module On</b>. 
+
+@image html images/Uzombies_5.png
+@image latex images/Uzombies_5.png
+
+</ol>
+
+@section zombies_legs Creating the Player's Legs
+
+<ol> 
+<li> Create a new script and name it <i>NuitrackLegs.cs</i>. In this script, we'll define the   skeleton tracking and create the player's legs.
+<li> Add the necessary fields. An "offset" is a skeleton offset that is calculated based on the data received from Oculus Rift (head) and Nuitrack (the rest of the skeleton joints). 
+
+@code
+public class NuitrackLegs : MonoBehaviour 
+{
+	[SerializeField] Transform head;
+	[SerializeField] Rigidbody leftLeg, rightLeg;
+	[SerializeField] Transform floor; // correct the position of user's legs 
+	Vector3 offset;
+ 	Quaternion q180 = Quaternion.Euler(0f, 180f, 0f); // mirror the joint position
+	Vector3 newPosLeft, newPosRight; // position of the left leg and right leg
+}
+@endcode
+
+<li> In <i>Update</i>, process the user's skeleton if it is found. 
+
+@code
+void Update()
+{
+    	//If a skeleton is detected, process the model
+    	if (CurrentUserTracker.CurrentSkeleton != null) ProcessSkeleton(CurrentUserTracker.CurrentSkeleton);
+}
+@endcode
+
+<li> In <i>ProcessSkeleton</i>, calculate the position of the left leg and right leg (see our [Animating the Avatar using Skeleton] (http://download.3divi.com/Nuitrack/doc/UnityAnimation_page.html) tutorial for more details), taking into account the offset. In case the user's legs are located below the floor level (in Unity) during the tracking (this may happen if the player sits down, for example), their position will be automatically corrected so that the user's legs won't go underground.
+
+@code
+void ProcessSkeleton(nuitrack.Skeleton skeleton)
+{
+    	newPosLeft = q180 * (CalibrationInfo.SensorOrientation * (0.001f * skeleton.GetJoint(nuitrack.JointType.LeftAnkle).ToVector3())) + offset;
+ 
+    	newPosRight = q180 * (CalibrationInfo.SensorOrientation * (0.001f * skeleton.GetJoint(nuitrack.JointType.RightAnkle).ToVector3())) + offset;
+ 
+    	if (newPosLeft.y < floor.position.y)
+    	{
+        	     newPosLeft = new Vector3(newPosLeft.x, floor.position.y, newPosLeft.z);
+    	}
+ 
+    	if (newPosRight.y < floor.position.y)
+    	{
+        	     newPosRight = new Vector3(newPosRight.x, floor.position.y, newPosRight.z);
+    	}
+}
+@endcode
+
+<li> Calculate the offset for the whole skeleton (head joint position detected by Nuitrack is subtracted from head position detected by Oculus Rift).
+
+@code
+void ProcessSkeleton(nuitrack.Skeleton skeleton)
+{
+...
+    	offset = head.position - q180 * (CalibrationInfo.SensorOrientation * (0.001f * skeleton.GetJoint(nuitrack.JointType.Head).ToVector3())));
+}
+@endcode 
+
+<li> In <i>FixedUpdate</i>, apply the coordinates to the user's legs. We use <i>FixedUpdate</i> instead of <i>Update</i> for that purpose because Unity physics is only processed in this method.
+
+@code
+void FixedUpdate () 
+{
+    	leftLeg.MovePosition(newPosLeft);
+    	rightLeg.MovePosition(newPosRight);
+}
+@endcode
+
+@note
+Learn more about the <i>MovePosition</i> method at [Unity website] (https://docs.unity3d.com/ScriptReference/Rigidbody.MovePosition.html).  
+
+<li> Drag-and-drop the script to the <b>LocalAvatar</b> prefab.
+<li> Set the fields in the prefab settings:
+
+<b>Head - CenterEyeAnchor</b> (from the <b>OVRCameraRig</b> prefab)<br>
+<b>LeftLeg - leg Left</b> (from hierarchy)<br>
+<b>RightLeg - leg Right</b> (from hierarchy)<br>
+<b>Floor - FLOOR</b> (from hierarchy)<br>
+
+@image html images/Uzombies_6.png
+@image latex images/Uzombies_6.png
+
+<li> Run the project. You should see your feet displayed as nice blue sneakers. Movement is tracked by Nuitrack. You will also see the "screen" with the user's segment that helps to check FPS and understand whether the user's legs are in the frame or not.
+
+@image html images/Uzombies_1.gif
+@image latex images/Uzombies_1.gif
+
+@note
+You can use not only leg joints but also all other skeleton joints detected by Nuitrack (21 joints all in all) (see the complete list at  [Nuitrack official website] (http://download.3divi.com/Nuitrack/doc/group__SkeletonTracker__group.html#gabc259a32c94594974dd3325b7c72d28a)). Don't forget to add the offset! 
+
+</ol> 
+
+@section zombies_logic Determining the Game Logic 
+
+<ol>
+<li> Create a new script and name it <i>GameManager.cs</i>. In this script, we'll describe the end and restart of our game and when the zombies appear.
+<li> Add the necessary fields: maximum number of spawned zombies, an array with enemies, an array with spawn points for zombies, restart time after the player's death and counter for spawned zombies. 
+
+@code
+public class GameManager: MonoBehaviour 
+{
+	[SerializeField] int maxEnemies = 100;
+ 
+	[SerializeField] GameObject[] enemies;
+	[SerializeField] Transform[] spawnPoints;
+ 
+	float restartTime = 5;
+	int enemiesCount = 0;
+}
+@endcode
+
+<li> In <i>Start</i>, the constantly repeated method <i>SpawnEnemy</i> defines that the zombies spawn in 3 seconds after start every 0.2 seconds. If maximum number of spawned zombies is reached, the method is not executed anymore. Before spawning, the size of each zombie is a bit changed (so they don't look like a uniform bunch).
+
+@code
+void Start()
+{
+    	InvokeRepeating("SpawnEnemy", 3, 0.2f);
+}
+
+void SpawnEnemy()
+{
+    	if (enemiesCount >= maxEnemies)
+        	return;
+ 
+    	float randomSize = Random.Range(0.2f, 0.3f); // zombie size
+ 
+    	enemies[Random.Range(0, enemies.Length)].transform.localScale = Vector3.one * randomSize; // set the zombie size
+    	Instantiate(enemies[Random.Range(0, enemies.Length)], spawnPoints[Random.Range(0, spawnPoints.Length)].position, Quaternion.identity); // spawn zombies 
+ 
+    	enemiesCount++;
+}
+@endcode
+
+@note
+The [InvokeRepeating] (https://docs.unity3d.com/ScriptReference/MonoBehaviour.InvokeRepeating.html) method cyclically calls the required method at regular time intervals.
+
+<li> The <i>GameOver</i> method initiates the execution of the <i>Restart</i> method, which restarts the game after a certain time and starts a new level.
+
+@code
+public void GameOver()
+{
+    	StartCoroutine(Restart());
+}
+ 
+IEnumerator Restart()
+{
+    	yield return new WaitForSeconds(restartTime);
+    	Application.LoadLevel(Application.loadedLevel);
+}
+@endcode
+
+<li> In Unity, create an <b>Empty Object</b> (<b>GameObject → Create Empty</b>) and name it <b>GameManager</b>. Drag-and-drop the script to this object. 
+<li> In settings of the <b>GameManager</b> object, fill in the enemies field with zombies: <b>Tutorials → Zombie Nightmare (RIFT) → Prefabs</b> (<b>Parasite, Hulk, Zombie Police</b>). 
+
+@image html images/Uzombies_8.png
+@image latex images/Uzombies_8.png
+
+<li> Set the spawn points for zombies as well: <b>Spawn Points → SpawnPoint(1)(Transform), SpawnPoint(2)(Transform)</b> (from hierarchy).
+
+@image html images/Uzombies_9.png
+@image latex images/Uzombies_9.png
+
+<li> Run the project. The zombies will randomly appear on the scene (this looks pretty funny).
+</ol>
+
+@image html images/Uzombies_7.gif
+@image latex images/Uzombies_7.gif
+
+@section zombies_player Creating the Player and Zombies 
+
+<ol>
+<li> Time to create a savior of our little world! Create a new script and name it <i>Player.cs</i>.
+<li> Add the necessary fields: health score and healthbar.
+
+@code
+public class Player : MonoBehaviour 
+{
+	float health = 100;
+	[SerializeField] UnityEngine.UI.Image healthBar;
+}
+@endcode
+
+<li> In the <i>GetDamage</i> method, set the damage from a zombie to the player. If the player has 0 lives, the remaining code is not executed. If the player has enough lives, he loses health when a zombie bites him (healthbar turns red) or, otherwise, dies (obviously). After the player's death (the <i>Death</i> method) the level restarts in 3 seconds. 
+
+@code
+public void GetDamage(float damage)
+{
+    	if (health <= 0)
+        	     return;
+ 
+    	health -= damage;
+ 
+    	if(health <= 0)
+    	{
+        	     health = 0;
+        	     FindObjectOfType<GameManager>().GameOver();
+    	}
+ 
+    	healthBar.fillAmount = health / 100;
+}
+@endcode
+
+<li> Drag-and-drop the script to <b>localAvatar - base</b>, add <b>healthbar</b> from <b>Canvas</b>.
+
+@image html images/Uzombies_11.png
+@image latex images/Uzombies_11.png
+
+<li> Select <b>base</b>, add <b>Capsule Collider</b> and <b>Rigidbody</b>, tick <b>Is Kinematic</b> (so that the capsule doesn't fall) and set the settings as shown in the screenshot (zombies will encircle the player).
+
+@image html images/Uzombies_12.png
+@image latex images/Uzombies_12.png
+
+<li> And now it's time to create a devil's brat, an evil itself – a zombie. Create a new script and name it <i>ZombieController.cs</i>. In this script, we'll describe the behavior of zombies in our game. 
+<li> Add the necessary fields.
+
+@code
+public class ZombieController : MonoBehaviour
+{
+	[SerializeField] int hp = 100; // health of a zombie
+	[SerializeField] float damage = 0.01f; // damage from a zombie
+	[SerializeField] float speed = 1; // speed of a zombie
+	[SerializeField] Transform floorChecker; // used to switch Ragdoll
+	[SerializeField] Animator animator; // used to control the animation of zombies
+	[SerializeField] float attackDistance = 0.7f; // attacking distance of a zombie
+	[SerializeField] Transform modelTransform; // used to process Ragdoll
+	float standTime = 0, flyTime = 0; // time on the ground and in flight
+	bool isOnGround = false; // check whether the zombie is on the ground or not
+	bool isFly = false; // check whether the zombie is in flight or not
+	bool isRagdoll = true; // is Ragdoll on?
+	bool canAttack = false, prevCanAttack = false; // can a zombie attack?
+ 
+	Player target; // target for a zombie attack (player)
+	Rigidbody rb;
+ 
+	Rigidbody[] rigidbodyRagdoll;
+	Collider[] colliderRagdoll;
+ 
+	Vector3 localPosition; // modelTransform position of a zombie 
+}
+@endcode
+
+<li> In the <i>Awake</i> method, get <i>localPosition</i> and <i>modelTransform</i> from a zombie, save the start local coordinates of the zombie's child object, which will be ragdolled, so that we can return this child object to its original position when Ragdoll is finished. 
+
+@code
+void Awake()
+{
+    	localPosition = modelTransform.localPosition;
+}
+@endcode
+
+<li> In <i>Start</i>, get the references to <i>Rigidbody</i> and <i>Colliders</i> of zombie's body parts and zombie's main Rigidbody for later use in <i>Ragdoll</i> processing. Disable <i>Ragdoll</i> and find the target (player) for a zombie.
+
+@code
+void Start()
+{
+    	rigidbodyRagdoll = GetComponentsInChildren<Rigidbody>();
+    	colliderRagdoll = GetComponentsInChildren<Collider>();
+    	rb = GetComponent<Rigidbody>();
+ 
+    	SwitchRagdoll(false); // disable ragdoll
+    	target = FindObjectOfType<Player>(); // find the target for zombies
+}
+@endcode
+
+<li> Process the zombie Ragdoll switching in the <i>switchRagdoll</i> method. Ragdoll is enabled when we just gave a zombie a good kick and he flew away like a bird. We need to use Ragdoll so our zombies flies nice and good, otherwise he will just “walk on skies”. Ragdoll is disabled when the zombie has landed and lay on the ground for like 2 seconds.
+
+@code
+void SwitchRagdoll(bool ragdoll)
+{
+    	if (ragdoll != isRagdoll)
+    	{
+        	     if (ragdoll) // If ragdoll is off
+        	     {
+            	for (int i = 0; i < rigidbodyRagdoll.Length; i++)
+            	{
+                	     rigidbodyRagdoll[i].isKinematic = false; // Physics is turned on
+                	     rigidbodyRagdoll[i].velocity = rb.velocity; // When ragdoll is on, the speed of the main Rigidbody component is passed to the child Rigidbody components so they continue to fly according to physics
+            	 }
+        	     }
+        	     else // If ragdoll is off
+        	     {
+            	     // Return position and rotation to original state when Ragdoll is over
+            	     modelTransform.localRotation = Quaternion.identity;
+            	     transform.position = modelTransform.position; // When Ragdoll is over, the model base object is brought back to Ragdoll coordinates
+            	     modelTransform.localPosition = localPosition; // Move the child model to its original local coordinates
+ 
+            	     for (int i = 0; i < rigidbodyRagdoll.Length; i++)
+            	     {
+                	          rigidbodyRagdoll[i].isKinematic = true;
+            	     }
+                  }
+ 
+                  rb.isKinematic = ragdoll; // Switch the basic Ragdoll kinematics
+ 
+        	      for (int i = 0; i < colliderRagdoll.Length; i++)
+        	      {
+            	colliderRagdoll[i].enabled = ragdoll; // Switch the Ragdoll colliders
+        	      }
+ 
+        	      GetComponent<Collider>().enabled = !ragdoll; // Switch the base collider
+ 
+        	      animator.enabled = !ragdoll; // Switch the animator. When Ragdoll is turned on, еру animator is switched off.
+    	}
+ 
+    	isRagdoll = ragdoll;
+}
+@endcode
+
+<li> In the <i>IsOnGround</i> method, we check whether the zombie is on the ground or not. Each zombie has the <i>FloorChecker</i> object that helps to check zombie's position. This object is always downwards and can be treated as a point for casting the ray to check the floor position. Create a ray and set it up. 
+
+@code
+bool IsOnGround() // Is the zombie on the ground?
+{
+    	floorChecker.rotation = Quaternion.identity; // Fix the object rotation
+    	Vector3 direction = -floorChecker.up; // Downward direction
+    	float maxDistance = 0.5f;
+    	Ray ray = new Ray(floorChecker.position, direction); // Create a ray
+ 
+    	return Physics.Raycast(ray, maxDistance); // Return value from the ray
+}
+@endcode
+
+<li> In <i>Update</i>, determine the conditions when the zombie can attack and when the attack starts. Also, define the zombie's behavior depending on his state (on the ground, flew and fell on ground, flying). Fortunately, our zombies can fly only after our good kick. 
+
+@code
+void Update()
+{
+    	if (hp <= 0)
+        	     return; // If the zombie is dead, the code below is not executed
+ 
+    	isOnGround = IsOnGround();
+ 
+    	canAttack = isOnGround && Vector3.Distance(transform.position, target.transform.position) <= attackDistance && hp > 0; // If the zombie is on the ground, the distance to the player is sufficient and he has enough lives, it's time to attack 
+ 
+    	if (canAttack != prevCanAttack) // Called just once
+    	{
+        	     prevCanAttack = canAttack;
+        	     StartCoroutine(Attacking());
+    	}
+ 
+    	animator.SetBool("Attacking", canAttack); // Start "attacking" animation
+ 
+    	if (isOnGround)
+    	{
+        	     if (standTime > 2.0f) // Zombie gets up in 2 seconds
+        	     {
+            	if(isRagdoll) // If Ragdoll was off, turn it on
+                	     SwitchRagdoll(false);
+ 
+            	transform.LookAt(target.transform); // Zombie turns to the player
+            	rb.AddForce(transform.forward * speed); // And runs! 
+           	     }
+ 
+        	     standTime += Time.deltaTime;
+ 
+        	     if (isFly) // If the zombie has flown and fallen
+        	     {
+            	isFly = false;
+ 
+            	GetDamage((int)(flyTime * 10)); // When the zombie falls, he gets damaged depending on the "flight time"
+ 
+            	flyTime = 0;
+        	     }
+    	}
+    	else
+    	{
+        	     standTime = 0;
+        	     isFly = true; // If the zombie is flying
+ 
+        	     flyTime += Time.deltaTime;
+ 
+        	     if (flyTime >= .1f && !isRagdoll) // If the zombie flies for more than 0.1 sec, turn the ragdoll on
+            	SwitchRagdoll(true);
+    	}
+}
+@endcode
+
+<li> In <i>IEnumerator Attacking</i> wait for 1 sec and attack (zombie bites every second).
+
+@code
+IEnumerator Attacking()
+{
+    	yield return new WaitForSeconds(1.0f);
+ 
+    	if (hp > 0)
+    	{
+        	     target.GetDamage(damage);
+ 
+        	     if (canAttack)
+            	StartCoroutine(Attacking());
+        }
+}
+@endcode
+
+<li> In the <i>GetDamage</i> method define the damage from the player and from the flight.
+
+@code
+void GetDamage(int damage)
+{
+    	hp -= damage;
+    	if (hp <= 0)
+        	     Death();
+}
+@endcode
+
+<li> In the <i>Death</i> method, define the events after the zombie's death. Each zombie has an array with <i>SkinnedMeshRenderers</i> (they're used to display the model).  Loop over the array elements and paint the body parts red. Turn the <i>Ragdoll</i> on (so the zombie falls after his death). Destroy the zombie after 5 seconds. 
+
+@code
+void Death()
+{
+    	SkinnedMeshRenderer[] bodyParts = GetComponentsInChildren<SkinnedMeshRenderer>(); // Search for zombie parts in the array
+ 
+    	for (int i = 0; i < bodyParts.Length; i++)
+    	{
+        	     bodyParts[i].material.color = Color.red; // Paint the body red  
+    	}
+ 
+    	SwitchRagdoll(true);
+ 
+    	Destroy(gameObject, 5);
+}
+@endcode
+
+<li> In the <i>OnCollisionEnter</i> method, define the damage to zombies when the player crushes them with his feet (the player has a collider tagged as <b>Player</b> attached to the bottom of his sneakers - you can use this to smash the zombies). 
+
+@code
+void OnCollisionEnter(Collision collision)
+{
+    	if (collision.transform.tag == "Player")
+    	{
+        	     GetDamage(10);
+    	}
+}
+@endcode
+
+<li> Select the prefabs <b>Hulk, Zombie Police, Parasite</b> from the <b>Prefabs</b> folder and add a component: <b>Add Component → Zombie Controller</b>. 
+
+@image html images/Uzombies_13.png
+@image latex images/Uzombies_13.png
+
+@note
+You can easily create your own zombie if you'd like to:
+1. Download a zombie model, for example, from [this website] (https://www.mixamo.com).
+2. Drag-and-drop it to the scene. Set the size to 0.2 along all axes.
+3. Add <b>Rigidbody</b> and <b>Capsule Collider</b>. Set the size of <b>Capsule Collider</b> and apply the physical material “Bounce Phys Material”.
+4. Open <b>GameObject/3D Object/Ragdoll...</b> In the popup window, fill in the necessary fields and click <b>Create</b>. The body and limbs of a zombie should now have colliders. Perhaps, you'll need to adjust their size manually. Also, we recommend you to tick <b>Enable Projection</b> on <b>CharacterJoint</b> components to prevent excessive movement of skeleton joints.
+5. Select <b>Animator > Controller</b> and apply <b>Controller “Zombie Anim”</b>.
+6. Create an empty object, make it child to Hips (or any similar one) and name it <b>FloorChecker</b>.
+7. Add <b>ZombieController</b>. Fill in the fields.
+8. Save the prefab and delete it from the scene.
+
+<li> In Unity, select the <b>ZombieController(Script)</b> object and set it up: add <b>Floor Checker</b> to <b>Floor Checker</b>, <b>Animator</b> to <b>Animator</b>, and a child object of a zombie to <b>Model Transform</b> (there is only one child object for each zombie). Drag-and-drop the zombie (prefab) to the scene and click <b>Apply</b> so that the settings take effect. If you want, you can set the damage from a zombie, his speed and lives in settings.
+
+@image html images/Uzombies_14.png
+@image latex images/Uzombies_14.png
+
+<li> Run the project. Watch out, a bunch of zombies run toward you and bite you! Kick them off and crush them with your feet!
+</ol>
+
+@image html images/Uzombies_10.gif
+@image latex images/Uzombies_10.gif
+
+You can use this project as a strong base and develop more sophisticated games with Oculus Rift and Nuitrack Skeleton Tracking middleware (though it will be hard to beat such a fascinating game as our “Zombie Nightmare”... just kidding). Have fun! 
+
+*/
