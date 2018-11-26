@@ -26,27 +26,27 @@ Software:
 3. Open the scene **"City" (Nuitrack SDK → Tutorials → Zombie Nightmare (RIFT) → City)**. Our zombie apocalypse begins in a developed megalopolis (New York? Who knows...).
 
 <p align="center">
-<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Uzombies_2.png">
+<img width="450" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Uzombies_2.png">
 </p>
 
 4. Download [Oculus Integration package](https://assetstore.unity.com/packages/tools/integration/oculus-integration-82022) from Unity Asset Store, which provides Advanced Oculus Rift, Touch, and Gear VR support for rendering, audio, social, and avatars, and import it to the project.
 5. Enable VR support in Unity settings: **Build Settings → Player Settings → XR Settings → Virtual Reality Supported**. 
 
 <p align="center">
-<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Uzombies_3.png">
+<img width="450" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Uzombies_3.png">
 </p>
 
 6. Drag-and-drop the **OVRCameraRig** prefab to the scene: **Assets → Oculus → VR → Prefabs**. This is gonna be the player's head. Set its Position/Rotation/Scale to (0, 0, 0) so that the player is standing in the center of the scene (as he is the new hope of mankind in our game). Set **Tracking Origin Type** in settings of the **OVRCameraRig** prefab: **OVRManager → Tracking → Tracking Origin Type → Floor Level** so that the camera is located at the player's height level.
 
 <p align="center">
-<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Uzombies_4.png">
+<img width="450" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Uzombies_4.png">
 </p>
 
 7. Drag-and-drop the **LocalAvatar** prefab to the scene: **Assets → Oculus → Avatar → Content → Prefabs**. This is gonna be the player's body. This body will mesmerize our zombies and they will run towards it. 
 8. Drag-and-drop the **NuitrackScripts** prefab to the scene: **Nuitrack SDK → Nuitrack → Prefabs**. Tick the required modules for user's skeleton tracking: **Skeleton Tracker Module On, User Tracker Module On**. 
 
 <p align="center">
-<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Uzombies_5.png">
+<img width="450" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Uzombies_5.png">
 </p>
 
 ## Creating the Player's Legs
@@ -122,13 +122,13 @@ _**Note:** Learn more about the `MovePosition` method at [Unity website](https:/
 7. Drag-and-drop the script to the **LocalAvatar** prefab.
 8. Set the fields in the prefab settings:
 
-**Head - CenterEyeAnchor** (from the **OVRCameraRig** prefab)
-**LeftLeg - leg Left** (from hierarchy)
-**RightLeg - leg Right** (from hierarchy)
-**Floor - FLOOR** (from hierarchy)
+**Head - CenterEyeAnchor** (from the **OVRCameraRig** prefab)<br>
+**LeftLeg - leg Left** (from hierarchy)<br>
+**RightLeg - leg Right** (from hierarchy)<br>
+**Floor - FLOOR** (from hierarchy)<br>
 
 <p align="center">
-<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Uzombies_6.png">
+<img width="450" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Uzombies_6.png">
 </p>
 
 9. Run the project. You should see your feet displayed as nice blue sneakers. Movement is tracked by Nuitrack. You will also see the "screen" with the user's segment that helps to check FPS and understand whether the user's legs are in the frame or not.
@@ -200,13 +200,13 @@ IEnumerator Restart()
 6. In settings of the **GameManager** object, fill in the enemies field with zombies: **Tutorials → Zombie Nightmare (RIFT) → Prefabs** (**Parasite, Hulk, Zombie Police**). 
 
 <p align="center">
-<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Uzombies_8.png">
+<img width="450" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Uzombies_8.png">
 </p>
 
 7. Set the spawn points for zombies as well: **Spawn Points → SpawnPoint(1)(Transform), SpawnPoint(2)(Transform)** (from hierarchy).
 
 <p align="center">
-<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Uzombies_9.png">
+<img width="450" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Uzombies_9.png">
 </p>
 
 8. Run the project. The zombies will randomly appear on the scene (this looks pretty funny).
@@ -251,13 +251,13 @@ public void GetDamage(float damage)
 4. Drag-and-drop the script to **localAvatar - base**, add **healthbar** from **Canvas**.
 
 <p align="center">
-<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Uzombies_11.png">
+<img width="450" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Uzombies_11.png">
 </p>
 
 5. Select **base**, add **Capsule Collider** and **Rigidbody**, tick **Is Kinematic** (so that the capsule doesn't fall) and set the settings as shown in the screenshot (zombies will encircle the player).
 
 <p align="center">
-<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Uzombies_12.png">
+<img width="450" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Uzombies_12.png">
 </p>
 
 6. And now it's time to create a devil's brat, an evil itself – a zombie. Create a new script and name it `ZombieController.cs`. In this script, we'll describe the behavior of zombies in our game. 
@@ -317,18 +317,18 @@ void Start()
 ```cs
 void SwitchRagdoll(bool ragdoll)
 {
-    	if (ragdoll != isRagdoll)
-    	{
-        	     if (ragdoll) // If ragdoll is off
-        	     {
-            	for (int i = 0; i < rigidbodyRagdoll.Length; i++)
-            	{
+	if (ragdoll != isRagdoll)
+	{
+		if (ragdoll) // If ragdoll is off
+		{
+            		for (int i = 0; i < rigidbodyRagdoll.Length; i++)
+            		{
                 	     rigidbodyRagdoll[i].isKinematic = false; // Physics is turned on
                 	     rigidbodyRagdoll[i].velocity = rb.velocity; // When ragdoll is on, the speed of the main Rigidbody component is passed to the child Rigidbody components so they continue to fly according to physics
-            	 }
-        	     }
-        	     else // If ragdoll is off
-        	     {
+            	 	}
+		}
+		else // If ragdoll is off
+		{
             	     // Return position and rotation to original state when Ragdoll is over
             	     modelTransform.localRotation = Quaternion.identity;
             	     transform.position = modelTransform.position; // When Ragdoll is over, the model base object is brought back to Ragdoll coordinates
@@ -338,19 +338,19 @@ void SwitchRagdoll(bool ragdoll)
             	     {
                 	          rigidbodyRagdoll[i].isKinematic = true;
             	     }
-                  }
+		}
  
-                  rb.isKinematic = ragdoll; // Switch the basic Ragdoll kinematics
+		rb.isKinematic = ragdoll; // Switch the basic Ragdoll kinematics
  
-        	      for (int i = 0; i < colliderRagdoll.Length; i++)
-        	      {
-            	colliderRagdoll[i].enabled = ragdoll; // Switch the Ragdoll colliders
-        	      }
+			for (int i = 0; i < colliderRagdoll.Length; i++)
+			{
+				colliderRagdoll[i].enabled = ragdoll; // Switch the Ragdoll colliders
+			}
  
-        	      GetComponent<Collider>().enabled = !ragdoll; // Switch the base collider
+		GetComponent<Collider>().enabled = !ragdoll; // Switch the base collider
  
-        	      animator.enabled = !ragdoll; // Switch the animator. When Ragdoll is turned on, еру animator is switched off.
-    	}
+		animator.enabled = !ragdoll; // Switch the animator. When Ragdoll is turned on, еру animator is switched off.
+	}
  
     	isRagdoll = ragdoll;
 }
@@ -391,25 +391,25 @@ void Update()
  
     	if (isOnGround)
     	{
-        	     if (standTime > 2.0f) // Zombie gets up in 2 seconds
-        	     {
-            	if(isRagdoll) // If Ragdoll was off, turn it on
+		if (standTime > 2.0f) // Zombie gets up in 2 seconds
+		{
+			if(isRagdoll) // If Ragdoll was off, turn it on
                 	     SwitchRagdoll(false);
  
             	transform.LookAt(target.transform); // Zombie turns to the player
             	rb.AddForce(transform.forward * speed); // And runs! 
-           	     }
+		}
  
-        	     standTime += Time.deltaTime;
+		standTime += Time.deltaTime;
  
-        	     if (isFly) // If the zombie has flown and fallen
-        	     {
-            	isFly = false;
+		if (isFly) // If the zombie has flown and fallen
+		{
+            		isFly = false;
  
-            	GetDamage((int)(flyTime * 10)); // When the zombie falls, he gets damaged depending on the "flight time"
+            		GetDamage((int)(flyTime * 10)); // When the zombie falls, he gets damaged depending on the "flight time"
  
-            	flyTime = 0;
-        	     }
+            		flyTime = 0;
+		}
     	}
     	else
     	{
@@ -485,24 +485,24 @@ void OnCollisionEnter(Collision collision)
 17. Select the prefabs **Hulk, Zombie Police, Parasite** from the **Prefabs** folder and add a component: **Add Component → Zombie Controller**. 
 
 <p align="center">
-<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Uzombies_13.png">
+<img width="900" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Uzombies_13.png">
 </p>
 
-_**Note:**
-You can easily create your own zombie if you'd like to:
-1. Download a zombie model, for example, from [this website](https://www.mixamo.com).
-2. Drag-and-drop it to the scene. Set the size to 0.2 along all axes.
-3. Add **Rigidbody** and **Capsule Collider**. Set the size of **Capsule Collider** and apply the physical material “Bounce Phys Material”.
-4. Open **GameObject/3D Object/Ragdoll...** In the popup window, fill in the necessary fields and click **Create**. The body and limbs of a zombie should now have colliders. Perhaps, you'll need to adjust their size manually. Also, we recommend you to tick **Enable Projection** on **CharacterJoint** components to prevent excessive movement of skeleton joints.
-5. Select **Animator > Controller** and apply **Controller “Zombie Anim”**.
-6. Create an empty object, make it child to Hips (or any similar one) and name it **FloorChecker**.
-7. Add **ZombieController**. Fill in the fields.
-8. Save the prefab and delete it from the scene.
+_**Note:**_
+*You can easily create your own zombie if you'd like to:*
+*1. Download a zombie model, for example, from [this website](https://www.mixamo.com).*
+*2. Drag-and-drop it to the scene. Set the size to 0.2 along all axes.*
+*3. Add **Rigidbody** and **Capsule Collider**. Set the size of **Capsule Collider** and apply the physical material “Bounce Phys Material”.*
+*4. Open **GameObject/3D Object/Ragdoll...** In the popup window, fill in the necessary fields and click **Create**. The body and limbs of a zombie should now have colliders. Perhaps, you'll need to adjust their size manually. Also, we recommend you to tick **Enable Projection** on **CharacterJoint** components to prevent excessive movement of skeleton joints.
+*5. Select **Animator > Controller** and apply **Controller “Zombie Anim”**.*
+*6. Create an empty object, make it child to Hips (or any similar one) and name it **FloorChecker**.*
+*7. Add **ZombieController**. Fill in the fields.*
+*8. Save the prefab and delete it from the scene.*
 
 18. In Unity, select the **ZombieController(Script)** object and set it up: add **Floor Checker** to **Floor Checker**, **Animator** to **Animator**, and a child object of a zombie to **Model Transform** (there is only one child object for each zombie). Drag-and-drop the zombie (prefab) to the scene and click **Apply** so that the settings take effect. If you want, you can set the damage from a zombie, his speed and lives in settings.
 
 <p align="center">
-<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Uzombies_14.png">
+<img width="400" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Uzombies_14.png">
 </p>
 
 19. Run the project. Watch out, a bunch of zombies run toward you and bite you! Kick them off and crush them with your feet!
