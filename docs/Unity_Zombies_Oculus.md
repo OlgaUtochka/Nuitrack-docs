@@ -51,10 +51,10 @@ Software:
 
 ## Creating the Player's Legs
 
-1. Create a new script and name it <i>NuitrackLegs.cs</i>. In this script, we'll define the   skeleton tracking and create the player's legs.
-<li> Add the necessary fields. An "offset" is a skeleton offset that is calculated based on the data received from Oculus Rift (head) and Nuitrack (the rest of the skeleton joints). 
+1. Create a new script and name it `NuitrackLegs.cs`. In this script, we'll define the   skeleton tracking and create the player's legs.
+2. Add the necessary fields. An "offset" is a skeleton offset that is calculated based on the data received from Oculus Rift (head) and Nuitrack (the rest of the skeleton joints). 
 
-@code
+```cs
 public class NuitrackLegs : MonoBehaviour 
 {
 	[SerializeField] Transform head;
@@ -64,21 +64,21 @@ public class NuitrackLegs : MonoBehaviour
  	Quaternion q180 = Quaternion.Euler(0f, 180f, 0f); // mirror the joint position
 	Vector3 newPosLeft, newPosRight; // position of the left leg and right leg
 }
-@endcode
+```
 
-<li> In <i>Update</i>, process the user's skeleton if it is found. 
+3. In `Update`, process the user's skeleton if it is found. 
 
-@code
+```cs
 void Update()
 {
     	//If a skeleton is detected, process the model
     	if (CurrentUserTracker.CurrentSkeleton != null) ProcessSkeleton(CurrentUserTracker.CurrentSkeleton);
 }
-@endcode
+```
 
-<li> In <i>ProcessSkeleton</i>, calculate the position of the left leg and right leg (see our [Animating the Avatar using Skeleton] (http://download.3divi.com/Nuitrack/doc/UnityAnimation_page.html) tutorial for more details), taking into account the offset. In case the user's legs are located below the floor level (in Unity) during the tracking (this may happen if the player sits down, for example), their position will be automatically corrected so that the user's legs won't go underground.
+4. In `ProcessSkeleton`, calculate the position of the left leg and right leg (see our [Animating the Avatar using Skeleton](http://download.3divi.com/Nuitrack/doc/UnityAnimation_page.html) tutorial for more details), taking into account the offset. In case the user's legs are located below the floor level (in Unity) during the tracking (this may happen if the player sits down, for example), their position will be automatically corrected so that the user's legs won't go underground.
 
-@code
+```cs
 void ProcessSkeleton(nuitrack.Skeleton skeleton)
 {
     	newPosLeft = q180 * (CalibrationInfo.SensorOrientation * (0.001f * skeleton.GetJoint(nuitrack.JointType.LeftAnkle).ToVector3())) + offset;
@@ -95,59 +95,56 @@ void ProcessSkeleton(nuitrack.Skeleton skeleton)
         	     newPosRight = new Vector3(newPosRight.x, floor.position.y, newPosRight.z);
     	}
 }
-@endcode
+```
 
-<li> Calculate the offset for the whole skeleton (head joint position detected by Nuitrack is subtracted from head position detected by Oculus Rift).
+5. Calculate the offset for the whole skeleton (head joint position detected by Nuitrack is subtracted from head position detected by Oculus Rift).
 
-@code
+```cs
 void ProcessSkeleton(nuitrack.Skeleton skeleton)
 {
 ...
     	offset = head.position - q180 * (CalibrationInfo.SensorOrientation * (0.001f * skeleton.GetJoint(nuitrack.JointType.Head).ToVector3())));
 }
-@endcode 
+```
 
-<li> In <i>FixedUpdate</i>, apply the coordinates to the user's legs. We use <i>FixedUpdate</i> instead of <i>Update</i> for that purpose because Unity physics is only processed in this method.
+6. In `FixedUpdate`, apply the coordinates to the user's legs. We use `FixedUpdate` instead of `Update` for that purpose because Unity physics is only processed in this method.
 
-@code
+```cs
 void FixedUpdate () 
 {
     	leftLeg.MovePosition(newPosLeft);
     	rightLeg.MovePosition(newPosRight);
 }
-@endcode
+```
 
-@note
-Learn more about the <i>MovePosition</i> method at [Unity website] (https://docs.unity3d.com/ScriptReference/Rigidbody.MovePosition.html).  
+_**Note:** Learn more about the `MovePosition` method at [Unity website](https://docs.unity3d.com/ScriptReference/Rigidbody.MovePosition.html)._  
 
-<li> Drag-and-drop the script to the <b>LocalAvatar</b> prefab.
-<li> Set the fields in the prefab settings:
+7. Drag-and-drop the script to the **LocalAvatar** prefab.
+8. Set the fields in the prefab settings:
 
-<b>Head - CenterEyeAnchor</b> (from the <b>OVRCameraRig</b> prefab)<br>
-<b>LeftLeg - leg Left</b> (from hierarchy)<br>
-<b>RightLeg - leg Right</b> (from hierarchy)<br>
-<b>Floor - FLOOR</b> (from hierarchy)<br>
+**Head - CenterEyeAnchor** (from the **OVRCameraRig** prefab)
+**LeftLeg - leg Left** (from hierarchy)
+**RightLeg - leg Right** (from hierarchy)
+**Floor - FLOOR** (from hierarchy)
 
-@image html images/Uzombies_6.png
-@image latex images/Uzombies_6.png
+<p align="center">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Uzombies_6.png">
+</p>
 
-<li> Run the project. You should see your feet displayed as nice blue sneakers. Movement is tracked by Nuitrack. You will also see the "screen" with the user's segment that helps to check FPS and understand whether the user's legs are in the frame or not.
+9. Run the project. You should see your feet displayed as nice blue sneakers. Movement is tracked by Nuitrack. You will also see the "screen" with the user's segment that helps to check FPS and understand whether the user's legs are in the frame or not.
 
-@image html images/Uzombies_1.gif
-@image latex images/Uzombies_1.gif
+<p align="center">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Uzombies_1.gif">
+</p>
 
-@note
-You can use not only leg joints but also all other skeleton joints detected by Nuitrack (21 joints all in all) (see the complete list at  [Nuitrack official website] (http://download.3divi.com/Nuitrack/doc/group__SkeletonTracker__group.html#gabc259a32c94594974dd3325b7c72d28a)). Don't forget to add the offset! 
+_**Note:** You can use not only leg joints but also all other skeleton joints detected by Nuitrack (21 joints all in all) (see the complete list at  [Nuitrack official website](http://download.3divi.com/Nuitrack/doc/group__SkeletonTracker__group.html#gabc259a32c94594974dd3325b7c72d28a)). Don't forget to add the offset!_
 
-</ol> 
+## Determining the Game Logic 
 
-@section zombies_logic Determining the Game Logic 
+1. Create a new script and name it `GameManager.cs`. In this script, we'll describe the end and restart of our game and when the zombies appear.
+2. Add the necessary fields: maximum number of spawned zombies, an array with enemies, an array with spawn points for zombies, restart time after the player's death and counter for spawned zombies. 
 
-<ol>
-<li> Create a new script and name it <i>GameManager.cs</i>. In this script, we'll describe the end and restart of our game and when the zombies appear.
-<li> Add the necessary fields: maximum number of spawned zombies, an array with enemies, an array with spawn points for zombies, restart time after the player's death and counter for spawned zombies. 
-
-@code
+```cs
 public class GameManager: MonoBehaviour 
 {
 	[SerializeField] int maxEnemies = 100;
@@ -158,11 +155,11 @@ public class GameManager: MonoBehaviour
 	float restartTime = 5;
 	int enemiesCount = 0;
 }
-@endcode
+```
 
-<li> In <i>Start</i>, the constantly repeated method <i>SpawnEnemy</i> defines that the zombies spawn in 3 seconds after start every 0.2 seconds. If maximum number of spawned zombies is reached, the method is not executed anymore. Before spawning, the size of each zombie is a bit changed (so they don't look like a uniform bunch).
+3. In `Start`, the constantly repeated method `SpawnEnemy` defines that the zombies spawn in 3 seconds after start every 0.2 seconds. If maximum number of spawned zombies is reached, the method is not executed anymore. Before spawning, the size of each zombie is a bit changed (so they don't look like a uniform bunch).
 
-@code
+```cs
 void Start()
 {
     	InvokeRepeating("SpawnEnemy", 3, 0.2f);
@@ -180,14 +177,13 @@ void SpawnEnemy()
  
     	enemiesCount++;
 }
-@endcode
+```
 
-@note
-The [InvokeRepeating] (https://docs.unity3d.com/ScriptReference/MonoBehaviour.InvokeRepeating.html) method cyclically calls the required method at regular time intervals.
+_**Note:** The [InvokeRepeating](https://docs.unity3d.com/ScriptReference/MonoBehaviour.InvokeRepeating.html) method cyclically calls the required method at regular time intervals._
 
-<li> The <i>GameOver</i> method initiates the execution of the <i>Restart</i> method, which restarts the game after a certain time and starts a new level.
+4. The `GameOver` method initiates the execution of the `Restart` method, which restarts the game after a certain time and starts a new level.
 
-@code
+```cs
 public void GameOver()
 {
     	StartCoroutine(Restart());
@@ -198,42 +194,43 @@ IEnumerator Restart()
     	yield return new WaitForSeconds(restartTime);
     	Application.LoadLevel(Application.loadedLevel);
 }
-@endcode
+```
 
-<li> In Unity, create an <b>Empty Object</b> (<b>GameObject → Create Empty</b>) and name it <b>GameManager</b>. Drag-and-drop the script to this object. 
-<li> In settings of the <b>GameManager</b> object, fill in the enemies field with zombies: <b>Tutorials → Zombie Nightmare (RIFT) → Prefabs</b> (<b>Parasite, Hulk, Zombie Police</b>). 
+5. In Unity, create an **Empty Object** (**GameObject → Create Empty**) and name it **GameManager**. Drag-and-drop the script to this object. 
+6. In settings of the **GameManager** object, fill in the enemies field with zombies: **Tutorials → Zombie Nightmare (RIFT) → Prefabs** (**Parasite, Hulk, Zombie Police**). 
 
-@image html images/Uzombies_8.png
-@image latex images/Uzombies_8.png
+<p align="center">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Uzombies_8.png">
+</p>
 
-<li> Set the spawn points for zombies as well: <b>Spawn Points → SpawnPoint(1)(Transform), SpawnPoint(2)(Transform)</b> (from hierarchy).
+7. Set the spawn points for zombies as well: **Spawn Points → SpawnPoint(1)(Transform), SpawnPoint(2)(Transform)** (from hierarchy).
 
-@image html images/Uzombies_9.png
-@image latex images/Uzombies_9.png
+<p align="center">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Uzombies_9.png">
+</p>
 
-<li> Run the project. The zombies will randomly appear on the scene (this looks pretty funny).
-</ol>
+8. Run the project. The zombies will randomly appear on the scene (this looks pretty funny).
 
-@image html images/Uzombies_7.gif
-@image latex images/Uzombies_7.gif
+<p align="center">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Uzombies_7.gif">
+</p>
 
-@section zombies_player Creating the Player and Zombies 
+## Creating the Player and Zombies 
 
-<ol>
-<li> Time to create a savior of our little world! Create a new script and name it <i>Player.cs</i>.
-<li> Add the necessary fields: health score and healthbar.
+1. Time to create a savior of our little world! Create a new script and name it `Player.cs`.
+2. Add the necessary fields: health score and healthbar.
 
-@code
+```cs
 public class Player : MonoBehaviour 
 {
 	float health = 100;
 	[SerializeField] UnityEngine.UI.Image healthBar;
 }
-@endcode
+```
 
-<li> In the <i>GetDamage</i> method, set the damage from a zombie to the player. If the player has 0 lives, the remaining code is not executed. If the player has enough lives, he loses health when a zombie bites him (healthbar turns red) or, otherwise, dies (obviously). After the player's death (the <i>Death</i> method) the level restarts in 3 seconds. 
+3. In the `GetDamage` method, set the damage from a zombie to the player. If the player has 0 lives, the remaining code is not executed. If the player has enough lives, he loses health when a zombie bites him (healthbar turns red) or, otherwise, dies (obviously). After the player's death (the `Death` method) the level restarts in 3 seconds. 
 
-@code
+```cs
 public void GetDamage(float damage)
 {
     	if (health <= 0)
@@ -249,22 +246,24 @@ public void GetDamage(float damage)
  
     	healthBar.fillAmount = health / 100;
 }
-@endcode
+```
 
-<li> Drag-and-drop the script to <b>localAvatar - base</b>, add <b>healthbar</b> from <b>Canvas</b>.
+4. Drag-and-drop the script to **localAvatar - base**, add **healthbar** from **Canvas**.
 
-@image html images/Uzombies_11.png
-@image latex images/Uzombies_11.png
+<p align="center">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Uzombies_11.png">
+</p>
 
-<li> Select <b>base</b>, add <b>Capsule Collider</b> and <b>Rigidbody</b>, tick <b>Is Kinematic</b> (so that the capsule doesn't fall) and set the settings as shown in the screenshot (zombies will encircle the player).
+5. Select **base**, add **Capsule Collider** and **Rigidbody**, tick **Is Kinematic** (so that the capsule doesn't fall) and set the settings as shown in the screenshot (zombies will encircle the player).
 
-@image html images/Uzombies_12.png
-@image latex images/Uzombies_12.png
+<p align="center">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Uzombies_12.png">
+</p>
 
-<li> And now it's time to create a devil's brat, an evil itself – a zombie. Create a new script and name it <i>ZombieController.cs</i>. In this script, we'll describe the behavior of zombies in our game. 
-<li> Add the necessary fields.
+6. And now it's time to create a devil's brat, an evil itself – a zombie. Create a new script and name it `ZombieController.cs`. In this script, we'll describe the behavior of zombies in our game. 
+7. Add the necessary fields.
 
-@code
+```cs
 public class ZombieController : MonoBehaviour
 {
 	[SerializeField] int hp = 100; // health of a zombie
@@ -288,20 +287,20 @@ public class ZombieController : MonoBehaviour
  
 	Vector3 localPosition; // modelTransform position of a zombie 
 }
-@endcode
+```
 
-<li> In the <i>Awake</i> method, get <i>localPosition</i> and <i>modelTransform</i> from a zombie, save the start local coordinates of the zombie's child object, which will be ragdolled, so that we can return this child object to its original position when Ragdoll is finished. 
+8. In the `Awake` method, get `localPosition` and `modelTransform` from a zombie, save the start local coordinates of the zombie's child object, which will be ragdolled, so that we can return this child object to its original position when Ragdoll is finished. 
 
-@code
+```cs
 void Awake()
 {
     	localPosition = modelTransform.localPosition;
 }
-@endcode
+```
 
-<li> In <i>Start</i>, get the references to <i>Rigidbody</i> and <i>Colliders</i> of zombie's body parts and zombie's main Rigidbody for later use in <i>Ragdoll</i> processing. Disable <i>Ragdoll</i> and find the target (player) for a zombie.
+9. In `Start`, get the references to `Rigidbody` and `Colliders` of zombie's body parts and zombie's main Rigidbody for later use in `Ragdoll` processing. Disable `Ragdoll` and find the target (player) for a zombie.
 
-@code
+```cs
 void Start()
 {
     	rigidbodyRagdoll = GetComponentsInChildren<Rigidbody>();
@@ -311,11 +310,11 @@ void Start()
     	SwitchRagdoll(false); // disable ragdoll
     	target = FindObjectOfType<Player>(); // find the target for zombies
 }
-@endcode
+```
 
-<li> Process the zombie Ragdoll switching in the <i>switchRagdoll</i> method. Ragdoll is enabled when we just gave a zombie a good kick and he flew away like a bird. We need to use Ragdoll so our zombies flies nice and good, otherwise he will just “walk on skies”. Ragdoll is disabled when the zombie has landed and lay on the ground for like 2 seconds.
+10. Process the zombie Ragdoll switching in the `switchRagdoll` method. Ragdoll is enabled when we just gave a zombie a good kick and he flew away like a bird. We need to use Ragdoll so our zombies flies nice and good, otherwise he will just “walk on skies”. Ragdoll is disabled when the zombie has landed and lay on the ground for like 2 seconds.
 
-@code
+```cs
 void SwitchRagdoll(bool ragdoll)
 {
     	if (ragdoll != isRagdoll)
@@ -355,11 +354,11 @@ void SwitchRagdoll(bool ragdoll)
  
     	isRagdoll = ragdoll;
 }
-@endcode
+```
 
-<li> In the <i>IsOnGround</i> method, we check whether the zombie is on the ground or not. Each zombie has the <i>FloorChecker</i> object that helps to check zombie's position. This object is always downwards and can be treated as a point for casting the ray to check the floor position. Create a ray and set it up. 
+11. In the `IsOnGround` method, we check whether the zombie is on the ground or not. Each zombie has the `FloorChecker` object that helps to check zombie's position. This object is always downwards and can be treated as a point for casting the ray to check the floor position. Create a ray and set it up. 
 
-@code
+```cs
 bool IsOnGround() // Is the zombie on the ground?
 {
     	floorChecker.rotation = Quaternion.identity; // Fix the object rotation
@@ -369,11 +368,10 @@ bool IsOnGround() // Is the zombie on the ground?
  
     	return Physics.Raycast(ray, maxDistance); // Return value from the ray
 }
-@endcode
+```
+12. In `Update`, determine the conditions when the zombie can attack and when the attack starts. Also, define the zombie's behavior depending on his state (on the ground, flew and fell on ground, flying). Fortunately, our zombies can fly only after our good kick. 
 
-<li> In <i>Update</i>, determine the conditions when the zombie can attack and when the attack starts. Also, define the zombie's behavior depending on his state (on the ground, flew and fell on ground, flying). Fortunately, our zombies can fly only after our good kick. 
-
-@code
+```cs
 void Update()
 {
     	if (hp <= 0)
@@ -424,11 +422,11 @@ void Update()
             	SwitchRagdoll(true);
     	}
 }
-@endcode
+```
 
-<li> In <i>IEnumerator Attacking</i> wait for 1 sec and attack (zombie bites every second).
+13. In `IEnumerator Attacking` wait for 1 sec and attack (zombie bites every second).
 
-@code
+```cs
 IEnumerator Attacking()
 {
     	yield return new WaitForSeconds(1.0f);
@@ -441,22 +439,22 @@ IEnumerator Attacking()
             	StartCoroutine(Attacking());
         }
 }
-@endcode
+```
 
-<li> In the <i>GetDamage</i> method define the damage from the player and from the flight.
+14. In the `GetDamage` method define the damage from the player and from the flight.
 
-@code
+```cs
 void GetDamage(int damage)
 {
     	hp -= damage;
     	if (hp <= 0)
         	     Death();
 }
-@endcode
+```
 
-<li> In the <i>Death</i> method, define the events after the zombie's death. Each zombie has an array with <i>SkinnedMeshRenderers</i> (they're used to display the model).  Loop over the array elements and paint the body parts red. Turn the <i>Ragdoll</i> on (so the zombie falls after his death). Destroy the zombie after 5 seconds. 
+15. In the `Death` method, define the events after the zombie's death. Each zombie has an array with `SkinnedMeshRenderers` (they're used to display the model).  Loop over the array elements and paint the body parts red. Turn the `Ragdoll` on (so the zombie falls after his death). Destroy the zombie after 5 seconds. 
 
-@code
+```cs
 void Death()
 {
     	SkinnedMeshRenderer[] bodyParts = GetComponentsInChildren<SkinnedMeshRenderer>(); // Search for zombie parts in the array
@@ -470,11 +468,11 @@ void Death()
  
     	Destroy(gameObject, 5);
 }
-@endcode
+```
 
-<li> In the <i>OnCollisionEnter</i> method, define the damage to zombies when the player crushes them with his feet (the player has a collider tagged as <b>Player</b> attached to the bottom of his sneakers - you can use this to smash the zombies). 
+16. In the `OnCollisionEnter` method, define the damage to zombies when the player crushes them with his feet (the player has a collider tagged as **Player** attached to the bottom of his sneakers - you can use this to smash the zombies). 
 
-@code
+```cs
 void OnCollisionEnter(Collision collision)
 {
     	if (collision.transform.tag == "Player")
@@ -482,35 +480,35 @@ void OnCollisionEnter(Collision collision)
         	     GetDamage(10);
     	}
 }
-@endcode
+```
 
-<li> Select the prefabs <b>Hulk, Zombie Police, Parasite</b> from the <b>Prefabs</b> folder and add a component: <b>Add Component → Zombie Controller</b>. 
+17. Select the prefabs **Hulk, Zombie Police, Parasite** from the **Prefabs** folder and add a component: **Add Component → Zombie Controller**. 
 
-@image html images/Uzombies_13.png
-@image latex images/Uzombies_13.png
+<p align="center">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Uzombies_13.png">
+</p>
 
-@note
+_**Note:**
 You can easily create your own zombie if you'd like to:
-1. Download a zombie model, for example, from [this website] (https://www.mixamo.com).
+1. Download a zombie model, for example, from [this website](https://www.mixamo.com).
 2. Drag-and-drop it to the scene. Set the size to 0.2 along all axes.
-3. Add <b>Rigidbody</b> and <b>Capsule Collider</b>. Set the size of <b>Capsule Collider</b> and apply the physical material “Bounce Phys Material”.
-4. Open <b>GameObject/3D Object/Ragdoll...</b> In the popup window, fill in the necessary fields and click <b>Create</b>. The body and limbs of a zombie should now have colliders. Perhaps, you'll need to adjust their size manually. Also, we recommend you to tick <b>Enable Projection</b> on <b>CharacterJoint</b> components to prevent excessive movement of skeleton joints.
-5. Select <b>Animator > Controller</b> and apply <b>Controller “Zombie Anim”</b>.
-6. Create an empty object, make it child to Hips (or any similar one) and name it <b>FloorChecker</b>.
-7. Add <b>ZombieController</b>. Fill in the fields.
+3. Add **Rigidbody** and **Capsule Collider**. Set the size of **Capsule Collider** and apply the physical material “Bounce Phys Material”.
+4. Open **GameObject/3D Object/Ragdoll...** In the popup window, fill in the necessary fields and click **Create**. The body and limbs of a zombie should now have colliders. Perhaps, you'll need to adjust their size manually. Also, we recommend you to tick **Enable Projection** on **CharacterJoint** components to prevent excessive movement of skeleton joints.
+5. Select **Animator > Controller** and apply **Controller “Zombie Anim”**.
+6. Create an empty object, make it child to Hips (or any similar one) and name it **FloorChecker**.
+7. Add **ZombieController**. Fill in the fields.
 8. Save the prefab and delete it from the scene.
 
-<li> In Unity, select the <b>ZombieController(Script)</b> object and set it up: add <b>Floor Checker</b> to <b>Floor Checker</b>, <b>Animator</b> to <b>Animator</b>, and a child object of a zombie to <b>Model Transform</b> (there is only one child object for each zombie). Drag-and-drop the zombie (prefab) to the scene and click <b>Apply</b> so that the settings take effect. If you want, you can set the damage from a zombie, his speed and lives in settings.
+18. In Unity, select the **ZombieController(Script)** object and set it up: add **Floor Checker** to **Floor Checker**, **Animator** to **Animator**, and a child object of a zombie to **Model Transform** (there is only one child object for each zombie). Drag-and-drop the zombie (prefab) to the scene and click **Apply** so that the settings take effect. If you want, you can set the damage from a zombie, his speed and lives in settings.
 
-@image html images/Uzombies_14.png
-@image latex images/Uzombies_14.png
+<p align="center">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Uzombies_14.png">
+</p>
 
-<li> Run the project. Watch out, a bunch of zombies run toward you and bite you! Kick them off and crush them with your feet!
-</ol>
+19. Run the project. Watch out, a bunch of zombies run toward you and bite you! Kick them off and crush them with your feet!
 
-@image html images/Uzombies_10.gif
-@image latex images/Uzombies_10.gif
+<p align="center">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Uzombies_10.gif">
+</p>
 
 You can use this project as a strong base and develop more sophisticated games with Oculus Rift and Nuitrack Skeleton Tracking middleware (though it will be hard to beat such a fascinating game as our “Zombie Nightmare”... just kidding). Have fun! 
-
-*/
