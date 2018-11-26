@@ -2,59 +2,56 @@
 
 In this tutorial you'll learn how to create a super duper cool project using Oculus Rift and Nuitrack. We'll create a VR game called "Zombie Nightmare". The player's goal is to kill all zombies that randomly appear from everywhere. The player has a limited number of lives. If a zombie takes a bite of a player, the player's health slightly decreases and eventually he can die :( So what is that bewitching little detail of that seemingly trivial project? The point is that the player has to destroy zombies not with his hands... but with his **LEGS**! Have you ever used your legs when playing with Oculus Rift? We haven't! And now your wildest dreams come true thanks to Nuitrack! 
 
-@image html images/Uzombies_10.gif
-@image latex images/Uzombies_10.gif
+<p align="center">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Uzombies_10.gif">
+</p>
 
 You'll need just a couple of things for this project: 
 
 Hardware: 
-<ul>
-<li> Powerful PC (check out [minimum system specifications] (https://support.oculus.com/170128916778795/))
-<li> Oculus Rift (headset + 2 sensors + Oculus Touches)
-<li> Depth sensor (see the list of supported cameras at [our website] (https://nuitrack.com/))
-</ul>
+* Powerful PC (check out [minimum system specifications](https://support.oculus.com/170128916778795/))
+* Oculus Rift (headset + 2 sensors + Oculus Touches)
+* Depth sensor (see the list of supported cameras at [our website](https://nuitrack.com/))
 
 Software:
-<ul>
-<li> Nuitrack (we used 0.23.1)
-<li> Windows (we used Windows 10)
-<li> [Oculus Integration] (https://assetstore.unity.com/packages/tools/integration/oculus-integration-82022) package from Unity Asset Store
-<li> [Nuitrack Skeleton Tracking] (https://assetstore.unity.com/packages/templates/packs/nuitrack-skeleton-tracking-127675) package from Unity Asset Store
-</ul>
+* Nuitrack (we used 0.23.1)
+* Windows (we used Windows 10)
+* [Oculus Integration](https://assetstore.unity.com/packages/tools/integration/oculus-integration-82022) package from Unity Asset Store
+* [Nuitrack Skeleton Tracking](https://assetstore.unity.com/packages/templates/packs/nuitrack-skeleton-tracking-127675) package from Unity Asset Store
 
-@section zombies_settings Setting Up the Project
+## Setting Up the Project
 
-<ol>
-<li> Create a new project and name it as you wish (for example, “Incredible Zombie Game with Nuitrack”).
-<li> Download [Nuitrack Skeleton Tracking package] (https://assetstore.unity.com/packages/templates/packs/nuitrack-skeleton-tracking-127675) from Unity Asset Store and import it to the project: <b>Assets → Import Package → Custom Package</b>.
-<li> Open the scene <b>"City" (Nuitrack SDK → Tutorials → Zombie Nightmare (RIFT) → City)</b>. Our zombie apocalypse begins in a developed megalopolis (New York? Who knows...).
+1. Create a new project and name it as you wish (for example, “Incredible Zombie Game with Nuitrack”).
+2. Download [Nuitrack Skeleton Tracking package](https://assetstore.unity.com/packages/templates/packs/nuitrack-skeleton-tracking-127675) from Unity Asset Store and import it to the project: **Assets → Import Package → Custom Package**.
+3. Open the scene **"City" (Nuitrack SDK → Tutorials → Zombie Nightmare (RIFT) → City)**. Our zombie apocalypse begins in a developed megalopolis (New York? Who knows...).
 
-@image html images/Uzombies_2.png
-@image latex images/Uzombies_2.png
+<p align="center">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Uzombies_2.png">
+</p>
 
-<li> Download [Oculus Integration package] (https://assetstore.unity.com/packages/tools/integration/oculus-integration-82022) from Unity Asset Store, which provides Advanced Oculus Rift, Touch, and Gear VR support for rendering, audio, social, and avatars, and import it to the project.
-<li> Enable VR support in Unity settings: <b>Build Settings → Player Settings → XR Settings → Virtual Reality Supported</b>. 
+4. Download [Oculus Integration package](https://assetstore.unity.com/packages/tools/integration/oculus-integration-82022) from Unity Asset Store, which provides Advanced Oculus Rift, Touch, and Gear VR support for rendering, audio, social, and avatars, and import it to the project.
+5. Enable VR support in Unity settings: **Build Settings → Player Settings → XR Settings → Virtual Reality Supported**. 
 
-@image html images/Uzombies_3.png
-@image latex images/Uzombies_3.png
+<p align="center">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Uzombies_3.png">
+</p>
 
-<li> Drag-and-drop the <b>OVRCameraRig</b> prefab to the scene: <b>Assets → Oculus → VR → Prefabs</b>. This is gonna be the player's head. Set its Position/Rotation/Scale to (0, 0, 0) so that the player is standing in the center of the scene (as he is the new hope of mankind in our game). Set  <b>Tracking Origin Type</b> in settings of the <b>OVRCameraRig</b> prefab: <b>OVRManager → Tracking → Tracking Origin Type → Floor Level</b> so that the camera is located at the player's height level.
+6. Drag-and-drop the **OVRCameraRig** prefab to the scene: **Assets → Oculus → VR → Prefabs**. This is gonna be the player's head. Set its Position/Rotation/Scale to (0, 0, 0) so that the player is standing in the center of the scene (as he is the new hope of mankind in our game). Set **Tracking Origin Type** in settings of the **OVRCameraRig** prefab: **OVRManager → Tracking → Tracking Origin Type → Floor Level** so that the camera is located at the player's height level.
 
-@image html images/Uzombies_4.png
-@image latex images/Uzombies_4.png
+<p align="center">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Uzombies_4.png">
+</p>
 
-<li> Drag-and-drop the <b>LocalAvatar</b> prefab to the scene: <b>Assets → Oculus → Avatar → Content → Prefabs</b>. This is gonna be the player's body. This body will mesmerize our zombies and they will run towards it. 
-<li> Drag-and-drop the <b>NuitrackScripts</b> prefab to the scene: <b>Nuitrack SDK → Nuitrack → Prefabs</b>. Tick the required modules for user's skeleton tracking: <b>Skeleton Tracker Module On, User Tracker Module On</b>. 
+7. Drag-and-drop the **LocalAvatar** prefab to the scene: **Assets → Oculus → Avatar → Content → Prefabs**. This is gonna be the player's body. This body will mesmerize our zombies and they will run towards it. 
+8. Drag-and-drop the **NuitrackScripts** prefab to the scene: **Nuitrack SDK → Nuitrack → Prefabs**. Tick the required modules for user's skeleton tracking: **Skeleton Tracker Module On, User Tracker Module On**. 
 
-@image html images/Uzombies_5.png
-@image latex images/Uzombies_5.png
+<p align="center">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Uzombies_5.png">
+</p>
 
-</ol>
+## Creating the Player's Legs
 
-@section zombies_legs Creating the Player's Legs
-
-<ol> 
-<li> Create a new script and name it <i>NuitrackLegs.cs</i>. In this script, we'll define the   skeleton tracking and create the player's legs.
+1. Create a new script and name it <i>NuitrackLegs.cs</i>. In this script, we'll define the   skeleton tracking and create the player's legs.
 <li> Add the necessary fields. An "offset" is a skeleton offset that is calculated based on the data received from Oculus Rift (head) and Nuitrack (the rest of the skeleton joints). 
 
 @code
