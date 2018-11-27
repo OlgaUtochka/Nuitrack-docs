@@ -2,47 +2,52 @@
 
 In this tutorial you'll learn how to quickly and easily record the animation of your avatar in Unity with Nuitrack. You won't need any additional tools except a depth sensor (from the [list of supported sensors](https://nuitrack.com/)) to track your skeleton and record the animation. We'll describe three different types of recording animation. You can use any one you like, depending on your needs.
 
-<b>Generic animation</b> is used to animate any models. In general, this animation is easier to use compared to the Humanoid animation but it is tied to the hierarchy of Game Objects. This means that animation will be displayed incorrectly if you change the name or position of any animated Game Object.  
+**Generic animation** is used to animate any models. In general, this animation is easier to use compared to the Humanoid animation but it is tied to the hierarchy of Game Objects. This means that animation will be displayed incorrectly if you change the name or position of any animated Game Object.  
 
-<b>Animation using [GameObjectRecorder](https://docs.unity3d.com/ScriptReference/Experimental.Animations.GameObjectRecorder.html)</b> is an experimental feature by Unity. It can be used only with Unity 2017.4 or 2018.2. This type can be called a simplified version of Generic animation. It is also used to animate models of any form. This is a convenient animation type, however, it is not optimized yet. As a result, you will face a long list of unnecessary keys due to the fact that all Game Objects are recorded (even those avatar's parts that didn't move at all).
+**Animation using [GameObjectRecorder](https://docs.unity3d.com/ScriptReference/Experimental.Animations.GameObjectRecorder.html)** is an experimental feature by Unity. It can be used only with Unity 2017.4 or 2018.2. This type can be called a simplified version of Generic animation. It is also used to animate models of any form. This is a convenient animation type, however, it is not optimized yet. As a result, you will face a long list of unnecessary keys due to the fact that all Game Objects are recorded (even those avatar's parts that didn't move at all).
 
-<b>Humanoid animation</b> is used (as you can guess) to animate humanoid models. It is more versatile than Generic animation because you can record the animation for a particular model and apply it to any other humanoid model. Also you can set the range of motion for specific muscles.
+**Humanoid animation** is used (as you can guess) to animate humanoid models. It is more versatile than Generic animation because you can record the animation for a particular model and apply it to any other humanoid model. Also you can set the range of motion for specific muscles.
 
-@image html images/Umc_9.gif Animation recorded with GameObjectRecorder 
-@image latex images/Umc_9.gif Animation recorded with GameObjectRecorder
+<p align="center">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Umc_9.gif"><br>
+<b>Animation recorded with GameObjectRecorder</b><br>
+</p>
 
 Choose the suitable animation type and let's get started! 
 
-@section mc_settings Setting Up the Scene
+## Setting Up the Scene
 
-<ol>
-<li> Create a new project. Import [<b>Nuitrack Skeleton Tracking</b> Unity Package](https://assetstore.unity.com/packages/templates/packs/nuitrack-skeleton-tracking-127675) to your project. Drag-and-drop the <b>Ethan</b> model from the downloaded package (or any other humanoid model) to the scene. The model should be in a T-Pose so that its joints are matched correctly. To do that, select your model's hands (for example, <b>EthanLeftArm</b> and <b>EthanRightArm</b> for our model) and set Rotation parameters as in the screenshot below: 
+1. Create a new project. Import [**Nuitrack Skeleton Tracking** Unity Package](https://assetstore.unity.com/packages/templates/packs/nuitrack-skeleton-tracking-127675) to your project. Drag-and-drop the **Ethan** model from the downloaded package (or any other humanoid model) to the scene. The model should be in a T-Pose so that its joints are matched correctly. To do that, select your model's hands (for example, **EthanLeftArm** and **EthanRightArm** for our model) and set Rotation parameters as in the screenshot below: 
 
-@image html images/Umc_1.png Settings of the "EthanLeftArm" Object 
-@image latex images/Umc_1.png Settings of the "EthanLeftArm" Object  
+<p align="center">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Umc_1.png"><br>
+<b>Settings of the "EthanLeftArm" Object</b><br>
+</p>
 
-@image html images/Umc_2.png Settings of the "EthanRightArm" Object  
-@image latex images/Umc_2.png Settings of the "EthanRightArm" Object
+<p align="center">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Umc_2.png"><br>
+<b>Settings of the "EthanRightArm" Object</b><br>
+</p>
 
-<li> If you use your own model, you have to drag-and-drop the <i>RiggedAvatar</i> script from <b>Nuitrack Skeleton Tracking</b> Unity Package to the model (this script is already attached to <b>Ethan</b>). Then, select the joints you'd like to animate. All in all, Nuitrack tracks up to 20 joints, see the list [here](http://download.3divi.com/Nuitrack/doc/group__SkeletonTracker__group__csharp.html#ga659db18c8af0cb3d660930d7116709ae). Remove the <b>Animator</b> component (if any) from the model so that it doesn't block changes in the <i>RiggedAvatar</i> script. Here is an example of selected joints: 
+2. If you use your own model, you have to drag-and-drop the `RiggedAvatar` script from **Nuitrack Skeleton Tracking** Unity Package to the model (this script is already attached to **Ethan**). Then, select the joints you'd like to animate. All in all, Nuitrack tracks up to 20 joints, see the list [here](http://download.3divi.com/Nuitrack/doc/group__SkeletonTracker__group__csharp.html#ga659db18c8af0cb3d660930d7116709ae). Remove the **Animator** component (if any) from the model so that it doesn't block changes in the `RiggedAvatar` script. Here is an example of selected joints: 
 
-@image html images/Umc_3.png  
-@image latex images/Umc_3.png 
+<p align="center">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Umc_3.png">
+</p>
 
-<li> Place the model so that it is completely in the field of view of the camera.
-<li> To indicate the beginning and ending of recording the animation, we'll need a red indicator. Create a <b>Canvas</b> and an <b>Image</b> on it (make it look like a red recording indicator). Place the indicator in the top left corner.
-<li> Drag-and-drop the <b>NuitrackScripts</b> prefab from <b>Nuitrack SDK</b> to the scene. In settings, tick the modules required for skeleton tracking of our avatar: <b>Depth Module, SkeletonTracker Module, UserTracker Module</b>.
+3. Place the model so that it is completely in the field of view of the camera.
+4. To indicate the beginning and ending of recording the animation, we'll need a red indicator. Create a **Canvas** and an **Image** on it (make it look like a red recording indicator). Place the indicator in the top left corner.
+5. Drag-and-drop the **NuitrackScripts** prefab from **Nuitrack SDK** to the scene. In settings, tick the modules required for skeleton tracking of our avatar: **Depth Module, SkeletonTracker Module, UserTracker Module**.
 
-@image html images/Umc_4.png  
-@image latex images/Umc_4.png 
+<p align="center">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Umc_4.png">
+</p>
 
-<li> At this point, you can run the project and check whether the avatar is moving in accordance with the user's movements or not. 
-</ol>
+6. At this point, you can run the project and check whether the avatar is moving in accordance with the user's movements or not. 
 
-@section mc_interface Creating an Interface for Animation Recorders
+## Creating an Interface for Animation Recorders
 
-<ol>
-<li> Since we'll use several implementations of the animation recorder, we have to set up a relevant interface for them. Create a new script named <i>IRecordable</i>. In this script, we'll describe the interface with the same name. In the script, create the <i>TakeSnapShot</i> method (to take pictures of Game Objects state) and <i>GetClip</i> (to get the clip with a recorded animation). 
+1. Since we'll use several implementations of the animation recorder, we have to set up a relevant interface for them. Create a new script named <i>IRecordable</i>. In this script, we'll describe the interface with the same name. In the script, create the <i>TakeSnapShot</i> method (to take pictures of Game Objects state) and <i>GetClip</i> (to get the clip with a recorded animation). 
 
 @code
 using UnityEngine;
