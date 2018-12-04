@@ -1,65 +1,57 @@
-/*!
-@page UnityFaceTracking_page Face Tracking with Nuitrack
-  @tableofcontents
+# Face Tracking with Nuitrack
 
-In this useful tutorial you'll learn how to track and get information about faces with <b>Nuitrack</b>. This feature is available in Nuitrack since version 0.23.3 (upgrade your Nuitrack if you haven't done this yet!). In this project, an RGB image from the sensor is displayed in the background and emojis are shown instead of faces. The way an emoji looks (its gender, age type, emotion) is determined by the parameters received from Nuitrack. Also you can set the desired number of tracked skeletons in this project (up to 6), because more people is more fun! 2D skeleton is displayed on the user's body.<br>
-<br>
+In this useful tutorial you'll learn how to track and get information about faces with **Nuitrack**. This feature is available in Nuitrack since version 0.23.3 (upgrade your Nuitrack if you haven't done this yet!). In this project, an RGB image from the sensor is displayed in the background and emojis are shown instead of faces. The way an emoji looks (its gender, age type, emotion) is determined by the parameters received from Nuitrack. Also you can set the desired number of tracked skeletons in this project (up to 6), because more people is more fun! 2D skeleton is displayed on the user's body.
+
 To create this wonderful project, only a couple of things are required: 
-<ul>
-<li> Nuitrack;
-<li> Any supported sensor (see the full list [at our website](https://nuitrack.com/)).
-</ul>
-<br>
-You can find the finished project in <b>Nuitrack SDK: Unity 3D → NuitrackSDK.unitypackage → Tutorials → FaceTracker</b>.
 
-@image html images/Uface_1.gif  
-@image latex images/Uface_1.gif 
+* Nuitrack;
+* Any supported sensor (see the full list [at our website](https://nuitrack.com/)).
 
-@note
-Nuitrack displays the info about a face <b>only after the user's skeleton is detected</b>. So, if only your face is visible, Nuitrack won't display the information. If you're only interested in face tracking (without any info about skeletons), you can take a look at [3DiVi Face SDK](https://facesdk.3divi.com/), which is a software for face tracking, detection, and matching. Unlike Nuitrack SDK, <b>3DiVi Face SDK</b> focuses on processing the data about faces and provides more advanced features in this field.
+You can find the finished project in **Nuitrack SDK: Unity 3D → NuitrackSDK.unitypackage → Tutorials → FaceTracker**.
 
-@section ft_setting Setting Up the Scene
+<p align="center">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Uface_1.gif">
+</p>
 
-<ol>
-<li> Create a new Unity project. 
-<li> Import <b>NuitrackSDK.unitypackage</b> from <b>Nuitrack SDK/Unity3D</b> to the project (except for the folder <b>Tutorials/FaceTracker/FinalAssets</b>, because this folder contains the scripts and other files that we're going to create in this tutorial): <b>Assets → Import Package → Custom Package...</b>
-<li> Drag-and-drop the <b>NuitrackScripts</b> prefab for skeleton tracking to the scene. In the <b>NuitrackManager</b> section, tick the required modules: <b>Color Module On</b> (to output an RGB image from a sensor), <b>Skeleton Module On</b> (for skeleton tracking).
+_**Note:** Nuitrack displays the info about a face **only after the user's skeleton is detected**. So, if only your face is visible, Nuitrack won't display the information. If you're only interested in face tracking (without any info about skeletons), you can take a look at [3DiVi Face SDK](https://facesdk.3divi.com/), which is a software for face tracking, detection, and matching. Unlike Nuitrack SDK, **3DiVi Face SDK** focuses on processing the data about faces and provides more advanced features in this field._
 
-@image html images/Uface_2.png  
-@image latex images/Uface_2.png 
+## Setting Up the Scene
 
-<li> Drag-and-drop the <b>Color Frame Canvas</b> prefab to the scene.
+1. Create a new Unity project. 
+2. Import **NuitrackSDK.unitypackage** from **Nuitrack SDK/Unity3D** to the project (except for the folder **Tutorials/FaceTracker/FinalAssets**, because this folder contains the scripts and other files that we're going to create in this tutorial): **Assets → Import Package → Custom Package...**
+3. Drag-and-drop the **NuitrackScripts** prefab for skeleton tracking to the scene. In the **NuitrackManager** section, tick the required modules: **Color Module On** (to output an RGB image from a sensor), **Skeleton Module On** (for skeleton tracking).
 
-@note
-<b>Color Frame Canvas</b> displays the RGB image from a sensor on the standard interface component <b>Image</b>. The <i>DrawColorFrame</i> script creates a Texture2d in the format of RGB24 using the <i>ColorFrame</i> data. Each time a <i>ColorFrame</i> is received, the texture is updated. 
+<p align="center">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Uface_2.png">
+</p>
 
-<li> Drag-and-drop the <b>Skeletons Canvas</b> prefab to the scene. In the <b>Canvas</b> section, set <b>Sort Order = 1</b>, so that skeletons are always displayed over <b>Color Frame Canvas</b>. <b>Sort Order</b> determines the rendering order: <b>Sort Order</b> in <b>Color Frame Canvas</b> is set to the default value of 0, that's why it is used as a background.
+4. Drag-and-drop the **Color Frame Canvas** prefab to the scene.
 
-@image html images/Uface_3.png  
-@image latex images/Uface_3.png 
+_**Note:** **Color Frame Canvas** displays the RGB image from a sensor on the standard interface component **Image**. The `DrawColorFrame` script creates a Texture2d in the format of RGB24 using the `ColorFrame` data. Each time a `ColorFrame` is received, the texture is updated._
 
-@note
-If your skeleton looks shifted, you have to turn on <b>depth-to-color registration</b> using the  <i>nuitrack.config</i> file: find the section <i>“DepthProvider”</i> and set <i>“Depth2ColorRegistration”</i> to <i>true</i>.
+5. Drag-and-drop the **Skeletons Canvas** prefab to the scene. In the **Canvas** section, set **Sort Order = 1**, so that skeletons are always displayed over **Color Frame Canvas**. **Sort Order** determines the rendering order: **Sort Order** in **Color Frame Canvas** is set to the default value of 0, that's why it is used as a background.
 
-@note
-In this project, we display a 2D skeleton on the user's body because it's a simpler and more versatile implementation. To display a 3D skeleton, you have to take into account the aspect, position, and FOV of your sensor in the Unity editor.
+<p align="center">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Uface_3.png">
+</p>
 
-<li> Run the project. You should see an RGB image from the sensor on the scene and tracked skeletons displayed on users' bodies. Time to move on to the most interesting part of this tutorial - face tracking! 
+_**Note:** If your skeleton looks shifted, you have to turn on **depth-to-color registration** using the  `nuitrack.config` file: find the section `“DepthProvider”` and set `“Depth2ColorRegistration”` to `true`._
 
-@image html images/Uface_4.gif  
-@image latex images/Uface_4.gif 
+_**Note:** In this project, we display a 2D skeleton on the user's body because it's a simpler and more versatile implementation. To display a 3D skeleton, you have to take into account the aspect, position, and FOV of your sensor in the Unity editor._
 
-</ol>
+6. Run the project. You should see an RGB image from the sensor on the scene and tracked skeletons displayed on users' bodies. Time to move on to the most interesting part of this tutorial - face tracking! 
 
-@section ft_creating_faces Creating the Faces
+<p align="center">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Uface_4.gif">
+</p>
 
-<ol>
-<li> Create a new script and name it <i>FaceInfo</i>. This script will contain the parameters and values from the JSON response received from Nuitrack (see a sample JSON response [in our documentation](http://download.3divi.com/Nuitrack/doc/Instance_based_API.html)). 
+## Creating the Faces
 
-@note
-By default, face tracking in Nuitrack is turned off. To turn on this function, open the  <i>nuitrack.config</i> file and set <i>“Faces.ToUse”</i> and <i>“DepthProvider.Depth2ColorRegistration”</i> to <i>true</i>. 
+1. Create a new script and name it `FaceInfo`. This script will contain the parameters and values from the JSON response received from Nuitrack (see a sample JSON response [in our documentation](http://download.3divi.com/Nuitrack/doc/Instance_based_API.html)). 
 
-@code
+_**Note:** By default, face tracking in Nuitrack is turned off. To turn on this function, open the  `nuitrack.config` file and set `“Faces.ToUse”` and `“DepthProvider.Depth2ColorRegistration”` to `true`._ 
+
+```cs
 using UnityEngine;
  
 [System.Serializable]
@@ -122,14 +114,13 @@ public class Age
     public string type;
     public float years;
 }
-@endcode
+```
 
-@note
-A keyword cannot be used as an identifier (name of variable, class, interface etc). However, they can be used with the prefix '@'. For example, <i>class</i> is a reserved keyword so it cannot be used as an identifier, but '@'class can be used.
+_**Note:** A keyword cannot be used as an identifier (name of variable, class, interface etc). However, they can be used with the prefix `@`. For example, `class` is a reserved keyword so it cannot be used as an identifier, but `@class` can be used._
 
-<li> Create a new script and name it <i>FaceManager</i>. Create enumerators for genders, age types, and emotions and list all possible values. 
+2. Create a new script and name it `FaceManager`. Create enumerators for genders, age types, and emotions and list all possible values. 
 
-@code
+```cs
 using System.Collections.Generic;
 using UnityEngine;
  
@@ -157,11 +148,11 @@ public enum Emotions
     neutral,
     angry
 }
-@endcode
+```
 
-<li> Add the <i>canvas</i> field for the <b>Canvas</b> displaying the emojis, <i>faceController</i> field for an emoji prefab, <i>skeletonController</i> field, list of <i>FaceControllers</i>, and an array with the data about faces. 
+3. Add the `canvas` field for the **Canvas** displaying the emojis, `faceController` field for an emoji prefab, `skeletonController` field, list of `FaceControllers`, and an array with the data about faces. 
 
-@code
+```cs
 ...
 public class FaceManager : MonoBehaviour 
 {
@@ -173,23 +164,21 @@ public class FaceManager : MonoBehaviour
  
     FaceInfo faceInfo;    
 }
-@endcode
+```
 
-@note
-Here are sample emojis for 2 genders, 4 age types, and 4 emotions (just to let you know how emojis of different ages and genders look like in this project):
-<ul>
-<li> happy little girl
-<li> surprised young man
-<li> neutral adult woman
-<li> angry old man
-</ul>
+_**Note:** Here are sample emojis for 2 genders, 4 age types, and 4 emotions (just to let you know how emojis of different ages and genders look like in this project):_
+* *happy little girl*
+* *surprised young man*
+* *neutral adult woman*
+* *angry old man*
 
-@image html images/Uface_5.png  
-@image latex images/Uface_5.png 
+<p align="center">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Uface_5.png">
+</p>
 
-<li> In <i>Start</i>, add faces to the scene and include them in the list of <i>FaceControllers</i>. 
+4. In `Start`, add faces to the scene and include them in the list of `FaceControllers`. 
 
-@code
+```cs
 public class FaceManager : MonoBehaviour 
 {
 ...
@@ -201,11 +190,11 @@ public class FaceManager : MonoBehaviour
         }
      }
 }
-@endcode
+```
 
-<li> In <i>Update</i>, get a JSON response and include the data from JSON to the <i>faceInfo</i> class, which stores the received face info. Add the faces from <i>faceInfo</i> (<i>faceInfo.Instances</i>) to the <i>faces</i> array. Loop over the <i>FaceControllers</i>: if the face info is available, the emoji is displayed, otherwise, it's hidden. Create the <i>id</i> variable and <i>currentFace</i> variable that stores the info about a current face. Pass the face info to <i>FaceController</i> and display the face. Get the <i>id</i> parameter from the face info and pass it to the <i>id</i> variable. Each of the detected users has his/her own id. User id and skeleton id in Nuitrack are always the same. Create a user's skeleton. If skeleton data from Nuitrack is received, we try to get a skeleton with the same id. If a skeleton is found, create the <i>joint</i> variable and call it <i>head</i>, get the <i>joint head</i> from the skeleton and place it in the coordinates received from the skeleton. An emoji will be displayed in place of the joint head.
+5. In `Update`, get a JSON response and include the data from JSON to the `faceInfo` class, which stores the received face info. Add the faces from `faceInfo` (`faceInfo.Instances`) to the `faces` array. Loop over the `FaceControllers`: if the face info is available, the emoji is displayed, otherwise, it's hidden. Create the `id` variable and `currentFace` variable that stores the info about a current face. Pass the face info to `FaceController` and display the face. Get the `id` parameter from the face info and pass it to the `id` variable. Each of the detected users has his/her own id. User id and skeleton id in Nuitrack are always the same. Create a user's skeleton. If skeleton data from Nuitrack is received, we try to get a skeleton with the same id. If a skeleton is found, create the `joint` variable and call it `head`, get the `joint head` from the skeleton and place it in the coordinates received from the skeleton. An emoji will be displayed in place of the joint head.
 
-@code
+```cs
 public class FaceManager : MonoBehaviour {
 ...
 void Update () 
@@ -250,15 +239,14 @@ void Update ()
 		}
 	}
 }
-@endcode
+```
 
-@note
-Learn more about [JsonUtility](https://docs.unity3d.com/ScriptReference/JsonUtility.html) (utility functions for working with JSON data).
+_**Note:** Learn more about [JsonUtility](https://docs.unity3d.com/ScriptReference/JsonUtility.html) (utility functions for working with JSON data)._
 
-<li> Create a new script and name it <i>FaceController</i>. Create public fields for gender, emotions, and age, and a text field for age. Age types and emotions are stored in the dictionaries <i>Dictionary<string, AgeType> age</i> and <i>Dictionary<EmotionType, float> emotionDict</i>. You can get "age type" by age name (string), and get "emotion value" (float) by "emotion type". 
+6. Create a new script and name it `FaceController`. Create public fields for gender, emotions, and age, and a text field for age. Age types and emotions are stored in the dictionaries `Dictionary<string, AgeType> age` and `Dictionary<EmotionType, float> emotionDict`. You can get "age type" by age name (string), and get "emotion value" (float) by "emotion type". 
 
-@code
-﻿using UnityEngine;
+```cs
+using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -284,11 +272,11 @@ public class FaceController : MonoBehaviour
 		{ EmotionType.angry, 0 },
 	};
 }
-@endcode
+```
 
-<li> The <i>SetFace</i> method takes the <i>Face</i> class from the <i>FaceInfo</i> script that stores all the info about the face. In this method, all characteristics of a particular face are assigned. Assign gender (either male or female). Get the age type by its name. Emotion is defined as follows: the values stored in the dictionare are looped over, and an emotion with the highest value is selected. 
+7. The `SetFace` method takes the `Face` class from the `FaceInfo` script that stores all the info about the face. In this method, all characteristics of a particular face are assigned. Assign gender (either male or female). Get the age type by its name. Emotion is defined as follows: the values stored in the dictionare are looped over, and an emotion with the highest value is selected. 
 
-@code
+```cs
 public class FaceController : MonoBehaviour 
 {
 ...
@@ -320,21 +308,22 @@ public class FaceController : MonoBehaviour
 		}
 	}
 }
-@endcode
+```
 
-<li> In Unity, create an <b>Empty Object</b> and name it <b>FaceManager</b>. Drag-and-drop the <i>FaceManager</i> script to this object. Create a new Canvas, name it Face Canvas, and set the Sort Order to 2. Drag-and-drop <b>Face Canvas</b> to the <b>Canvas</b> field of this object. Drag-and-drop <b>Head</b> (<b>FaceTracker/Prefabs</b>) to the <b>Face Controller</b> field and <b>Skeletons Canvas</b> (from the Scene) to the <b>Skeleton Controller</b> field of this object. 
+8. In Unity, create an **Empty Object** and name it **FaceManager**. Drag-and-drop the `FaceManager` script to this object. Create a new Canvas, name it Face Canvas, and set the Sort Order to 2. Drag-and-drop **Face Canvas** to the **Canvas** field of this object. Drag-and-drop **Head** (**FaceTracker/Prefabs**) to the **Face Controller** field and **Skeletons Canvas** (from the Scene) to the **Skeleton Controller** field of this object. 
 
-@image html images/Uface_6.png  
-@image latex images/Uface_6.png 
+<p align="center">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Uface_6.png">
+</p>
 
-<li> Drag-and-drop the <b>Head</b> prefab to the scene. Drag-and-drop the <i>FaceController</i> script to this prefab and click <b>Apply</b>. Delete the head from the scene. 
-<li> Run the project. You should see emojis instead of users' faces but they look exactly the same at the moment (a young happy man is a default emoji) because the received face parameters are not applied to the emojis yet. At this point, emojis  move according to users' movements.
-</ol>
+9. Drag-and-drop the **Head** prefab to the scene. Drag-and-drop the `FaceController` script to this prefab and click **Apply**. Delete the head from the scene. 
+10. Run the project. You should see emojis instead of users' faces but they look exactly the same at the moment (a young happy man is a default emoji) because the received face parameters are not applied to the emojis yet. At this point, emojis  move according to users' movements.
 
-@image html images/Uface_7.gif  
-@image latex images/Uface_7.gif 
+<p align="center">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Uface_7.gif">
+</p>
 
-@section ft_application Applying the Received Data about Faces
+## Applying the Received Data about Faces
 
 <ol>
 <li> Create a new script and name it <i>FaceSwitcher</i>. It will switch the face parameters in Unity according to the info from JSON. Add the necessary fields (<i>gender, ageType, emotions</i>) and two objects: <i>enabledObject</i>, which is enabled, if all conditions are <i>true</i>, and <i>disabled</i>, if at least one is <i>false</i>, and <i>disabledObject</i>, which operates vice versa. Add the <i>FaceController</i> field and the boolean variable <i>display</i> to display/hide a face. 
