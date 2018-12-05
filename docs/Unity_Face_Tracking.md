@@ -22,7 +22,7 @@ _**Note:** Nuitrack displays the info about a face **only after the user's skele
 3. Drag-and-drop the **NuitrackScripts** prefab for skeleton tracking to the scene. In the **NuitrackManager** section, tick the required modules: **Color Module On** (to output an RGB image from a sensor), **Skeleton Module On** (for skeleton tracking).
 
 <p align="center">
-<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Uface_2.png">
+<img width="450" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Uface_2.png">
 </p>
 
 4. Drag-and-drop the **Color Frame Canvas** prefab to the scene.
@@ -32,7 +32,7 @@ _**Note:** **Color Frame Canvas** displays the RGB image from a sensor on the st
 5. Drag-and-drop the **Skeletons Canvas** prefab to the scene. In the **Canvas** section, set **Sort Order = 1**, so that skeletons are always displayed over **Color Frame Canvas**. **Sort Order** determines the rendering order: **Sort Order** in **Color Frame Canvas** is set to the default value of 0, that's why it is used as a background.
 
 <p align="center">
-<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Uface_3.png">
+<img width="450" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Uface_3.png">
 </p>
 
 _**Note:** If your skeleton looks shifted, you have to turn on **depth-to-color registration** using the  `nuitrack.config` file: find the section `“DepthProvider”` and set `“Depth2ColorRegistration”` to `true`._
@@ -313,7 +313,7 @@ public class FaceController : MonoBehaviour
 8. In Unity, create an **Empty Object** and name it **FaceManager**. Drag-and-drop the `FaceManager` script to this object. Create a new Canvas, name it Face Canvas, and set the Sort Order to 2. Drag-and-drop **Face Canvas** to the **Canvas** field of this object. Drag-and-drop **Head** (**FaceTracker/Prefabs**) to the **Face Controller** field and **Skeletons Canvas** (from the Scene) to the **Skeleton Controller** field of this object. 
 
 <p align="center">
-<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Uface_6.png">
+<img width="450" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Uface_6.png">
 </p>
 
 9. Drag-and-drop the **Head** prefab to the scene. Drag-and-drop the `FaceController` script to this prefab and click **Apply**. Delete the head from the scene. 
@@ -393,13 +393,13 @@ public class FaceSwitcher : MonoBehaviour
 5. Drag-and-drop the **Head** prefab to the scene again. Select **Head → Face**, add the **FaceSwitcher** component, and select **Gender: Male, Age Type: Any, Emotions: Any** (they'll be assigned hierarchically). Assign the **enabledObject: Male, disabledObject: Female**.
 
 <p align="center">
-<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Uface_8.png">
+<img width="600" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Uface_8.png">
 </p>
 
 6. Assign emotions and age types in the relevant fields as shown on the screenshots (you have to add the **FaceSwitcher** component several times).
 
 <p align="center">
-<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Uface_9.png">
+<img width="1100" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Uface_9.png">
 </p>
 
 7. Run the project. You should see the tracked skeletons and faces of several users with emojis instead of faces. Different emojis are displayed depending on gender, age type and emotion of a user.
