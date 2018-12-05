@@ -325,10 +325,9 @@ public class FaceController : MonoBehaviour
 
 ## Applying the Received Data about Faces
 
-<ol>
-<li> Create a new script and name it <i>FaceSwitcher</i>. It will switch the face parameters in Unity according to the info from JSON. Add the necessary fields (<i>gender, ageType, emotions</i>) and two objects: <i>enabledObject</i>, which is enabled, if all conditions are <i>true</i>, and <i>disabled</i>, if at least one is <i>false</i>, and <i>disabledObject</i>, which operates vice versa. Add the <i>FaceController</i> field and the boolean variable <i>display</i> to display/hide a face. 
+1. Create a new script and name it `FaceSwitcher`. It will switch the face parameters in Unity according to the info from JSON. Add the necessary fields (`gender, ageType, emotions`) and two objects: `enabledObject`, which is enabled, if all conditions are `true`, and `disabled`, if at least one is `false`, and `disabledObject`, which operates vice versa. Add the `FaceController` field and the boolean variable `display` to display/hide a face. 
 
-@code
+```cs
 using UnityEngine;
  
 public class FaceSwitcher : MonoBehaviour 
@@ -342,11 +341,11 @@ public class FaceSwitcher : MonoBehaviour
     FaceController faceController;
     bool display = false;
 }
-@endcode
+```
 
-<li> In <i>Start</i>, find the <i>FaceController</i> component in a parent object and pass it to the <i>faceController</i> variable. 
+2. In `Start`, find the `FaceController` component in a parent object and pass it to the `faceController` variable. 
 
-@code
+```cs
 public class FaceSwitcher : MonoBehaviour 
 {
 ...
@@ -355,11 +354,11 @@ public class FaceSwitcher : MonoBehaviour
         faceController = GetComponentInParent<FaceController>();
      }
 }
-@endcode
+```
 
-<li> In the <i>SwitchObjects</i> method, enable/disable the corresponding object to display/hide the parameters if they're <i>true/false</i>. 
+3. In the `SwitchObjects` method, enable/disable the corresponding object to display/hide the parameters if they're `true/false`. 
 
-@code
+```cs
 public class FaceSwitcher : MonoBehaviour 
 {
 ...
@@ -372,11 +371,11 @@ public class FaceSwitcher : MonoBehaviour
             disabledObject.SetActive(!display);
      }
 }
-@endcode
+```
 
-<li> In <i>Update</i>, the value of <i>display</i> is changed according to the specified conditions. If all conditions are true (gender, age type, and emotion correspond to the ones specified in Unity), then the <i>enabledObject</i> is displayed. If at least one condition is false, the <i>display</i> becomes <i>false</i> and <i>enabledObject</i> is not displayed. 
+4. In `Update`, the value of `display` is changed according to the specified conditions. If all conditions are true (gender, age type, and emotion correspond to the ones specified in Unity), then the `enabledObject` is displayed. If at least one condition is false, the `display` becomes `false` and `enabledObject` is not displayed. 
 
-@code
+```cs
 public class FaceSwitcher : MonoBehaviour 
 {
 ...
@@ -389,22 +388,27 @@ public class FaceSwitcher : MonoBehaviour
         SwitchObjects();
      }
 }
-@endcode
+```
 
-<li> Drag-and-drop the <b>Head</b> prefab to the scene again. Select <b>Head → Face</b>, add the <b>FaceSwitcher</b> component, and select <b>Gender: Male, Age Type: Any, Emotions: Any</b> (they'll be assigned hierarchically). Assign the <b>enabledObject: Male, disabledObject: Female</b>.
+5. Drag-and-drop the **Head** prefab to the scene again. Select **Head → Face**, add the **FaceSwitcher** component, and select **Gender: Male, Age Type: Any, Emotions: Any** (they'll be assigned hierarchically). Assign the **enabledObject: Male, disabledObject: Female**.
 
-@image html images/Uface_8.png  
-@image latex images/Uface_8.png 
+<p align="center">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Uface_8.png">
+</p>
 
-<li> Assign emotions and age types in the relevant fields as shown on the screenshots (you have to add the <b>FaceSwitcher</b> component several times).
+6. Assign emotions and age types in the relevant fields as shown on the screenshots (you have to add the **FaceSwitcher** component several times).
 
-@image html images/Uface_9.png  
-@image latex images/Uface_9.png 
+<p align="center">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Uface_9.png">
+</p>
 
-<li> Run the project. You should see the tracked skeletons and faces of several users with emojis instead of faces. Different emojis are displayed depending on gender, age type and emotion of a user.
-</ol>
+7. Run the project. You should see the tracked skeletons and faces of several users with emojis instead of faces. Different emojis are displayed depending on gender, age type and emotion of a user.
 
 @image html images/Uface_1.gif  
 @image latex images/Uface_1.gif 
+
+<p align="center">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Uface_1.gif">
+</p>
 
 Congratulations, you've just learnt how to use face tracking in your project with Nuitrack! You can use the information in gaming or other fields. By the way, check out other parameters in the [JSON response from Nuitrack](http://download.3divi.com/Nuitrack/doc/Instance_based_API.html), there are far more interesting things besides the ones covered in this tutorial. Have fun!
