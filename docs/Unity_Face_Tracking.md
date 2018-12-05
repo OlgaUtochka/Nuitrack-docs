@@ -404,9 +404,6 @@ public class FaceSwitcher : MonoBehaviour
 
 7. Run the project. You should see the tracked skeletons and faces of several users with emojis instead of faces. Different emojis are displayed depending on gender, age type and emotion of a user.
 
-@image html images/Uface_1.gif  
-@image latex images/Uface_1.gif 
-
 <p align="center">
 <img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Uface_1.gif">
 </p>
