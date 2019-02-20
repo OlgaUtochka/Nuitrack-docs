@@ -1,62 +1,62 @@
-/*!
-@page UnityAnimatedEmoji_page Creating Animated Emoji with Nuitrack
+# Creating Animated Emoji with Nuitrack
 
 In this tutorial you'll learn to create animated emoji using the face info from Nuitrack and blendshapes. You'll be able to track several skeletons (from 1 to 6) and see the fox animated emoji instead of the user's face. Fox face mimics user's facial expressions. When a user turns his/her head, the fox head is also rotated. You can notice that fox fur is slightly moving when the fox turns its face - an incredible thing to watch. The fox face is zoomed in and out, i.e. the closer the user is, the bigger the fox head is, and vice versa.  
 
 To create this project, you'll need just a couple of things:
-<ul>
-<li> [Nuitrack Runtime and Nuitrack SDK](https://nuitrack.com/#rec54893368)
-<li> Unity (2017.4 or higher)
-<li> Any compatible sensor (see the complete list at [Nuitrack website](https://nuitrack.com/#rec24776680)) 
-</ul>
+* [Nuitrack Runtime and Nuitrack SDK](https://nuitrack.com/#rec54893368)
+* Unity (2017.4 or higher)
+* Any compatible sensor (see the complete list at [Nuitrack website](https://nuitrack.com/#rec24776680)) 
 
-You can find the finished project in <b>Nuitrack SDK: Unity 3D → NuitrackSDK.unitypackage → Tutorials → Animated Emoji </b>
+You can find the finished project in **Nuitrack SDK: Unity 3D → NuitrackSDK.unitypackage → Tutorials → Animated Emoji**
 
-@image html images/Uanimoji_1.gif  
-@image latex images/Uanimoji_1.gif  
+<p align="center">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Uanimoji_1.gif">
+</p>
 
-@section animoji_settings Setting Up the Scene
+## Setting Up the Scene
 
-<ol>
-<li> Download and import <b>NuitrackSDK.unitypackage</b> from <b>Nuitrack SDK</b> to your project (except for the folder <b>NuitrackSDK/Tutorials/Animated Emoji/Final Assets</b> because it includes ready-made scripts).
-<li> Drag-and-drop the <b>NuitrackScripts</b> prefab to the scene. Tick the required Nuitrack modules: <b>Color Module On</b> (to output an RGB image from a sensor), <b>Skeleton Tracker Module On</b> (for skeleton tracking).
+1. Download and import **NuitrackSDK.unitypackage** from **Nuitrack SDK** to your project (except for the folder **NuitrackSDK/Tutorials/Animated Emoji/Final Assets** because it includes ready-made scripts).
+2. Drag-and-drop the **NuitrackScripts** prefab to the scene. Tick the required Nuitrack modules: **Color Module On** (to output an RGB image from a sensor), **Skeleton Tracker Module On** (for skeleton tracking).
 
-@image html images/Uanimoji_2.png  
-@image latex images/Uanimoji_2.png  
+<p align="center">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Uanimoji_2.png">
+</p>
 
-<li> Create a new <b>Canvas: Create → UI → Canvas</b>, name it <b>Face Canvas</b>. Set its Sort Order to 2. This canvas is used to display the fox face (over the canvases for outputting RGB and displaying skeletons). 
+3. Create a new **Canvas: Create → UI → Canvas**, name it **Face Canvas**. Set its Sort Order to 2. This canvas is used to display the fox face (over the canvases for outputting RGB and displaying skeletons). 
 
-@image html images/Uanimoji_3.png  
-@image latex images/Uanimoji_3.png  
+<p align="center">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Uanimoji_3.png">
+</p>
 
-@note
-In this project, we display the fox face in 2D as the image in this format will be displayed correctly for all supported sensors. If we wanted to create the fox face in 3D, we would need to know which sensor is used and what is its resolution. Nuitrack doesn't provide this information at the moment. 
+_**Note:** In this project, we display the fox face in 2D as the image in this format will be displayed correctly for all supported sensors. If we wanted to create the fox face in 3D, we would need to know which sensor is used and what is its resolution. Nuitrack doesn't provide this information at the moment._ 
 
-<li> Create a child object to the <b>Canvas: Create → UI → Raw Image</b>, name it <b>Fox Face</b>. Go to the settings of this object and set <b>Width = 1, Height = 1</b> in the <b>RectTransform</b> section. Set the appropriate <b>Scale</b>, for example: <b>X: 100, Y: 100, Z: 1</b>. This is the image size in pixels, which will soon become the fox face. It's important to keep the 1:1 aspect ratio, otherwise the fox face will be stretched vertically or horizontally. The image size shouldn't be too small, otherwise you won't even see the fox face when you run the project at this stage. 
+4. Create a child object to the **Canvas: Create → UI → Raw Image**, name it **Fox Face**. Go to the settings of this object and set **Width = 1, Height = 1** in the **RectTransform** section. Set the appropriate **Scale**, for example: **X: 100, Y: 100, Z: 1**. This is the image size in pixels, which will soon become the fox face. It's important to keep the 1:1 aspect ratio, otherwise the fox face will be stretched vertically or horizontally. The image size shouldn't be too small, otherwise you won't even see the fox face when you run the project at this stage. 
 
-@image html images/Uanimoji_4.png  
-@image latex images/Uanimoji_4.png  
+<p align="center">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Uanimoji_4.png">
+</p>
 
-<li> Drag-and-drop the <b>Fox Face Model</b> prefab to the scene (it's located in <b>NuitrackSDK/Tutorials/Animated Emoji/Prefabs</b>).
-<li> Create a new texture in the folder <b>Animated Emoji (Create → Render Texture)</b>, name it <b>Face</b>. This is the texture for rendering the image from the sensor. 
-<li> Go to the settings of the <b>Fox Face</b> object and drag-and-drop the <b>Face</b> texture to the <b>Texture</b> field. 
+5. Drag-and-drop the **Fox Face Model** prefab to the scene (it's located in <b>NuitrackSDK/Tutorials/Animated Emoji/Prefabs</b>).
+6. Create a new texture in the folder **Animated Emoji (Create → Render Texture)**, name it **Face**. This is the texture for rendering the image from the sensor. 
+7. Go to the settings of the **Fox Face** object and drag-and-drop the **Face** texture to the **Texture** field. 
 
-@image html images/Uanimoji_5.png  
-@image latex images/Uanimoji_5.png  
+<p align="center">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Uanimoji_5.png">
+</p>
 
-<li> Go to the settings of the <b>Camera</b> object (which can be found under the ready-made <b>Fox Face Model</b> prefab) and drag-and-drop the <b>Face</b> texture to the <b>Target Texture</b> field. 
+8. Go to the settings of the **Camera** object (which can be found under the ready-made **Fox Face Model** prefab) and drag-and-drop the **Face** texture to the **Target Texture** field. 
 
-@image html images/Uanimoji_6.png  
-@image latex images/Uanimoji_6.png  
-
-</ol>
+<p align="center">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Uanimoji_6.png">
+</p>
 
 Great job! Now we have a 2D fox face that we can further use to mimic our facial expressions. 
 
-@image html images/Uanimoji_7.jpg  
-@image latex images/Uanimoji_7.jpg  
+<p align="center">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Uanimoji_7.jpg">
+</p>
 
-@section animoji_switch Switch the User Face with the Fox Face
+## Switch the User Face with the Fox Face
 
 <ol>
 <li> Save <b>Fox Face</b> as a prefab. Then, delete the <b>Fox Face</b> and <b>Fox Face Model</b> prefabs from the scene.
