@@ -49,7 +49,7 @@ _**Note:** Why do we use `RawImage` instead of `Image` in this project? `Image` 
 ```cs
 public class DrawColorFrame : MonoBehaviour
 {
-…
+...
 	void DrawColor(nuitrack.ColorFrame frame)
 	{ 
 		background.texture = frame.ToTexture2D();
@@ -85,14 +85,13 @@ public class DrawColorFrame : MonoBehaviour
 
 ## Displaying the Skeleton
 
-<ol>
-<li> All right, color image from the sensor is fun, but we're interested in the skeletons of users (otherwise, what do we need Nuitrack for?) Let's start tracking and displaying skeletons. First of all, turn on <b>depth-to-color registration</b> because a depth map doesn't accurately match an RGB image and we have to align them. To turn on depth-to-color registration, you have to open <i>nuitrack.config</i> and set <i>DepthProvider.Depth2ColorRegistration</i> to true. 
-<li> Create two prefabs to display a user's skeleton (a ball for a joint and a line for a connection). As an option, you can use the prefabs from <b>NuitrackSDK.unitypackage</b> (<b>Assets/NuitrackSDK/Tutorials/RGBandSkeletons/Prefabs (JointUI and ConnectionUI)</b>). 
-<li> Create a new script and name it <i>SimpleSkeletonAvatar</i>. In this script, determine tracking and displaying of a single skeleton. 
-<li> Create a new bool variable <i>autoProcessing</i>. If we need to process only one skeleton, we set the value of this variable to <i>true</i> and Nuitrack passes all data about this skeleton. At this stage, this is quite sufficient because we want to display only one skeleton. However, when it comes to displaying several skeletons, we'll need additional components, because multiple skeletons cannot be processed automatically. 
-<li> Create two fields for the joint and connection prefabs: <i>jointPrefab</i> and <i>connectionPrefab</i>.
+1. All right, color image from the sensor is fun, but we're interested in the skeletons of users (otherwise, what do we need Nuitrack for?) Let's start tracking and displaying skeletons. First of all, turn on **depth-to-color registration** because a depth map doesn't accurately match an RGB image and we have to align them. To turn on depth-to-color registration, you have to open `nuitrack.config` and set `DepthProvider.Depth2ColorRegistration` to `true`. 
+2. Create two prefabs to display a user's skeleton (a ball for a joint and a line for a connection). As an option, you can use the prefabs from **NuitrackSDK.unitypackage** (**Assets/NuitrackSDK/Tutorials/RGBandSkeletons/Prefabs (JointUI and ConnectionUI)**). 
+3. Create a new script and name it `SimpleSkeletonAvatar`. In this script, determine tracking and displaying of a single skeleton. 
+4. Create a new bool variable `autoProcessing`. If we need to process only one skeleton, we set the value of this variable to `true` and Nuitrack passes all data about this skeleton. At this stage, this is quite sufficient because we want to display only one skeleton. However, when it comes to displaying several skeletons, we'll need additional components, because multiple skeletons cannot be processed automatically. 
+5. Create two fields for the joint and connection prefabs: `jointPrefab` and `connectionPrefab`.
 
-@code
+```cs
 using System.Collections.Generic;
 using UnityEngine;
  
@@ -101,14 +100,14 @@ public class SimpleSkeletonAvatar : MonoBehaviour
 	public bool autoProcessing = true;
 	[SerializeField] GameObject jointPrefab = null, connectionPrefab = null;
 }
-@endcode
+```
 
-<li> Create the <i>jointsInfo</i> array with the list of all joints that are needed to display the skeleton. All in all, there are 19 joints tracked by Nuitrack. 
+6. Create the `jointsInfo` array with the list of all joints that are needed to display the skeleton. All in all, there are 19 joints tracked by Nuitrack. 
 
-@code
+```cs
 public class SimpleSkeletonAvatar : MonoBehaviour
 {
-…
+...
 	nuitrack.JointType[] jointsInfo = new nuitrack.JointType[]
 	{
 		nuitrack.JointType.Head,
@@ -132,14 +131,14 @@ public class SimpleSkeletonAvatar : MonoBehaviour
 		nuitrack.JointType.RightAnkle
 	};
 }
-@endcode
+```
 
-<li> Create a 2D array containing all the connections. Specify the initial and end joints (a connection is created between these two joints).  
+7. Create a 2D array containing all the connections. Specify the initial and end joints (a connection is created between these two joints).  
 
-@code
+```cs
 public class SimpleSkeletonAvatar : MonoBehaviour
 {
-…
+...
 	nuitrack.JointType[,] connectionsInfo = new nuitrack.JointType[,]
 	{ 
 		{nuitrack.JointType.Neck,			nuitrack.JointType.Head},
@@ -162,39 +161,38 @@ public class SimpleSkeletonAvatar : MonoBehaviour
 		{nuitrack.JointType.RightKnee, 		nuitrack.JointType.RightAnkle}
 	};
 }
-@endcode
+```
 
-<li> Create an array containing ready-made connections and a dictionary with ready-made joints (the key is a joint type and the value is a spawned object). 
+8. Create an array containing ready-made connections and a dictionary with ready-made joints (the key is a joint type and the value is a spawned object). 
 
-@code
-
+```cs
 public class SimpleSkeletonAvatar : MonoBehaviour
 {
-…
+...
 	GameObject[] connections;
 	Dictionary<nuitrack.JointType, GameObject> joints;
 }
-@endcode
+```
 
-<li> In <i>Start</i>, call the <i>CreateSkeletonParts</i> method. 
+9. In `Start`, call the `CreateSkeletonParts` method. 
 
-@code
+```cs
 public class SimpleSkeletonAvatar : MonoBehaviour
 {
-…
+...
 	void Start()
 	{
 		CreateSkeletonParts();
 	}
 }
-@endcode
+```
 
-<li> In the <i>CreateSkeletonParts</i> method, create all joints and connections. Joints are spawned, turned off and added to the list of joints. Do the same thing with all connections. Joints and connections are "turned on" as soon as a skeleton is detected. 
+10. In the `CreateSkeletonParts` method, create all joints and connections. Joints are spawned, turned off and added to the list of joints. Do the same thing with all connections. Joints and connections are "turned on" as soon as a skeleton is detected. 
 
-@code
+```cs
 public class SimpleSkeletonAvatar : MonoBehaviour
 {
-…    
+...
 	void CreateSkeletonParts()
 	{
 		joints = new Dictionary<nuitrack.JointType, GameObject>();
@@ -222,28 +220,28 @@ public class SimpleSkeletonAvatar : MonoBehaviour
 		}
 	}
 }
-@endcode
+```
 
-<li> Create a new method <i>ProcessSkeleton</i> for processing the skeleton received from Nuitrack. Check for null values (if a skeleton isn't detected, the other part of the method won't be executed). 
+11. Create a new method `ProcessSkeleton` for processing the skeleton received from Nuitrack. Check for null values (if a skeleton isn't detected, the other part of the method won't be executed). 
 
-@code
+```cs
 public class SimpleSkeletonAvatar : MonoBehaviour
 {
-…
+...
 	public void ProcessSkeleton(nuitrack.Skeleton skeleton)
 	{
 		if (skeleton == null)
 			return;
 	}
 }
-@endcode
+```
 
-<li> Loop over the joints. If a specific joint is detected (confidence > 0.5), it's displayed and its position is set in 2D (projective coordinates received from Nuitrack are used). Otherwise, the joint is not displayed. 
+12. Loop over the joints. If a specific joint is detected (confidence > 0.5), it's displayed and its position is set in 2D (projective coordinates received from Nuitrack are used). Otherwise, the joint is not displayed. 
 
-@code
+```cs
 public class SimpleSkeletonAvatar : MonoBehaviour
 {
-…
+...
 	public void ProcessSkeleton(nuitrack.Skeleton skeleton)
 	{
 		for (int i = 0; i < jointsInfo.Length; i++)
@@ -262,23 +260,20 @@ public class SimpleSkeletonAvatar : MonoBehaviour
 		}
 	}
 }
-@endcode
+```
 
-@note
-Currently, there are only two values of confidence: 0 (Nuitrack thinks that this isn't a joint) and 0.75 (a joint).
+_**Note:** Currently, there are only two values of confidence: 0 (Nuitrack thinks that this isn't a joint) and 0.75 (a joint)._
 
-<li> Loop over the connections. If both joint models required to create the connection are displayed (the initial and end joint), activate the connection. Set the connection position based on the positions of corresponding joint models. To rotate the connection, use the difference between the positions of the initial and end joints. Calculate the connection size: 
-<ul>
-<li> find the distance between the initial and end joints;
-<li> set the size: Vector3 (distance, 1, 1)
-</ul>
+13. Loop over the connections. If both joint models required to create the connection are displayed (the initial and end joint), activate the connection. Set the connection position based on the positions of corresponding joint models. To rotate the connection, use the difference between the positions of the initial and end joints. Calculate the connection size: 
+* find the distance between the initial and end joints;
+* set the size: Vector3 (distance, 1, 1)
 
 If any joint required to create the connection is not displayed, the connection is not displayed, too. 
 
-@code
+```cs
 public class SimpleSkeletonAvatar : MonoBehaviour
 {
-…
+...
 	public void ProcessSkeleton(nuitrack.Skeleton skeleton)
 	{
 		for (int i = 0; i < connectionsInfo.GetLength(0); i++)
@@ -302,11 +297,11 @@ public class SimpleSkeletonAvatar : MonoBehaviour
 		}
 	}
 }
-@endcode
+```
 
-<li> In <i>Update</i>, if <i>autoProcessing</i> is set to <i>true</i>, call the <i>ProcessSkeleton</i> and pass the parameters <i>CurrentUserTracker.CurrentSkeleton</i>. 
+14. In `Update`, if `autoProcessing` is set to `true`, call the `ProcessSkeleton` and pass the parameters `CurrentUserTracker.CurrentSkeleton`. 
 
-@code
+```cs
 public class SimpleSkeletonAvatar : MonoBehaviour
 {
 …    
@@ -316,29 +311,30 @@ public class SimpleSkeletonAvatar : MonoBehaviour
 			ProcessSkeleton(CurrentUserTracker.CurrentSkeleton);
 	}
 }
-@endcode
+```
 
-<li> Create a new <b>Canvas</b> named <b>SkeletonsCanvas</b>. Set its <b>Sort Order</b> to <b>1</b>, so that skeletons are displayed over the <b>ColorFrameCanvas</b>. 
+15. Create a new **Canvas** named **SkeletonsCanvas**. Set its **Sort Order** to **1**, so that skeletons are displayed over the **ColorFrameCanvas**. 
 
-@image html images/Urgb_7.png  
-@image latex images/Urgb_7.png 
+<p align="center">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Urgb_7.png">
+</p>
 
-<li> Create a child object to the <b>SkeletonsCanvas</b> (<b>Create Empty</b>) and name it <b>Simple Skeleton Avatar</b>. We'll use this object to display the skeleton. Drag-and-drop the <i>SimpleSkeletonAvatar</i> script to this object. 
-<li> Drag-and-drop the <b>jointUI</b> prefab (<b>Tutorials/RGBandSkeletons/Prefabs</b>) to the <b>Joint Prefab</b> field.  Drag-and-drop the <b>ConnectionUI</b> prefab (from the same folder) to the <b>Connection Prefab</b> field. 
+16. Create a child object to the **SkeletonsCanvas** (**Create Empty**) and name it **Simple Skeleton Avatar**. We'll use this object to display the skeleton. Drag-and-drop the `SimpleSkeletonAvatar` script to this object. 
+17. Drag-and-drop the **jointUI** prefab (**Tutorials/RGBandSkeletons/Prefabs**) to the **Joint Prefab** field.  Drag-and-drop the **ConnectionUI** prefab (from the same folder) to the **Connection Prefab** field. 
 
-@image html images/Urgb_8.png  
-@image latex images/Urgb_8.png 
+<p align="center">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Urgb_8.png">
+</p>
 
-<li> Run the project. At this point, you should see a 2D skeleton displayed over the RGB image from the sensor. However, if there are several users, their skeletons won't be displayed. Let's move on to the next point so as not to upset them. 
-</ol>
+17. Run the project. At this point, you should see a 2D skeleton displayed over the RGB image from the sensor. However, if there are several users, their skeletons won't be displayed. Let's move on to the next point so as not to upset them. 
 
-@image html images/Urgb_9.gif  
-@image latex images/Urgb_9.gif 
+<p align="center">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Urgb_9.gif">
+</p>
 
-@section rgb_skeletons Displaying Multiple Skeletons 
+## Displaying Multiple Skeletons 
 
-<ol>
-<li> Create a new script and name it <i>SkeletonController</i>. In this script, we'll define how to track and display multiple skeletons. 
+1. Create a new script and name it <i>SkeletonController</i>. In this script, we'll define how to track and display multiple skeletons. 
 <li> Add the <i>nuitrack</i> namespace. Create the <i>SkeletonCount</i> public variable and set the range from 0 to 6 (the number of tracked skeletons). Create the <i>SimpleSkeletonAvatar</i> field (for the <b>SkeletonAvatar</b> model that we've created). Create a list of <i>SkeletonAvatars</i> (displayed skeletons).
 
 @code
