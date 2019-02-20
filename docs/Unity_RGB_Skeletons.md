@@ -329,7 +329,7 @@ public class SimpleSkeletonAvatar : MonoBehaviour
 17. Run the project. At this point, you should see a 2D skeleton displayed over the RGB image from the sensor. However, if there are several users, their skeletons won't be displayed. Let's move on to the next point so as not to upset them. 
 
 <p align="center">
-<img width="400" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Urgb_9.gif">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Urgb_9.gif">
 </p>
 
 ## Displaying Multiple Skeletons 
