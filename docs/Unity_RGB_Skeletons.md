@@ -335,9 +335,9 @@ public class SimpleSkeletonAvatar : MonoBehaviour
 ## Displaying Multiple Skeletons 
 
 1. Create a new script and name it <i>SkeletonController</i>. In this script, we'll define how to track and display multiple skeletons. 
-<li> Add the <i>nuitrack</i> namespace. Create the <i>SkeletonCount</i> public variable and set the range from 0 to 6 (the number of tracked skeletons). Create the <i>SimpleSkeletonAvatar</i> field (for the <b>SkeletonAvatar</b> model that we've created). Create a list of <i>SkeletonAvatars</i> (displayed skeletons).
+2. Add the `nuitrack` namespace. Create the `SkeletonCount` public variable and set the range from 0 to 6 (the number of tracked skeletons). Create the `SimpleSkeletonAvatar` field (for the **SkeletonAvatar** model that we've created). Create a list of `SkeletonAvatars` (displayed skeletons).
 
-@code
+```cs
 using nuitrack;
 using UnityEngine;
 using System.Collections.Generic;
@@ -350,14 +350,13 @@ public class SkeletonController : MonoBehaviour
  
 	List<SimpleSkeletonAvatar> avatars = new List<SimpleSkeletonAvatar>();
 }
-@endcode
+```
 
-@note
-We set the range from 0 to 6 because Nuitrack tracks up to 6 skeletons. 
+_**Note:** We set the range from 0 to 6 because Nuitrack tracks up to 6 skeletons._
 
-<li> In <i>Start</i>, spawn skeletons on the scene, get the <i>SimpleSkeletonAvatar</i> component from each skeleton, and set <i>autoProcessing</i> to <i>false</i> (because we want to process several skeletons). Add a skeleton to the list of avatars <i>avatars.Add(simpleSkeleton)</i>. Pass the desired number of tracked skeletons to Nuitrack. You can set the desired number of skeletons in the Unity editor. 
+3. In `Start`, spawn skeletons on the scene, get the `SimpleSkeletonAvatar` component from each skeleton, and set `autoProcessing` to `false` (because we want to process several skeletons). Add a skeleton to the list of avatars `avatars.Add(simpleSkeleton)`. Pass the desired number of tracked skeletons to Nuitrack. You can set the desired number of skeletons in the Unity editor. 
 
-@code
+```cs
 public class SkeletonController : MonoBehaviour
 {    
 ...
@@ -373,14 +372,14 @@ public class SkeletonController : MonoBehaviour
 		NuitrackManager.SkeletonTracker.SetNumActiveUsers(skeletonCount);
 	}
 }
-@endcode
+```
 
-<li> Create the <i>OnSkeletonUpdate</i> method, which accepts all the info about the received skeletons (<i>skeletonData</i>). Loop over all the spawned skeletons depending on the number of tracked skeletons specified in Unity. If there is a skeleton received from Nuitrack for a skeleton avatar, it's processed and displayed, otherwise, it's hidden. 
+4. Create the `OnSkeletonUpdate` method, which accepts all the info about the received skeletons (`skeletonData`). Loop over all the spawned skeletons depending on the number of tracked skeletons specified in Unity. If there is a skeleton received from Nuitrack for a skeleton avatar, it's processed and displayed, otherwise, it's hidden. 
 
-@code
+```cs
 public class SkeletonController : MonoBehaviour
 {    
-…
+...
 	void OnSkeletonUpdate(SkeletonData skeletonData)
 	{
 		for (int i = 0; i < avatars.Count; i++)
@@ -397,11 +396,11 @@ public class SkeletonController : MonoBehaviour
 		}
 	}
 }
-@endcode
+```
 
-<li> In the <i>OnEnable</i> method, subscribe to <i>OnSkeletonUpdateEvent</i>, which is called each time the skeleton is updated (each frame). Update the skeleton info. 
+5. In the `OnEnable` method, subscribe to `OnSkeletonUpdateEvent`, which is called each time the skeleton is updated (each frame). Update the skeleton info. 
 
-@code
+```cs
 public class SkeletonController : MonoBehaviour
 {    
 	…    
@@ -411,23 +410,24 @@ public class SkeletonController : MonoBehaviour
 	}
 	…
 }
-@endcode
+```
 
-<li> Save the <b>SimpleSkeletonAvatar</b> prefab and delete it from the scene. 
-<li> Add the <i>SkeletonController</i> script to <b>SkeletonsCanvas</b>. 
-<li> Set the desired number of tracked skeletons with a slider. 
+6. Save the **SimpleSkeletonAvatar** prefab and delete it from the scene. 
+7. Add the `SkeletonController` script to `SkeletonsCanvas`. 
+8. Set the desired number of tracked skeletons with a slider. 
 
-@image html images/Urgb_10.png  
-@image latex images/Urgb_10.png 
+<p align="center">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Urgb_10.png">
+</p>
 
-<li> Drag-and-drop the <b>Simple Skeleton Avatar</b> prefab to the <b>Skeleton Avatar</b> field of the <i>SkeletonController</i> script.
+9. Drag-and-drop the **Simple Skeleton Avatar** prefab to the **Skeleton Avatar** field of the `SkeletonController` script.
 
-@image html images/Urgb_11.jpg  
-@image latex images/Urgb_11.jpg 
+<p align="center">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Urgb_11.jpg">
+</p>
 
-<li> Run the project. Now the skeletons of several users are tracked and displayed on the RGB image. Congratulations! 
-</ol>
+10. Run the project. Now the skeletons of several users are tracked and displayed on the RGB image. Congratulations! 
 
-@image html images/Urgb_1.gif  
-@image latex images/Urgb_1.gif 
-*/
+<p align="center">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Urgb_1.gif">
+</p>
