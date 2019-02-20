@@ -21,7 +21,7 @@ To create this project, you'll need just a couple of things:
 4. In the **Nuitrack Manager** section of the **NuitrackScripts** prefab, tick the necessary modules: **Color Module On** (to display the RGB image), **Skeleton Tracker Module On** (for skeleton tracking, as you can guess).
 
 <p align="center">
-<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Urgb_2.png">
+<img width="400" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Urgb_2.png">
 </p>
 
 5. Create a new script and name it `DrawColorFrame`. In this script, determine the output of an RGB image to the scene. 
@@ -61,20 +61,20 @@ public class DrawColorFrame : MonoBehaviour
 9. In the **Raw Image** settings, select **Anchor Presets**, press **Alt** and stretch the object across the width and height of the **Canvas**.
 
 <p align="center">
-<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Urgb_3.png">
+<img width="350" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Urgb_3.png">
 </p>
 
 10. Rotate **RawImage** by 180 degrees along X (otherwise, the output image will be inverted).
 
 <p align="center">
-<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Urgb_4.png">
+<img width="400" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Urgb_4.png">
 </p>
 
 11. Rename **Canvas** to **ColorFrameCanvas** and add the `DrawColorFrame` script to it. 
 12. Drag-and-drop the **Raw Image** to the **Background** field of the script. 
 
 <p align="center">
-<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Urgb_5.png">
+<img width="400" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Urgb_5.png">
 </p>
 
 13. Run the project. You should see a color image from the sensor displayed on the screen. 
@@ -141,14 +141,14 @@ public class SimpleSkeletonAvatar : MonoBehaviour
 ...
 	nuitrack.JointType[,] connectionsInfo = new nuitrack.JointType[,]
 	{ 
-		{nuitrack.JointType.Neck,			nuitrack.JointType.Head},
+		{nuitrack.JointType.Neck,		nuitrack.JointType.Head},
 		{nuitrack.JointType.LeftCollar,		nuitrack.JointType.Neck},
 		{nuitrack.JointType.LeftCollar, 	nuitrack.JointType.LeftShoulder},
 		{nuitrack.JointType.LeftCollar, 	nuitrack.JointType.RightShoulder},
 		{nuitrack.JointType.LeftCollar, 	nuitrack.JointType.Torso},
-		{nuitrack.JointType.Waist,			nuitrack.JointType.Torso},
-		{nuitrack.JointType.Waist,			nuitrack.JointType.LeftHip},
-		{nuitrack.JointType.Waist,			nuitrack.JointType.RightHip},
+		{nuitrack.JointType.Waist,		nuitrack.JointType.Torso},
+		{nuitrack.JointType.Waist,		nuitrack.JointType.LeftHip},
+		{nuitrack.JointType.Waist,		nuitrack.JointType.RightHip},
 		{nuitrack.JointType.LeftShoulder, 	nuitrack.JointType.LeftElbow},
 		{nuitrack.JointType.LeftElbow, 		nuitrack.JointType.LeftWrist},
 		{nuitrack.JointType.LeftWrist, 		nuitrack.JointType.LeftHand},
@@ -316,7 +316,7 @@ public class SimpleSkeletonAvatar : MonoBehaviour
 15. Create a new **Canvas** named **SkeletonsCanvas**. Set its **Sort Order** to **1**, so that skeletons are displayed over the **ColorFrameCanvas**. 
 
 <p align="center">
-<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Urgb_7.png">
+<img width="400" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Urgb_7.png">
 </p>
 
 16. Create a child object to the **SkeletonsCanvas** (**Create Empty**) and name it **Simple Skeleton Avatar**. We'll use this object to display the skeleton. Drag-and-drop the `SimpleSkeletonAvatar` script to this object. 
@@ -329,12 +329,12 @@ public class SimpleSkeletonAvatar : MonoBehaviour
 17. Run the project. At this point, you should see a 2D skeleton displayed over the RGB image from the sensor. However, if there are several users, their skeletons won't be displayed. Let's move on to the next point so as not to upset them. 
 
 <p align="center">
-<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Urgb_9.gif">
+<img width="400" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Urgb_9.gif">
 </p>
 
 ## Displaying Multiple Skeletons 
 
-1. Create a new script and name it <i>SkeletonController</i>. In this script, we'll define how to track and display multiple skeletons. 
+1. Create a new script and name it `SkeletonController`. In this script, we'll define how to track and display multiple skeletons. 
 2. Add the `nuitrack` namespace. Create the `SkeletonCount` public variable and set the range from 0 to 6 (the number of tracked skeletons). Create the `SimpleSkeletonAvatar` field (for the **SkeletonAvatar** model that we've created). Create a list of `SkeletonAvatars` (displayed skeletons).
 
 ```cs
@@ -408,7 +408,7 @@ public class SkeletonController : MonoBehaviour
 	{
 		NuitrackManager.SkeletonTracker.OnSkeletonUpdateEvent += OnSkeletonUpdate;
 	}
-	…
+	...
 }
 ```
 
@@ -417,13 +417,13 @@ public class SkeletonController : MonoBehaviour
 8. Set the desired number of tracked skeletons with a slider. 
 
 <p align="center">
-<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Urgb_10.png">
+<img width="400" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Urgb_10.png">
 </p>
 
 9. Drag-and-drop the **Simple Skeleton Avatar** prefab to the **Skeleton Avatar** field of the `SkeletonController` script.
 
 <p align="center">
-<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Urgb_11.jpg">
+<img width="400" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Urgb_11.jpg">
 </p>
 
 10. Run the project. Now the skeletons of several users are tracked and displayed on the RGB image. Congratulations! 
