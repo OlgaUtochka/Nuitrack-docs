@@ -61,7 +61,7 @@ public class DrawColorFrame : MonoBehaviour
 9. In the **Raw Image** settings, select **Anchor Presets**, press **Alt** and stretch the object across the width and height of the **Canvas**.
 
 <p align="center">
-<img width="350" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Urgb_3.png">
+<img width="250" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Urgb_3.png">
 </p>
 
 10. Rotate **RawImage** by 180 degrees along X (otherwise, the output image will be inverted).
@@ -323,7 +323,7 @@ public class SimpleSkeletonAvatar : MonoBehaviour
 17. Drag-and-drop the **jointUI** prefab (**Tutorials/RGBandSkeletons/Prefabs**) to the **Joint Prefab** field.  Drag-and-drop the **ConnectionUI** prefab (from the same folder) to the **Connection Prefab** field. 
 
 <p align="center">
-<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Urgb_8.png">
+<img width="400" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Urgb_8.png">
 </p>
 
 17. Run the project. At this point, you should see a 2D skeleton displayed over the RGB image from the sensor. However, if there are several users, their skeletons won't be displayed. Let's move on to the next point so as not to upset them. 
