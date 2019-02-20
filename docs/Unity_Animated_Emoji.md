@@ -58,11 +58,10 @@ Great job! Now we have a 2D fox face that we can further use to mimic our facial
 
 ## Switch the User Face with the Fox Face
 
-<ol>
-<li> Save <b>Fox Face</b> as a prefab. Then, delete the <b>Fox Face</b> and <b>Fox Face Model</b> prefabs from the scene.
-<li> Create a new script <i>FaceAnimController</i> to manage the fox faces. Add the <i>UnityEngine.UI</i> namespace. Add the necessary fields (their names speak for themselves). The <i>slerpRotation</i> is used to smooth the head rotation (otherwise, the head would jitter when turned). The <i>faceRaw</i> field is used to display the fox face.
+1. Save **Fox Face** as a prefab. Then, delete the **Fox Face** and **Fox Face Model** prefabs from the scene.
+2. Create a new script `FaceAnimController` to manage the fox faces. Add the `UnityEngine.UI` namespace. Add the necessary fields (their names speak for themselves). The `slerpRotation` is used to smooth the head rotation (otherwise, the head would jitter when turned). The `faceRaw` field is used to display the fox face.
 
-@code
+```cs
 using UnityEngine;
 using UnityEngine.UI;
  
@@ -82,14 +81,13 @@ public class FaceAnimController : MonoBehaviour
  
 	RawImage faceRaw;
 }
-@endcode 
+```
 
-@note
-Learn more about [Render Texture](https://docs.unity3d.com/Manual/class-RenderTexture.html).
+_**Note:** Learn more about [Render Texture](https://docs.unity3d.com/Manual/class-RenderTexture.html)._
 
-<li> In the <i>Init</i> method, pass the <i>Canvas</i> to make <i>rawImage</i> the child object and create <i>renderTexture</i> based on the <i>RenderTexture</i>, which we've created in the first section. Pass <i>renderTexture</i> to <i>Camera</i> and to the texture in the <i>rawImage</i> object. Set their position (far away from each other) and stretch the image (our fox face) in screen height. Don't forget to keep the aspect ratio. Spawn the <i>rawImage</i> object.
+3. In the `Init` method, pass the `Canvas` to make `rawImage` the child object and create `renderTexture` based on the `RenderTexture`, which we've created in the first section. Pass `renderTexture` to `Camera` and to the texture in the `rawImage` object. Set their position (far away from each other) and stretch the image (our fox face) in screen height. Don't forget to keep the aspect ratio. Spawn the `rawImage` object.
 
-@code
+```cs
 public class FaceAnimController : MonoBehaviour
 {
 ...
@@ -104,11 +102,11 @@ public class FaceAnimController : MonoBehaviour
 		faceRaw.gameObject.SetActive(false);
 	}
 }
-@endcode
+```
 
-<li> Create the public method <i>UpdateFace</i> and specify the required parameters: the info about a user's face from JSON and head joint. Get the position of the head joint in projective coordinates received from Nuitrack  and set the head to these coordinates (multiply X and Y by the width and height of the screen). Change the <i>headRoot</i> position along the Z axis using the info from Nuitrack. This would stand for the face zoom, which depends on the distance between a user and a sensor (the closer the user to the sensor is, the bigger the fox face is).
+4. Create the public method `UpdateFace` and specify the required parameters: the info about a user's face from JSON and head joint. Get the position of the head joint in projective coordinates received from Nuitrack  and set the head to these coordinates (multiply X and Y by the width and height of the screen). Change the `headRoot` position along the Z axis using the info from Nuitrack. This would stand for the face zoom, which depends on the distance between a user and a sensor (the closer the user to the sensor is, the bigger the fox face is).
 
-@code
+```cs
 public class FaceAnimController : MonoBehaviour
 {
 ...
@@ -120,14 +118,13 @@ public class FaceAnimController : MonoBehaviour
 		headRoot.localPosition = new Vector3(0, 0, -headJoint.Real.Z * 0.001f);
 	}
 }
-@endcode 
+```
 
-@note
-Keep in mind that 1 Unity unit is about 1 m, so we need to adjust the obtained data. To do that, multiply the received values by 0.001 (convert m to mm).
+_**Note:** Keep in mind that 1 Unity unit is about 1 m, so we need to adjust the obtained data. To do that, multiply the received values by 0.001 (convert m to mm)._
 
-<li> Create the <i>OnEnable</i> and <i>OnDisable</i> methods: when a face is enabled, rawImage is also enabled to render this face, and vice versa.
+5. Create the `OnEnable` and `OnDisable` methods: when a face is enabled, rawImage is also enabled to render this face, and vice versa.
 
-@code
+```cs
 public class FaceAnimController : MonoBehaviour
 {
 ...
@@ -143,16 +140,17 @@ public class FaceAnimController : MonoBehaviour
 			faceRaw.gameObject.SetActive(true);
 	}
 }
-@endcode 
+```
 
-<li> Drag-and-drop the <b>Fox Face Model</b> prefab to the scene. Then, drag-and-drop the <i>FaceAnimController</i> to this prefab. Fill in the fields as shown in the image below. After that, click <b>Apply</b> and delete <b>Fox Face Model</b> from the scene. 
+6. Drag-and-drop the **Fox Face Model** prefab to the scene. Then, drag-and-drop the `FaceAnimController` to this prefab. Fill in the fields as shown in the image below. After that, click **Apply** and delete **Fox Face Model** from the scene. 
 
-@image html images/Uanimoji_8.png  
-@image latex images/Uanimoji_8.png  
+<p align="center">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Uanimoji_8.png">
+</p>
 
-<li> Create a new script <i>FaceAnimManager</i>. In this script, we'll describe the display of the fox face instead of the user's face. Add the <i>nuitrack</i> namespace. Add the <i>canvas</i> field for <b>Canvas</b> and the <i>facePrefab</i> field for the fox face. Set <i>faceCount</i> from 0 to 6 (faces are "linked" to skeletons, and the maximum number of tracked skeletons is 6). Add <i>faceInfo</i> (parsed JSON from Nuitrack, from which we get all the info about faces) and list of <i>faceAnimControllers</i> (list of faces).
+7. Create a new script `FaceAnimManager`. In this script, we'll describe the display of the fox face instead of the user's face. Add the `nuitrack` namespace. Add the `canvas` field for **Canvas** and the `facePrefab` field for the fox face. Set `faceCount` from 0 to 6 (faces are "linked" to skeletons, and the maximum number of tracked skeletons is 6). Add `faceInfo` (parsed JSON from Nuitrack, from which we get all the info about faces) and list of `faceAnimControllers` (list of faces).
 
-@code
+```cs
 using UnityEngine;
 using System.Collections.Generic;
 using nuitrack;
@@ -169,11 +167,11 @@ public class FaceAnimManager : MonoBehaviour
 	FaceInfo faceInfo;
 	List<FaceAnimController> faceAnimControllers = new List<FaceAnimController>();
 }
-@endcode 
+```
 
-<li> In <i>Start</i>, spawn as many faces as you set in <i>faceCount</i>. Add the fox face to the scene, get <i>faceAnimController</i> from it, and call the <i>Init</i> method. Place fox faces far away from each other so that the <b>Camera</b> won't catch several fox faces at the same time, otherwise, there'll be several fox faces displayed instead of one user's face - this may look funny but it's incorrect. Add <i>faceAnimController</i> to the list of <i>faceAnimControllers</i>. Specify the necessary number of tracked skeletons (keep in mind that faces are linked to skeletons). Subscribe to <i>OnSkeletonUpdateEvent</i>.
+8. In `Start`, spawn as many faces as you set in `faceCount`. Add the fox face to the scene, get `faceAnimController` from it, and call the `Init` method. Place fox faces far away from each other so that the **Camera** won't catch several fox faces at the same time, otherwise, there'll be several fox faces displayed instead of one user's face - this may look funny but it's incorrect. Add `faceAnimController` to the list of `faceAnimControllers`. Specify the necessary number of tracked skeletons (keep in mind that faces are linked to skeletons). Subscribe to `OnSkeletonUpdateEvent`.
 
-@code
+```cs
 public class FaceAnimManager : MonoBehaviour
 {
 ...
@@ -192,11 +190,11 @@ public class FaceAnimManager : MonoBehaviour
 		NuitrackManager.SkeletonTracker.OnSkeletonUpdateEvent += OnSkeletonUpdate;
 	}
 }
-@endcode
+```
 
-<li> Create the <i>OnSkeletonUpdateEvent</i> method: create the <i>string json</i> variable and pass the info from JSON to it. Pass the parsed info from JSON to <i>faceInfo</i>: replace quotation marks with square brackets to prevent a conversion error in case an array is empty (no info about faces received). If there is no info about faces, the rest of the method is not executed.
+9. Create the `OnSkeletonUpdateEvent` method: create the `string json` variable and pass the info from JSON to it. Pass the parsed info from JSON to `faceInfo`: replace quotation marks with square brackets to prevent a conversion error in case an array is empty (no info about faces received). If there is no info about faces, the rest of the method is not executed.
 
-@code
+```cs
 public class FaceAnimManager : MonoBehaviour
 {
 ...
@@ -209,11 +207,11 @@ public class FaceAnimManager : MonoBehaviour
 			return;
 	}
 }
-@endcode
+```
 
-<li> If a face is received, loop over <i>faceAnimControllers</i>. Activate as many faces as many skeletons were found, the rest of the faces are deactivated. By default, 6 faces are activated at startup. Create the <i>skeleton</i> variable to store the skeleton corresponding to the face (face ID and skeleton ID are the same). If a skeleton is found, get <i>headJoint</i> from it and activate the head joint if its confidence is greater than 0.5. Call the <i>UpdateFace</i> method of <i>faceAnimController</i>, pass <i>Instance</i> (all the face parameters) from JSON and <i>headJoint</i>. If a skeleton isn't found, the face is deactivated.
+10. If a face is received, loop over `faceAnimControllers`. Activate as many faces as many skeletons were found, the rest of the faces are deactivated. By default, 6 faces are activated at startup. Create the `skeleton` variable to store the skeleton corresponding to the face (face ID and skeleton ID are the same). If a skeleton is found, get `headJoint` from it and activate the head joint if its confidence is greater than 0.5. Call the `UpdateFace` method of `faceAnimController`, pass `Instance` (all the face parameters) from JSON and `headJoint`. If a skeleton isn't found, the face is deactivated.
 
-@code
+```cs
 public class FaceAnimManager : MonoBehaviour
 {
 ...
@@ -238,22 +236,23 @@ public class FaceAnimManager : MonoBehaviour
 			}
 		}
 }
-@endcode
+```
 
-<li> Drag-and-drop the <i>FaceAnimManager</i> script to <b>Face Canvas</b>.
-<li> Drag-and-drop <b>Face Canvas</b> to the <b>Canvas</b> field. Drag-and-drop the <b>Fox Face Model</b> prefab to the <b>Face Prefab</b> field.
+11. Drag-and-drop the `FaceAnimManager` script to **Face Canvas**.
+12. Drag-and-drop **Face Canvas** to the **Canvas** field. Drag-and-drop the **Fox Face Model** prefab to the **Face Prefab** field.
 
-@image html images/Uanimoji_9.png  
-@image latex images/Uanimoji_9.png  
+<p align="center">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Uanimoji_9.png">
+</p>
 
-<li> Drag-and-drop the <b>Color Frame Canvas</b> prefab from <b>NuitrackSDK.unitypackage</b> to the scene. 
-<li> Run the project. You should see the fox faces instead of the users' faces. This looks quite nice, however, they're all the same at this stage! Let's move on and add emotions to our foxes, which will give them some personality. 
-</ol>
+13. Drag-and-drop the **Color Frame Canvas** prefab from **NuitrackSDK.unitypackage** to the scene. 
+14. Run the project. You should see the fox faces instead of the users' faces. This looks quite nice, however, they're all the same at this stage! Let's move on and add emotions to our foxes, which will give them some personality.
 
-@image html images/Uanimoji_10.gif  
-@image latex images/Uanimoji_10.gif  
+<p align="center">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Uanimoji_10.gif">
+</p>
 
-@section animoji_emotions Make the Fox Emotional! 
+## Make the Fox Emotional! 
 
 <ol>
 <li> First of all, turn on <b>depth-to-color registration</b> because a depth map doesn't accurately match an RGB image and we have to align them. To turn on depth-to-color registration, you have to open <i>nuitrack.config</i> and set <i>DepthProvider.Depth2ColorRegistration</i> to <i>true</i>.
