@@ -254,12 +254,11 @@ public class FaceAnimManager : MonoBehaviour
 
 ## Make the Fox Emotional! 
 
-<ol>
-<li> First of all, turn on <b>depth-to-color registration</b> because a depth map doesn't accurately match an RGB image and we have to align them. To turn on depth-to-color registration, you have to open <i>nuitrack.config</i> and set <i>DepthProvider.Depth2ColorRegistration</i> to <i>true</i>.
-<li> By default, face tracking in Nuitrack is turned off. To turn on this function, open the <i>nuitrack.config</i> file and set <i>Faces.ToUse</i> to <i>true</i>. 
-<li> Add the IDs of blendshapes to <i>FaceAnimController</i>. You can see the full list of blendshapes in the <b>Fox_RigFace</b> object settings. With the help of these blendshapes, you can animate different parts of the fox face. In this project, the fox can open its mouth, blink, smile, and raise eyebrows. When the fox face is turned, its ears and fur on the cheeks are slightly moving. As you can see, we use only 7 blendshapes in this project, though there are much more of them in the list of blendshapes on <b>Fox_RigFace</b>. The point is that we can receive the limited number of anthropometric points at the moment (see [Nuitrack Instance-based API [Beta]](http://download.3divi.com/Nuitrack/doc/Instance_based_API.html) for details), therefore, there is not enough information for other blendshapes (such as cheeks). Add the fields <i>baseRotation</i> (initial rotation of <i>headRoot</i>), <i>blendshapeWeights</i> (from 0 to 100%), and <i>newRotation</i> (current head rotation).
+1. First of all, turn on **depth-to-color registration** because a depth map doesn't accurately match an RGB image and we have to align them. To turn on depth-to-color registration, you have to open `nuitrack.config` and set `DepthProvider.Depth2ColorRegistration` to `true`.
+2. By default, face tracking in Nuitrack is turned off. To turn on this function, open the `nuitrack.config` file and set `Faces.ToUse` to `true`. 
+3. Add the IDs of blendshapes to `FaceAnimController`. You can see the full list of blendshapes in the **Fox_RigFace** object settings. With the help of these blendshapes, you can animate different parts of the fox face. In this project, the fox can open its mouth, blink, smile, and raise eyebrows. When the fox face is turned, its ears and fur on the cheeks are slightly moving. As you can see, we use only 7 blendshapes in this project, though there are much more of them in the list of blendshapes on **Fox_RigFace**. The point is that we can receive the limited number of anthropometric points at the moment (see [Nuitrack Instance-based API [Beta]](http://download.3divi.com/Nuitrack/doc/Instance_based_API.html) for details), therefore, there is not enough information for other blendshapes (such as cheeks). Add the fields `baseRotation` (initial rotation of `headRoot`), `blendshapeWeights` (from 0 to 100%), and `newRotation` (current head rotation).
 
-@code
+```cs
 public class FaceAnimController : MonoBehaviour
 {
 ...
@@ -278,14 +277,13 @@ public class FaceAnimController : MonoBehaviour
 	Quaternion newRotation;
 ...
 }
-@endcode 
+```
 
-@note
-Animation of fox ears and fur is described in the <i>LerpRotation</i> script. 
+_**Note:** Animation of fox ears and fur is described in the `LerpRotation` script._
 
-<li> In the <i>Init</i> method, save <i>baseRotation</i> (initial head rotation, which we use to calculate the current head rotation).
+4. In the `Init` method, save `baseRotation` (initial head rotation, which we use to calculate the current head rotation).
 
-@code
+```cs
 public class FaceAnimController : MonoBehaviour
 {
 ...
@@ -295,11 +293,11 @@ public class FaceAnimController : MonoBehaviour
 	}
 ...
 }
-@endcode
+```
 
-<li> In <i>UpdateFace</i>, add the local variable <i>face</i> and save the face from JSON. Pass <i>baseRotation</i> to the <i>newRotation</i> variable.
+5. In `UpdateFace`, add the local variable `face` and save the face from JSON. Pass `baseRotation` to the `newRotation` variable.
 
-@code
+```cs
 public class FaceAnimController : MonoBehaviour
 {
 ...
@@ -311,11 +309,11 @@ public class FaceAnimController : MonoBehaviour
 		newRotation = baseRotation;
 	}
 }
-@endcode
+```
 
-<li> If anthropometric points were detected on a user's face (for this, it should be clearly visible and not overlapped by other objects), set the weights of blendshapes. They're all set in the same way with the help of the <i>SetBlendShapeWeight</i> method: pass the index and weight of a blendshape (from 0 to 100) to this method - the weight is taken from the <i>blendshapeWeights</i> class, then call the relevant method, for example, <i>GetJawOpen</i> to open the fox mouth, pass the <i>face</i> to this method, and so on. As a result, we get a weight value for each blendshape. Calculate the head rotation: pass the product of <i>baseRotation</i> (initial rotation) and head rotation from JSON to the <i>newRotation</i> variable.
+6. If anthropometric points were detected on a user's face (for this, it should be clearly visible and not overlapped by other objects), set the weights of blendshapes. They're all set in the same way with the help of the `SetBlendShapeWeight` method: pass the index and weight of a blendshape (from 0 to 100) to this method - the weight is taken from the `blendshapeWeights` class, then call the relevant method, for example, `GetJawOpen` to open the fox mouth, pass the `face` to this method, and so on. As a result, we get a weight value for each blendshape. Calculate the head rotation: pass the product of `baseRotation` (initial rotation) and head rotation from JSON to the `newRotation` variable.
 
-@code
+```cs
 public class FaceAnimController : MonoBehaviour
 {
 ...
@@ -344,11 +342,11 @@ public class FaceAnimController : MonoBehaviour
 		newRotation = baseRotation * Quaternion.Euler(face.angles.yaw, -face.angles.pitch, face.angles.roll);
 	}
 }
-@endcode
+```
 
-<li> In <i>Update</i>, smoothly rotate the head. 
+7. In `Update`, smoothly rotate the head. 
 
-@code
+```cs
 public class FaceAnimController : MonoBehaviour
 {
 ...
@@ -357,15 +355,12 @@ public class FaceAnimController : MonoBehaviour
 		headRoot.rotation = Quaternion.Slerp(headRoot.rotation, newRotation, slerpRotation * Time.deltaTime);
 	}
 }
-@endcode
+```
 
-@note
-Learn more about [Quaternion.Slerp](https://docs.unity3d.com/ScriptReference/Quaternion.Slerp.html).
+_**Note:** Learn more about [Quaternion.Slerp](https://docs.unity3d.com/ScriptReference/Quaternion.Slerp.html)._
 
-<li> Run the project. Now our fox face looks quite lively - we can turn the head, see the emotions and moving ears and fur. You can use this sample to develop more sophisticated projects with face tracking, skeleton tracking, and animated emojis using Nuitrack. Have fun!
-</ol>
+8. Run the project. Now our fox face looks quite lively - we can turn the head, see the emotions and moving ears and fur. You can use this sample to develop more sophisticated projects with face tracking, skeleton tracking, and animated emojis using Nuitrack. Have fun!
 
-@image html images/Uanimoji_1.gif  
-@image latex images/Uanimoji_1.gif  
-
-*/
+<p align="center">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Uanimoji_1.gif">
+</p>
