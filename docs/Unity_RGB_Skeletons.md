@@ -15,19 +15,19 @@ To create this project, you'll need just a couple of things:
 
 ## Setting Up the Scene and Getting RGB Output from a Sensor 
 
-<ol>
-<li> Create a new project.
-<li> Download <b>Nuitrack SDK</b> and import <b>NuitrackSDK.unitypackage</b> to your project (<b>Assets → Import Package → Custom Package...</b>) except <b>Tutorials/RGBandSkeletons/FinalAssets</b> and <b>Tutorials/FaceTracker/Final Assets</b>. 
-<li> Drag-and-drop the <b>NuitrackScripts</b> prefab to the scene (this prefab allows you to use Nuitrack modules in your project). 
-<li> In the <b>Nuitrack Manager</b> section of the <b>NuitrackScripts</b> prefab, tick the necessary modules: <b>Color Module On</b> (to display the RGB image), <b>Skeleton Tracker Module On</b> (for skeleton tracking, as you can guess).
+1. Create a new project.
+2. Download **Nuitrack SDK** and import **NuitrackSDK.unitypackage** to your project (**Assets → Import Package → Custom Package...**) except **Tutorials/RGBandSkeletons/FinalAssets** and **Tutorials/FaceTracker/Final Assets**. 
+3. Drag-and-drop the **NuitrackScripts** prefab to the scene (this prefab allows you to use Nuitrack modules in your project). 
+4. In the **Nuitrack Manager** section of the **NuitrackScripts** prefab, tick the necessary modules: **Color Module On** (to display the RGB image), **Skeleton Tracker Module On** (for skeleton tracking, as you can guess).
 
-@image html images/Urgb_2.png  
-@image latex images/Urgb_2.png 
+<p align="center">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Urgb_2.png">
+</p>
 
-<li> Create a new script and name it <i>DrawColorFrame</i>. In this script, determine the output of an RGB image to the scene. 
-<li> Create a public field <i>RawImage background</i> to display the image. In <i>Start</i>, subscribe to update each color frame. 
+5. Create a new script and name it `DrawColorFrame`. In this script, determine the output of an RGB image to the scene. 
+6. Create a public field `RawImage background` to display the image. In `Start`, subscribe to update each color frame. 
 
-@code
+```cs
 using UnityEngine;
 using UnityEngine.UI;
  
@@ -40,14 +40,13 @@ public class DrawColorFrame : MonoBehaviour
 		NuitrackManager.onColorUpdate += DrawColor;
 	}
 }
-@endcode
+```
 
-@note
-Why do we use <i>RawImage</i> instead of <i>Image</i> in this project? <i>Image</i> is used for displaying Sprites only. <i>RawImage</i> is used for displaying any type of texture. Sprites are easier to work with, but <i>Sprite.Create</i> is an expensive operation. It takes a comparatively long time and uses a lot of memory. By using a <i>RawImage</i> you can skip the step of creating a sprite. <i>RawImage</i> accepts the texture, which we've created with <i>ToTexture2D()</i> from the data received from Nuitrack (frame).
+_**Note:** Why do we use `RawImage` instead of `Image` in this project? `Image` is used for displaying Sprites only. `RawImage` is used for displaying any type of texture. Sprites are easier to work with, but `Sprite.Create` is an expensive operation. It takes a comparatively long time and uses a lot of memory. By using a `RawImage` you can skip the step of creating a sprite. `RawImage` accepts the texture, which we've created with `ToTexture2D()` from the data received from Nuitrack (frame)._
 
-<li> In the <i>DrawColor</i> method, get the texture of <i>ColorFrame</i> and pass it to the <i>background</i> texture.
+7. In the `DrawColor` method, get the texture of `ColorFrame` and pass it to the `background` texture.
 
-@code
+```cs
 public class DrawColorFrame : MonoBehaviour
 {
 …
@@ -56,32 +55,35 @@ public class DrawColorFrame : MonoBehaviour
 		background.texture = frame.ToTexture2D();
 	}
 }
-@endcode
+```
 
-<li> Create a new <b>Canvas</b> on the scene (<b>Create → UI → Canvas</b>). After this, create a child object to the <b>Canvas</b>: <b>Create → UI → Raw Image</b>. The received texture (the image from a sensor) is stretched across the <b>Raw Image</b>.  
-<li> In the <b>Raw Image</b> settings, select <b>Anchor Presets</b>, press <b>Alt</b> and stretch the object across the width and height of the <b>Canvas</b>.
+8. Create a new **Canvas** on the scene (**Create → UI → Canvas**). After this, create a child object to the **Canvas**: **Create → UI → Raw Image**. The received texture (the image from a sensor) is stretched across the **Raw Image**.  
+9. In the **Raw Image** settings, select **Anchor Presets**, press **Alt** and stretch the object across the width and height of the **Canvas**.
 
-@image html images/Urgb_3.png  
-@image latex images/Urgb_3.png 
+<p align="center">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Urgb_3.png">
+</p>
 
-<li> Rotate <b>RawImage</b> by 180 degrees along X (otherwise, the output image will be inverted).
+10. Rotate **RawImage** by 180 degrees along X (otherwise, the output image will be inverted).
 
-@image html images/Urgb_4.png  
-@image latex images/Urgb_4.png 
+<p align="center">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Urgb_4.png">
+</p>
 
-<li> Rename <b>Canvas</b> to <b>ColorFrameCanvas</b> and add the <i>DrawColorFrame</i> script to it. 
-<li> Drag-and-drop the <b>Raw Image</b> to the <b>Background</b> field of the script. 
+11. Rename **Canvas** to **ColorFrameCanvas** and add the `DrawColorFrame` script to it. 
+12. Drag-and-drop the **Raw Image** to the **Background** field of the script. 
 
-@image html images/Urgb_5.png  
-@image latex images/Urgb_5.png 
+<p align="center">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Urgb_5.png">
+</p>
 
-<li> Run the project. You should see a color image from the sensor displayed on the screen. 
-</ol>
+13. Run the project. You should see a color image from the sensor displayed on the screen. 
 
-@image html images/Urgb_6.gif  
-@image latex images/Urgb_6.gif 
+<p align="center">
+<img width="500" src="https://github.com/OlgaUtochka/Nuitrack-docs/blob/master/images/Urgb_6.gif">
+</p>
 
-@section rgb_skeleton Displaying the Skeleton
+## Displaying the Skeleton
 
 <ol>
 <li> All right, color image from the sensor is fun, but we're interested in the skeletons of users (otherwise, what do we need Nuitrack for?) Let's start tracking and displaying skeletons. First of all, turn on <b>depth-to-color registration</b> because a depth map doesn't accurately match an RGB image and we have to align them. To turn on depth-to-color registration, you have to open <i>nuitrack.config</i> and set <i>DepthProvider.Depth2ColorRegistration</i> to true. 
